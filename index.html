@@ -467,6 +467,7 @@
     .field.is-invalid .consent__box { border-color: var(--erro); }
     .field--consent .field__error { margin-top: -10px; margin-bottom: 14px; }
 
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
     .form-note { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 14px; font-size: 12px; color: var(--texto-2); }
     .form-note svg { width: 14px; height: 14px; }
     .form-alert { display: none; margin-top: 12px; padding: 12px 14px; border: 1px solid #F2C9C4; background: #FFF8F7; color: var(--erro); font-size: 13px; border-radius: var(--r); }
@@ -1138,6 +1139,11 @@
                 </select>
               </div>
 
+              <div class="hp" aria-hidden="true">
+                <label for="f-website">Deixe este campo vazio</label>
+                <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+              </div>
+
               <div class="field field--consent">
                 <label class="consent">
                   <input type="checkbox" name="consentimento" value="sim" required>
@@ -1620,8 +1626,8 @@
       evento: 'Aulão Patrimônio Alavancado',
       inicio: '2026-10-20T20:00:00-03:00',
       fim: '2026-10-20T21:30:00-03:00',
-      // URL que recebe os leads (Google Apps Script, Make, Zapier, n8n, RD Station...). Veja o README.
-      webhookUrl: '',
+      // Função na Vercel que envia cada inscrição para o RD Station Marketing (veja api/lead.js).
+      endpoint: '/api/lead',
       // Link do grupo VIP do WhatsApp exibido após a inscrição (deixe vazio para ocultar o botão).
       grupoWhatsapp: '',
       // Página de obrigado opcional. Se preenchida, o lead é redirecionado para ela após a inscrição.
@@ -1930,6 +1936,8 @@
           objetivo: data.objetivo || '',
           investimento: data.investimento || '',
           consentimento: data.consentimento ? 'sim' : 'nao',
+          website: data.website || '',
+          client_tracking_id: (document.cookie.match(/(?:^|;\s*)_rdtrk=([^;]+)/) || [])[1] || '',
           ...tracking,
           pagina: location.href,
           referrer: document.referrer
@@ -1938,21 +1946,23 @@
         submitBtn.classList.add('is-loading');
         $('.btn__label', submitBtn).textContent = 'Enviando…';
         try {
-          if (CONFIG.webhookUrl) {
-            const ctrl = new AbortController();
-            const timer = setTimeout(() => ctrl.abort(), 12000);
-            await fetch(CONFIG.webhookUrl, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(payload), signal: ctrl.signal });
-            clearTimeout(timer);
-          } else {
-            console.warn('[Aulão] CONFIG.webhookUrl está vazio: o lead NÃO foi enviado para lugar nenhum.', payload);
-          }
+          const ctrl = new AbortController();
+          const timer = setTimeout(() => ctrl.abort(), 15000);
+          const resp = await fetch(CONFIG.endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+            signal: ctrl.signal
+          });
+          clearTimeout(timer);
+          if (!resp.ok) throw new Error('HTTP ' + resp.status);
           trackLead(payload);
           if (CONFIG.paginaObrigado) { location.href = CONFIG.paginaObrigado; return; }
           $('[data-success-name]').textContent = ', ' + payload.nome.split(/\s+/)[0];
           card.classList.add('is-done');
           formWrap.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
         } catch (err) {
-          alertBox.textContent = 'Não conseguimos enviar sua inscrição agora. Verifique sua conexão e tente novamente.';
+          alertBox.textContent = 'Não conseguimos confirmar sua inscrição agora. Tente novamente em instantes.';
           alertBox.classList.add('is-visible');
         } finally {
           submitBtn.classList.remove('is-loading');
