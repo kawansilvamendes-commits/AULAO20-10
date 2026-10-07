@@ -950,7 +950,14 @@
     }
     @media (max-width: 720px) {
       .versus { grid-template-columns: 1fr; }
-      .versus__vs { top: var(--vs-top, 50%); }
+      .versus__vs {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        justify-self: center;
+        margin: -29px 0;
+      }
       .timeline__rail { left: 6px; }
       .tl-item { grid-template-columns: 1fr; padding-left: 36px; }
       .tl-time { text-align: left; padding-top: 0; margin-bottom: 10px; font-size: 22px; }
