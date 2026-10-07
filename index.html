@@ -201,6 +201,13 @@
       color: var(--branco);
       border-bottom: 1px solid transparent;
       transition: background-color .4s var(--ease), border-color .4s var(--ease), backdrop-filter .4s;
+      /* Promove o header a uma camada própria de composição: evita o bug conhecido do
+         Safari iOS em que um elemento fixed "descola" do topo e sobrepõe o conteúdo
+         durante o zoom por pinça ou a transição da barra de endereço. */
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
     }
     .header.is-scrolled {
       background: rgba(7, 29, 48, .84);
