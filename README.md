@@ -33,8 +33,7 @@ Se o Meta Pixel (`fbq`), o Google Analytics (`gtag`) ou o Google Tag Manager (`d
 
 ## 3. O que revisar antes de publicar
 
-- **Horário:** a página assume 20h (Brasília) e duração de 1h30. Os horários do roteiro (20h00 a 21h20) são uma sugestão.
-- **Bônus:** os três bônus (simulador, material em PDF, diagnóstico com especialista) são sugestões. Confirme se serão entregues ou remova a seção.
+- **Horário:** a página assume 20h (Brasília) e duração de 1h30.
 - **Política de Privacidade:** troque os links `href="#"` pelo endereço real.
 - **Logo:** o logo foi recriado em vetor a partir da identidade visual. Se tiver o SVG oficial, substitua o `<symbol id="logo">` no topo do `<body>`.
 - **Simulação de custo:** os números são ilustrativos (R$ 300 mil, 240 meses, financiamento SAC a 11% a.a., consórcio com taxa de administração de 20%). Ajuste se preferir outro cenário.

@@ -733,34 +733,6 @@
     .quote-sign { display: flex; align-items: center; gap: 14px; margin-top: 40px; font-size: 13px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--texto-2); }
     .quote-sign::before { content: ''; width: 48px; height: 1px; background: var(--borda); }
 
-    /* ---------- Linha do tempo ---------- */
-    .timeline { position: relative; max-width: 960px; margin: 0 auto; }
-    .timeline__rail { position: absolute; top: 8px; bottom: 40px; left: 163px; width: 1px; background: var(--borda); }
-    .timeline__fill { position: absolute; inset: 0; background: linear-gradient(var(--destaque), var(--azul)); transform-origin: top; transform: scaleY(0); }
-    .tl-item { position: relative; display: grid; grid-template-columns: 130px 1fr; gap: 0 68px; padding-bottom: 28px; }
-    .tl-item:last-child { padding-bottom: 0; }
-    .tl-time { padding-top: 22px; text-align: right; font-size: clamp(22px, 2.4vw, 30px); font-weight: 700; letter-spacing: -.035em; color: #A9B6C3; font-variant-numeric: tabular-nums; transition: color .5s; }
-    .tl-dot {
-      position: absolute;
-      left: 157px; top: 32px;
-      width: 13px; height: 13px;
-      border: 2px solid var(--borda);
-      border-radius: 50%;
-      background: var(--fundo);
-      transition: border-color .5s, background-color .5s, box-shadow .5s;
-    }
-    .tl-card { padding: 24px 28px 26px; border: 1px solid var(--borda); border-radius: var(--r); background: var(--branco); transition: border-color .5s, transform .6s var(--ease); }
-    .tl-card .label { font-size: 11px; margin-bottom: 10px; color: var(--texto-2); transition: color .5s; }
-    .tl-card h3 { font-size: 19px; letter-spacing: -.02em; margin-bottom: 8px; }
-    .tl-card p { font-size: 14.5px; color: var(--texto-2); line-height: 1.7; }
-    .tl-item.is-active .tl-time { color: var(--navy); }
-    .tl-item.is-active .tl-dot { border-color: var(--destaque); background: var(--destaque); box-shadow: 0 0 0 6px rgba(91, 155, 213, .18); }
-    .tl-item.is-active .tl-card { border-color: var(--claro); }
-    .tl-item.is-active .tl-card .label { color: var(--azul); }
-    .tl-item--live .tl-card { background: var(--navy); border-color: var(--navy); color: var(--branco); }
-    .tl-item--live .tl-card p { color: rgba(255, 255, 255, .72); }
-    .tl-item--live.is-active .tl-card .label, .tl-item--live .tl-card .label { color: var(--claro); }
-
     /* ---------- Para quem é ---------- */
     .who { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--borda); border-left: 1px solid var(--borda); }
     .who__item {
@@ -782,27 +754,6 @@
     .who__check svg { width: 17px; height: 17px; }
     .who__item:hover .who__check { background: var(--navy); border-color: var(--navy); color: var(--branco); }
     .who__item span { padding-top: 4px; }
-
-    /* ---------- Bônus ---------- */
-    .bonus-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .bonus {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      padding: 36px 32px 38px;
-      border: 1px solid var(--linha-escura);
-      border-radius: var(--r);
-      background: rgba(255, 255, 255, .025);
-      transition: border-color .4s, transform .6s var(--ease), background-color .4s;
-    }
-    .bonus:hover { border-color: rgba(156, 198, 232, .4); background: rgba(91, 155, 213, .05); transform: translateY(-4px); }
-    .bonus.glow { overflow: visible; border-color: transparent; }
-    .bonus__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
-    .bonus__icon { width: 52px; height: 52px; display: grid; place-items: center; border: 1px solid rgba(156, 198, 232, .3); border-radius: var(--r); color: var(--destaque); background: rgba(91, 155, 213, .06); }
-    .bonus__icon svg { width: 26px; height: 26px; }
-    .bonus__tag { font-size: 11px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--claro); }
-    .bonus h3 { font-size: 21px; letter-spacing: -.025em; margin-bottom: 12px; }
-    .bonus p { font-size: 14.5px; line-height: 1.7; color: rgba(255, 255, 255, .66); }
 
     /* ---------- Sobre ---------- */
     .about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border: 1px solid var(--borda); background: var(--branco); }
@@ -944,7 +895,6 @@
       .split { grid-template-columns: 1fr; }
       .split__aside { position: static; }
       .who { grid-template-columns: repeat(2, 1fr); }
-      .bonus-grid { grid-template-columns: 1fr; max-width: 620px; }
       .about { grid-template-columns: 1fr; }
       .about__brand { min-height: 320px; }
     }
@@ -958,10 +908,6 @@
         justify-self: center;
         margin: -29px 0;
       }
-      .timeline__rail { left: 6px; }
-      .tl-item { grid-template-columns: 1fr; padding-left: 36px; }
-      .tl-time { text-align: left; padding-top: 0; margin-bottom: 10px; font-size: 22px; }
-      .tl-dot { left: 0; top: 7px; }
       .about__pillars { grid-template-columns: 1fr; gap: 16px; }
     }
     @media (max-width: 640px) {
@@ -1032,9 +978,6 @@
     <symbol id="i-target" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></g></symbol>
     <symbol id="i-card" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="1"/><path d="M2.5 9.5h19M6 14.5h4M15 14.5l1.5 1.5 3-3"/></g></symbol>
     <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.3-7.5 9.5-4.3-1.2-7.5-4.9-7.5-9.5V6z"/><path d="M8.8 12.2l2.2 2.2 4.3-4.4"/></g></symbol>
-    <symbol id="i-sheet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3.5" y="3.5" width="17" height="17" rx="1"/><path d="M3.5 9h17M3.5 14.5h17M9.5 9v11.5"/></g></symbol>
-    <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5H6.5a1 1 0 0 0-1 1v15a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V8z"/><path d="M14 3.5V8h4.5M8.5 12.5h7M8.5 16h5"/></g></symbol>
-    <symbol id="i-chat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7.5" r="3.5"/><path d="M2.5 20c.6-3.6 3.3-6 6.5-6 1.4 0 2.6.4 3.7 1.2"/><path d="M14.5 13.5h7v5h-4l-3 2z"/></g></symbol>
   </svg>
 
   <div class="progress" aria-hidden="true"></div>
@@ -1394,67 +1337,6 @@
       </div>
     </section>
 
-    <!-- ============ ROTEIRO ============ -->
-    <section class="section section--fundo" aria-labelledby="t-roteiro">
-      <div class="container">
-        <div class="section-head section-head--center">
-          <span class="label" data-reveal>Roteiro do aulão</span>
-          <h2 class="h2" id="t-roteiro" data-reveal style="--d:.08s">Como vai ser a <span class="grad">noite de 20 de outubro</span></h2>
-          <p class="lead" data-reveal style="--d:.16s">Cerca de 90 minutos de conteúdo ao vivo, do cenário do crédito no Brasil até simulações feitas na hora.</p>
-        </div>
-
-        <div class="timeline" data-timeline>
-          <div class="timeline__rail" aria-hidden="true"><div class="timeline__fill"></div></div>
-
-          <div class="tl-item" data-reveal>
-            <div class="tl-time">20h00</div>
-            <span class="tl-dot" aria-hidden="true"></span>
-            <div class="tl-card">
-              <span class="label">Abertura</span>
-              <h3>O cenário do crédito no Brasil</h3>
-              <p>Juros altos, crédito caro e por que o consórcio ganhou espaço na estratégia de quem constrói patrimônio.</p>
-            </div>
-          </div>
-          <div class="tl-item" data-reveal>
-            <div class="tl-time">20h15</div>
-            <span class="tl-dot" aria-hidden="true"></span>
-            <div class="tl-card">
-              <span class="label">Bloco 1</span>
-              <h3>Consórcio x financiamento x investimento</h3>
-              <p>A comparação lado a lado, com números, para você entender onde cada alternativa faz sentido.</p>
-            </div>
-          </div>
-          <div class="tl-item" data-reveal>
-            <div class="tl-time">20h35</div>
-            <span class="tl-dot" aria-hidden="true"></span>
-            <div class="tl-card">
-              <span class="label">Bloco 2</span>
-              <h3>As estratégias de alavancagem</h3>
-              <p>Lances, cartas contempladas e aquisição de ativos que geram renda: como os investidores montam cada jogada.</p>
-            </div>
-          </div>
-          <div class="tl-item" data-reveal>
-            <div class="tl-time">21h00</div>
-            <span class="tl-dot" aria-hidden="true"></span>
-            <div class="tl-card">
-              <span class="label">Bloco 3</span>
-              <h3>Simulações ao vivo</h3>
-              <p>Cenários reais montados na hora, do objetivo à contemplação, para você enxergar a estratégia funcionando.</p>
-            </div>
-          </div>
-          <div class="tl-item tl-item--live" data-reveal>
-            <div class="tl-time">21h20</div>
-            <span class="tl-dot" aria-hidden="true"></span>
-            <div class="tl-card">
-              <span class="label">Ao vivo</span>
-              <h3>Perguntas e respostas</h3>
-              <p>Tire suas dúvidas diretamente com os especialistas e entenda os próximos passos para colocar em prática.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ============ PARA QUEM É ============ -->
     <section class="section" aria-labelledby="t-quem">
       <div class="container">
@@ -1473,38 +1355,6 @@
         <div class="cta-row" data-reveal>
           <a class="btn btn--primary btn--shine" href="#inscricao" data-goto-form>Quero participar do aulão<svg class="arrow"><use href="#i-arrow"/></svg></a>
           <span class="cta-row__text">Se você se identificou com pelo menos um ponto, este aulão é para você.</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ BÔNUS ============ -->
-    <section class="section section--navy on-dark" aria-labelledby="t-bonus">
-      <div class="bg-grid" aria-hidden="true"></div>
-      <div class="container">
-        <div class="section-head">
-          <span class="label" data-reveal>Exclusivo para quem estiver ao vivo</span>
-          <h2 class="h2" id="t-bonus" data-reveal style="--d:.08s">Participe até o final e <span class="grad grad--light">leve três bônus</span> para casa</h2>
-        </div>
-        <div class="bonus-grid">
-          <article class="bonus" data-reveal style="--d:0s">
-            <div class="bonus__top"><div class="bonus__icon"><svg><use href="#i-sheet"/></svg></div><span class="bonus__tag">Bônus 01</span></div>
-            <h3>Simulador consórcio x financiamento</h3>
-            <p>Planilha para comparar cenários com os seus números: crédito, prazo, taxa e custo total.</p>
-          </article>
-          <article class="bonus glow" data-reveal style="--d:.1s">
-            <div class="bonus__top"><div class="bonus__icon"><svg><use href="#i-doc"/></svg></div><span class="bonus__tag">Bônus 02</span></div>
-            <h3>Material de apoio do aulão</h3>
-            <p>Resumo em PDF com as estratégias apresentadas, para você revisar com calma depois da live.</p>
-          </article>
-          <article class="bonus" data-reveal style="--d:.2s">
-            <div class="bonus__top"><div class="bonus__icon"><svg><use href="#i-chat"/></svg></div><span class="bonus__tag">Bônus 03</span></div>
-            <h3>Diagnóstico com especialista</h3>
-            <p>Uma conversa individual com um especialista Monetizze para analisar o seu objetivo e o melhor caminho.</p>
-          </article>
-        </div>
-        <div class="cta-row" data-reveal>
-          <a class="btn btn--light btn--shine" href="#inscricao" data-goto-form>Quero participar e receber os bônus<svg class="arrow"><use href="#i-arrow"/></svg></a>
-          <span class="cta-row__text">Os bônus são liberados para quem acompanhar o aulão ao vivo.</span>
         </div>
       </div>
     </section>
@@ -1740,12 +1590,7 @@
         quoteWords = $$('.qw', quote);
       }
 
-      /* ---------- Linha do tempo ---------- */
-      const timeline = $('[data-timeline]');
-      const tlFill = timeline && $('.timeline__fill', timeline);
-      const tlItems = timeline ? $$('.tl-item', timeline) : [];
-
-      /* ---------- Scroll: header, progresso, citação, timeline ---------- */
+      /* ---------- Scroll: header, progresso, citação ---------- */
       const header = $('.header');
       const progress = $('.progress');
       let ticking = false;
@@ -1763,17 +1608,6 @@
           const p = reduceMotion ? 1 : clamp((vh * .82 - r.top) / (r.height + vh * .32), 0, 1);
           const lit = Math.round(p * quoteWords.length);
           quoteWords.forEach((w, i) => w.classList.toggle('on', i < lit));
-        }
-
-        if (timeline) {
-          const r = timeline.getBoundingClientRect();
-          const line = vh * .6;
-          const p = clamp((line - r.top) / r.height, 0, 1);
-          tlFill.style.transform = `scaleY(${p})`;
-          tlItems.forEach(item => {
-            const dot = $('.tl-dot', item).getBoundingClientRect();
-            item.classList.toggle('is-active', dot.top < line);
-          });
         }
       }
       const requestScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } };
