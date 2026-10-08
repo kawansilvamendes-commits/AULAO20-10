@@ -1,86 +1,84 @@
-# Leads do aulão no RD Station
+# Leads do aulão no RD Station CRM
+
+> Esta conta tem só o **RD Station CRM**, não o RD Station Marketing. A integração usa a API do CRM diretamente: cada inscrição no formulário vira uma **negociação** já dentro do CRM, pronta para você e o Luan distribuírem entre vocês.
 
 ## Como os dados fluem
 
 ```
-Formulário da página  →  /api/lead (função na Vercel)  →  RD Station Marketing  →  RD Station CRM
-                                                          (conversão + tags)       (oportunidade, Kawan/Luan)
+Formulário da página  →  /api/lead (função na Vercel)  →  RD Station CRM
+                                                           (negociação com contato e telefone)
 ```
 
-Cada inscrição vira uma **conversão** no RD Station Marketing com o identificador `aulao-patrimonio-alavancado` e as tags:
-
-| Tag | Significado |
-|---|---|
-| `aulao-20-10` | Todo inscrito no aulão |
-| `objetivo-imovel`, `objetivo-veiculo`, `objetivo-renda`, `objetivo-empresa` | O objetivo escolhido no formulário |
-| `invest-ate-1k`, `invest-1k-3k`, `invest-3k-5k`, `invest-acima-5k`, `invest-nao-sabe` | A faixa de investimento mensal |
-
-Também são enviados nome, e-mail, celular, consentimento (LGPD) e a origem do tráfego (UTMs).
+Cada inscrição cria:
+- um **contato** com nome, e-mail, celular e o aceite da LGPD (base legal de consentimento);
+- uma **negociação** (deal) com esse contato, nomeada assim: `Nome · Objetivo · Faixa de investimento · Aulão 20/10` — por exemplo, `Ana Souza · Imóvel · Acima de R$ 5.000 · Aulão 20/10`. Assim vocês veem o essencial direto na lista de negociações, sem precisar abrir cada uma.
+- a negociação sai marcada com a **fonte** "Aulão Patrimônio Alavancado (20/10)" (criada automaticamente no CRM na primeira inscrição, se ainda não existir).
 
 ---
 
-## Passo 1: gerar a chave de API no RD (5 min)
+## Passo 1: gerar o token no RD Station CRM (2 min)
 
-> É preciso ter perfil **Gestor** ou **Dono** no RD Station Marketing.
+Qualquer uma destas duas telas funciona (o nome muda um pouco conforme a conta):
 
-1. No RD Station Marketing, abra a **App Store** e entre em **App Publisher**.
-2. Clique em **Gerar chave de API** e copie a chave.
+- Clique no seu nome (canto superior direito) → **Perfil** → se o código não aparecer, clique em **Gerar Token** e copie.
+- Ou: **Configurações** → **Preferências** → **Tokens de API**.
 
-## Passo 2: guardar a chave na Vercel
+## Passo 2: guardar o token na Vercel
 
 1. Na Vercel, abra o projeto do aulão e vá em **Settings > Environment Variables**.
 2. Crie a variável:
-   - **Key:** `RD_STATION_API_KEY`
-   - **Value:** a chave copiada do RD
+   - **Key:** `RDCRM_TOKEN`
+   - **Value:** o token copiado do CRM
    - **Environments:** Production e Preview
-3. Salve. Depois, em **Deployments**, abra o último deploy e clique em **Redeploy**. A variável só vale a partir do próximo deploy.
+3. Salve. Depois, em **Deployments**, abra o último deploy e clique em **Redeploy** — a variável só vale a partir do próximo deploy.
 
-> A chave fica só na Vercel. Ela não aparece no código do site nem no GitHub.
+> O token fica só na Vercel. Não aparece no código do site nem no GitHub.
 
 ## Passo 3: testar
 
-Faça uma inscrição na página com o seu próprio e-mail. Em até 1 minuto o contato deve aparecer na base de contatos do RD, com a conversão `aulao-patrimonio-alavancado` e as tags.
+Inscreva-se na página com o seu próprio e-mail. Em até 1 minuto a negociação deve aparecer no RD Station CRM (na tela de Negociações, no funil e etapa padrão da conta).
 
-Se aparecer a mensagem "Não conseguimos confirmar sua inscrição", veja o motivo em **Vercel > projeto > Logs**. As linhas começam com `[lead]`.
+Se aparecer "Não conseguimos confirmar sua inscrição", veja o motivo em **Vercel > projeto > Logs**. As linhas começam com `[lead]`.
 
-## Passo 4 (opcional): campos personalizados
+## Passo 4 (opcional): escolher em qual etapa do funil a negociação entra
 
-As tags já bastam para segmentar. Se quiser ver objetivo e investimento como campos no perfil do contato, crie dois campos personalizados de texto no RD com estes identificadores de API:
+Por padrão, a negociação cai na etapa inicial do funil padrão da conta. Se você quiser que ela entre numa etapa específica (de qualquer funil), crie a variável:
 
-- `cf_objetivo_consorcio` (ex.: "Objetivo com consórcio")
-- `cf_investimento_mensal` (ex.: "Investimento mensal")
+- **Key:** `RDCRM_STAGE_NAME`
+- **Value:** o nome exato da etapa, como aparece no RD Station CRM (ex.: `Novo Lead`)
 
-Se os campos não existirem, a função reenvia o lead sem eles automaticamente, e nada se perde.
+Se o nome não for encontrado em nenhum funil, a negociação segue normalmente para a etapa padrão (nada se perde).
+
+## Passo 5 (opcional): renomear a fonte
+
+Por padrão, a fonte é **"Aulão Patrimônio Alavancado (20/10)"**. Para usar outro nome, crie a variável `RDCRM_SOURCE_NAME` com o nome desejado — se não existir uma fonte com esse nome, ela é criada automaticamente.
 
 ---
 
-## Organização no RD Station Marketing
+## Distribuição entre você e o Luan
 
-### Segmentações
+As negociações entram sem responsável definido. Vocês combinaram que a divisão é feita dentro do próprio CRM — no RD Station CRM isso é o campo **Responsável** de cada negociação, que pode ser definido manualmente ao abrir cada uma, ou em massa selecionando várias negociações na lista.
 
-- **Inscritos Aulão 20/10:** contatos que converteram em `aulao-patrimonio-alavancado` (ou que têm a tag `aulao-20-10`).
-- **Inscritos com maior potencial:** inscritos com a tag `invest-acima-5k` ou `invest-3k-5k`. Vale chamar esses primeiro.
-
-### Passagem para o CRM (você e o Luan)
-
-No fluxo de automação de confirmação (abaixo), adicione a ação **Marcar como oportunidade** logo depois do e-mail 1. Com a integração entre RD Station Marketing e RD Station CRM ativa, cada inscrito vira uma negociação no CRM. Lá vocês definem o responsável de cada lead.
-
-Sugestão de etapas no funil do CRM para este aulão:
+Sugestão de etapas de funil para este aulão, caso queiram um funil dedicado (em vez do funil padrão da conta):
 `Inscrito` → `Contato feito` → `Participou do aulão` → `Diagnóstico agendado` → `Proposta` → `Fechado`
 
 ---
 
-## E-mails
+## ⚠️ Sobre e-mail de confirmação e lembretes
 
-**E-mail 1** é enviado por um **fluxo de automação**, com entrada = conversão em `aulao-patrimonio-alavancado`. Assim ele chega na hora da inscrição.
-**E-mails 2 a 6** são **e-mails agendados** para a segmentação "Inscritos Aulão 20/10".
+O RD Station **CRM** não tem fluxo de automação de e-mail (isso é um recurso do RD Station **Marketing**, que esta conta não tem). Hoje, quem se inscreve recebe só a confirmação na própria página — nenhum e-mail de confirmação, véspera, "1 hora antes" etc. é enviado automaticamente.
 
-Antes de enviar:
-- Substitua os textos entre colchetes.
-- Use o botão de campos dinâmicos do editor do RD para inserir o nome do contato onde aparece `[Nome]`.
-- Se os bônus não forem confirmados, remova os trechos sobre eles.
+Como vocês decidiram usar e-mail + grupo de WhatsApp para os lembretes, isso precisa de uma destas soluções:
 
-### E-mail 1: confirmação (imediato, via automação)
+1. **Grupo de WhatsApp como canal principal** — simples, já está desenhado na página (o botão para entrar no grupo aparece depois da inscrição). Os lembretes são por lá; sem automação de e-mail.
+2. **Adicionar envio de e-mail direto na função `/api/lead`** — eu implemento o envio do e-mail de confirmação (via um serviço como Resend ou SendGrid) no exato momento da inscrição. Os lembretes seguintes (véspera, 1h antes) precisariam de um agendamento separado (ex.: uma rotina programada), que também posso montar.
+3. **Assinar o RD Station Marketing** — aí a automação de e-mail completa (os 6 e-mails abaixo) funciona como desenhado originalmente.
+
+Me diga qual caminho vocês preferem e eu sigo.
+
+Os textos abaixo ficam aqui prontos para quando a automação de e-mail existir (opção 2 ou 3):
+
+### E-mail 1: confirmação (imediato)
 
 **Assunto:** Sua vaga no Aulão Patrimônio Alavancado está confirmada
 **Pré-cabeçalho:** Terça, 20/10, às 20h. Já salve na sua agenda.
@@ -116,8 +114,6 @@ Antes de enviar:
 > Uma pergunta para você pensar até lá: se o mesmo imóvel pode custar até R$ 255 mil a menos no total, por que tanta gente ainda escolhe o financiamento?
 >
 > Amanhã vamos colocar os números lado a lado e mostrar as estratégias que investidores usam para multiplicar patrimônio com consórcio, sem pagar juros.
->
-> Fique até o final: quem participa ao vivo recebe o simulador consórcio x financiamento e pode agendar um diagnóstico gratuito com um especialista.
 >
 > **[Botão: Entrar no grupo VIP]** → [LINK DO GRUPO]
 >

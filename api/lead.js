@@ -1,27 +1,34 @@
 /**
- * Recebe as inscrições do formulário e envia para o RD Station Marketing
- * como uma conversão. A chave fica na variável de ambiente RD_STATION_API_KEY
- * (Vercel > Settings > Environment Variables), nunca no código do site.
+ * Recebe as inscrições do formulário e cria uma negociação no RD Station CRM
+ * (não no RD Station Marketing — esta conta usa só o CRM).
+ *
+ * Configuração na Vercel (Settings > Environment Variables):
+ *   RDCRM_TOKEN        (obrigatório) — token do usuário, gerado no RD Station CRM
+ *                       em Perfil > Gerar Token, ou em Configurações > Preferências
+ *                       > Tokens de API.
+ *   RDCRM_SOURCE_NAME   (opcional) — nome da "fonte" da negociação no CRM.
+ *                       Se não existir uma fonte com esse nome, ela é criada
+ *                       automaticamente na primeira inscrição. Padrão abaixo.
+ *   RDCRM_STAGE_NAME    (opcional) — nome exato de uma etapa de funil (em
+ *                       qualquer funil da conta) onde a negociação deve
+ *                       entrar. Se vazio ou não encontrada, a negociação cai
+ *                       na etapa padrão do funil padrão da conta.
+ *
+ * Veja docs/rd-station.md para o passo a passo completo.
  */
 
-const RD_URL = 'https://api.rd.services/platform/conversions';
-const CONVERSION_ID = 'aulao-patrimonio-alavancado';
-const TAG_EVENTO = 'aulao-20-10';
+const CRM_BASE = 'https://crm.rdstation.com/api/v1';
+const SOURCE_NAME = (process.env.RDCRM_SOURCE_NAME || 'Aulão Patrimônio Alavancado (20/10)').trim();
+const STAGE_NAME = (process.env.RDCRM_STAGE_NAME || '').trim();
 
-// Só aceitamos os valores que existem no formulário; cada um vira uma tag para segmentar no RD.
-const OBJETIVOS = {
-  'Imóvel': 'objetivo-imovel',
-  'Veículo': 'objetivo-veiculo',
-  'Investir e gerar renda': 'objetivo-renda',
-  'Para minha empresa': 'objetivo-empresa'
-};
-const INVESTIMENTOS = {
-  'Até R$ 1.000': 'invest-ate-1k',
-  'De R$ 1.000 a R$ 3.000': 'invest-1k-3k',
-  'De R$ 3.000 a R$ 5.000': 'invest-3k-5k',
-  'Acima de R$ 5.000': 'invest-acima-5k',
-  'Ainda não sei': 'invest-nao-sabe'
-};
+// Cache em memória: vale enquanto a função serverless ficar "quente" entre
+// chamadas, só para evitar repetir essas duas consultas em toda inscrição.
+let cachedSourceId = null;
+let stageLookupDone = false;
+let cachedStageId = null;
+
+const OBJETIVOS = new Set(['Imóvel', 'Veículo', 'Investir e gerar renda', 'Para minha empresa']);
+const INVESTIMENTOS = new Set(['Até R$ 1.000', 'De R$ 1.000 a R$ 3.000', 'De R$ 3.000 a R$ 5.000', 'Acima de R$ 5.000', 'Ainda não sei']);
 
 const texto = (v, max = 200) => String(v ?? '').trim().slice(0, max);
 const emailValido = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
@@ -35,15 +42,64 @@ function lerCorpo(req) {
   return {};
 }
 
-async function enviarConversao(apiKey, payload) {
-  const resp = await fetch(`${RD_URL}?api_key=${encodeURIComponent(apiKey)}`, {
-    method: 'POST',
+async function rdFetch(token, path, { method = 'GET', body } = {}) {
+  const url = `${CRM_BASE}${path}${path.includes('?') ? '&' : '?'}token=${encodeURIComponent(token)}`;
+  const resp = await fetch(url, {
+    method,
     headers: { 'Content-Type': 'application/json', accept: 'application/json' },
-    body: JSON.stringify({ event_type: 'CONVERSION', event_family: 'CDP', payload }),
+    body: body ? JSON.stringify(body) : undefined,
     signal: AbortSignal.timeout(9000)
   });
-  const corpo = await resp.text();
-  return { ok: resp.ok, status: resp.status, corpo };
+  const texto = await resp.text();
+  let json = null;
+  try { json = texto ? JSON.parse(texto) : null; } catch (_) { /* resposta não-JSON */ }
+  return { ok: resp.ok, status: resp.status, texto, json };
+}
+
+// Acha (ou cria, na primeira vez) a "fonte" da negociação pelo nome.
+async function resolveSourceId(token) {
+  if (cachedSourceId) return cachedSourceId;
+  try {
+    const lista = await rdFetch(token, '/deal_sources?limit=200');
+    const fontes = Array.isArray(lista.json) ? lista.json : (lista.json && lista.json.deal_sources) || [];
+    const achada = fontes.find(f => texto(f.name).toLowerCase() === SOURCE_NAME.toLowerCase());
+    if (achada) {
+      cachedSourceId = achada._id || achada.id;
+      return cachedSourceId;
+    }
+    const criada = await rdFetch(token, '/deal_sources', {
+      method: 'POST',
+      body: { deal_source: { name: SOURCE_NAME, description: 'Criada automaticamente pela landing page do aulão.' } }
+    });
+    if (criada.ok && criada.json) {
+      cachedSourceId = criada.json._id || criada.json.id;
+      return cachedSourceId;
+    }
+    console.warn('[lead] Não consegui achar nem criar a fonte no RD CRM:', criada.status, criada.texto);
+  } catch (err) {
+    console.warn('[lead] Falha ao resolver a fonte da negociação no RD CRM:', err && err.message);
+  }
+  return null;
+}
+
+// Acha o id de uma etapa de funil pelo nome (procura em todos os funis da conta).
+async function resolveStageId(token) {
+  if (!STAGE_NAME) return null;
+  if (stageLookupDone) return cachedStageId;
+  stageLookupDone = true;
+  try {
+    const lista = await rdFetch(token, '/deal_pipelines?limit=200');
+    const funis = Array.isArray(lista.json) ? lista.json : (lista.json && lista.json.deal_pipelines) || [];
+    for (const funil of funis) {
+      const etapas = funil.deal_stages || [];
+      const achada = etapas.find(e => texto(e.name).toLowerCase() === STAGE_NAME.toLowerCase());
+      if (achada) { cachedStageId = achada._id || achada.id; break; }
+    }
+    if (!cachedStageId) console.warn(`[lead] Etapa "${STAGE_NAME}" (RDCRM_STAGE_NAME) não encontrada em nenhum funil. Usando a etapa padrão da conta.`);
+  } catch (err) {
+    console.warn('[lead] Falha ao resolver a etapa de funil no RD CRM:', err && err.message);
+  }
+  return cachedStageId;
 }
 
 module.exports = async function handler(req, res) {
@@ -54,7 +110,7 @@ module.exports = async function handler(req, res) {
 
   const dados = lerCorpo(req);
 
-  // Campo invisível para humanos: se vier preenchido, é robô. Respondemos "ok" sem enviar nada.
+  // Campo invisível para humanos: se vier preenchido, é robô. Respondemos "ok" sem criar nada.
   if (texto(dados.website)) return res.status(200).json({ ok: true });
 
   const nome = texto(dados.nome, 120);
@@ -66,58 +122,42 @@ module.exports = async function handler(req, res) {
     return res.status(422).json({ ok: false, erro: 'dados_invalidos' });
   }
 
-  const apiKey = process.env.RD_STATION_API_KEY;
-  if (!apiKey) {
-    console.error('[lead] RD_STATION_API_KEY não configurada na Vercel. Lead não enviado.');
+  const token = process.env.RDCRM_TOKEN;
+  if (!token) {
+    console.error('[lead] RDCRM_TOKEN não configurada na Vercel. Lead não enviado.');
     return res.status(500).json({ ok: false, erro: 'configuracao' });
   }
 
-  const objetivo = OBJETIVOS[dados.objetivo] ? dados.objetivo : '';
-  const investimento = INVESTIMENTOS[dados.investimento] ? dados.investimento : '';
+  const objetivo = OBJETIVOS.has(dados.objetivo) ? dados.objetivo : '';
+  const investimento = INVESTIMENTOS.has(dados.investimento) ? dados.investimento : '';
+
+  const [sourceId, stageId] = await Promise.all([resolveSourceId(token), resolveStageId(token)]);
+
+  const nomeDaNegociacao = [nome, objetivo, investimento].filter(Boolean).join(' · ') + ' · Aulão 20/10';
 
   const payload = {
-    conversion_identifier: CONVERSION_ID,
-    name: nome,
-    email,
-    mobile_phone: `+55 ${digitos.slice(0, 2)} ${digitos.slice(2, -4)}-${digitos.slice(-4)}`,
-    tags: [TAG_EVENTO, OBJETIVOS[objetivo], INVESTIMENTOS[investimento]].filter(Boolean),
-    available_for_mailing: true,
-    legal_bases: [{ category: 'communications', type: 'consent', status: 'granted' }]
+    contacts: [{
+      name: nome,
+      emails: [{ email }],
+      phones: [{ phone: `+55${digitos}`, type: 'home' }],
+      legal_bases: [{ type: 'consent', category: 'communications', status: 'granted' }]
+    }],
+    deal: {
+      name: nomeDaNegociacao.slice(0, 200),
+      ...(stageId ? { deal_stage_id: stageId } : {})
+    },
+    ...(sourceId ? { deal_source: { _id: sourceId } } : {})
   };
-
-  const opcionais = {
-    traffic_source: texto(dados.utm_source, 100),
-    traffic_medium: texto(dados.utm_medium, 100),
-    traffic_campaign: texto(dados.utm_campaign, 100),
-    traffic_value: texto(dados.utm_term, 100),
-    client_tracking_id: texto(dados.client_tracking_id, 100),
-    // Campos personalizados (opcionais): crie no RD com estes identificadores para vê-los no perfil do lead.
-    cf_objetivo_consorcio: objetivo,
-    cf_investimento_mensal: investimento
-  };
-  for (const [chave, valor] of Object.entries(opcionais)) {
-    if (valor) payload[chave] = valor;
-  }
 
   try {
-    let r = await enviarConversao(apiKey, payload);
-
-    // Se os campos personalizados ainda não existirem no RD, a API recusa (400). Reenviamos sem eles:
-    // as tags já carregam objetivo e investimento.
-    if (r.status === 400 && (payload.cf_objetivo_consorcio || payload.cf_investimento_mensal)) {
-      console.warn('[lead] RD recusou com campos personalizados, reenviando sem eles:', r.corpo);
-      delete payload.cf_objetivo_consorcio;
-      delete payload.cf_investimento_mensal;
-      r = await enviarConversao(apiKey, payload);
-    }
-
+    const r = await rdFetch(token, '/deals', { method: 'POST', body: payload });
     if (!r.ok) {
-      console.error(`[lead] RD Station respondeu ${r.status}:`, r.corpo);
+      console.error(`[lead] RD Station CRM respondeu ${r.status}:`, r.texto);
       return res.status(502).json({ ok: false, erro: 'crm' });
     }
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('[lead] Falha ao falar com o RD Station:', err && err.message);
+    console.error('[lead] Falha ao falar com o RD Station CRM:', err && err.message);
     return res.status(502).json({ ok: false, erro: 'crm' });
   }
 };

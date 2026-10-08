@@ -2,11 +2,11 @@
 
 Página única (`index.html`) + uma função serverless (`api/lead.js`) na Vercel. Sem build e sem dependências.
 
-## 1. Leads → RD Station
+## 1. Leads → RD Station CRM
 
-As inscrições vão do formulário para a função `api/lead.js` (Vercel), que envia cada lead ao **RD Station Marketing** como conversão `aulao-patrimonio-alavancado`, com tags de objetivo e faixa de investimento.
+As inscrições vão do formulário para a função `api/lead.js` (Vercel), que cria cada lead como uma **negociação** direto no **RD Station CRM** (esta conta não tem o RD Station Marketing).
 
-Para funcionar, crie a variável de ambiente `RD_STATION_API_KEY` na Vercel. O passo a passo completo, as segmentações, a passagem para o CRM e os textos dos e-mails estão em [docs/rd-station.md](docs/rd-station.md).
+Para funcionar, crie a variável de ambiente `RDCRM_TOKEN` na Vercel. O passo a passo completo, as variáveis opcionais e o aviso sobre e-mail de confirmação/lembretes estão em [docs/rd-station.md](docs/rd-station.md).
 
 > Sem a variável configurada, o formulário mostra uma mensagem de erro ao visitante (o lead não é perdido em silêncio).
 
