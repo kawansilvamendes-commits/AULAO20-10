@@ -30,10 +30,10 @@ const SOURCE_NAME = (process.env.RDCRM_SOURCE_NAME || 'Aulão Patrimônio Alavan
 const PIPELINE_NAME = (process.env.RDCRM_PIPELINE_NAME || 'LIVE – LEADS').trim();
 const STAGE_NAME = (process.env.RDCRM_STAGE_NAME || 'Em andamento').trim();
 
-// Compara nomes ignorando maiúsculas/minúsculas, espaços nas pontas e a
-// diferença entre hífen (-), en-dash (–) e em-dash (—) — fácil de digitar
-// errado ao copiar o nome de um funil.
-const normaliza = s => texto(s).toLowerCase().replace(/[‒-―]/g, '-').replace(/\s+/g, ' ');
+// Compara nomes de forma bem tolerante: tira acento, maiúsculas/minúsculas
+// e QUALQUER espaço, hífen, en-dash (–), em-dash (—) ou outra pontuação.
+// "LIVE – LEADS", "live-leads" e "Live Leads" todas ficam "liveleads".
+const chave = s => texto(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
 
 // Cache em memória: vale enquanto a função serverless ficar "quente" entre
 // chamadas, só para evitar repetir essas duas consultas em toda inscrição.
@@ -76,7 +76,7 @@ async function resolveSourceId(token) {
   try {
     const lista = await rdFetch(token, '/deal_sources?limit=200');
     const fontes = Array.isArray(lista.json) ? lista.json : (lista.json && lista.json.deal_sources) || [];
-    const achada = fontes.find(f => normaliza(f.name) === normaliza(SOURCE_NAME));
+    const achada = fontes.find(f => chave(f.name) === chave(SOURCE_NAME));
     if (achada) {
       cachedSourceId = achada._id || achada.id;
       return cachedSourceId;
@@ -107,11 +107,16 @@ async function resolveStageId(token) {
     const lista = await rdFetch(token, '/deal_pipelines?limit=200');
     const funis = Array.isArray(lista.json) ? lista.json : (lista.json && lista.json.deal_pipelines) || [];
 
+    if (!funis.length) {
+      console.warn('[lead] GET /deal_pipelines não retornou nenhum funil. Resposta recebida:', lista.status, lista.texto.slice(0, 500));
+      return null;
+    }
+
     let candidatos = funis;
     if (PIPELINE_NAME) {
-      const funil = funis.find(f => normaliza(f.name) === normaliza(PIPELINE_NAME));
+      const funil = funis.find(f => chave(f.name) === chave(PIPELINE_NAME));
       if (!funil) {
-        console.warn(`[lead] Funil "${PIPELINE_NAME}" (RDCRM_PIPELINE_NAME) não encontrado na conta. Negociação criada sem funil específico.`);
+        console.warn(`[lead] Funil "${PIPELINE_NAME}" (RDCRM_PIPELINE_NAME) não encontrado. Funis existentes na conta: ${funis.map(f => `"${f.name}"`).join(', ')}. Negociação criada sem funil específico.`);
         return null;
       }
       candidatos = [funil];
@@ -120,13 +125,13 @@ async function resolveStageId(token) {
     for (const funil of candidatos) {
       const etapas = [...(funil.deal_stages || [])].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
       if (!etapas.length) continue;
-      const achada = STAGE_NAME ? etapas.find(e => normaliza(e.name) === normaliza(STAGE_NAME)) : null;
+      const achada = STAGE_NAME ? etapas.find(e => chave(e.name) === chave(STAGE_NAME)) : null;
       if (achada) { cachedStageId = achada._id || achada.id; break; }
       // Etapa não informada ou não encontrada: se já sabemos o funil certo
       // (PIPELINE_NAME casou), usamos a primeira etapa dele como fallback
       // seguro, em vez de desistir.
       if (PIPELINE_NAME) {
-        if (STAGE_NAME) console.warn(`[lead] Etapa "${STAGE_NAME}" não encontrada no funil "${PIPELINE_NAME}". Usando a primeira etapa dele.`);
+        if (STAGE_NAME) console.warn(`[lead] Etapa "${STAGE_NAME}" não encontrada no funil "${funil.name}". Etapas existentes nele: ${etapas.map(e => `"${e.name}"`).join(', ')}. Usando a primeira etapa dele.`);
         cachedStageId = etapas[0]._id || etapas[0].id;
         break;
       }
