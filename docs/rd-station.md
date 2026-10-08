@@ -12,7 +12,8 @@ Formulário da página  →  /api/lead (função na Vercel)  →  RD Station CRM
 Cada inscrição cria:
 - um **contato** com nome, e-mail, celular e o aceite da LGPD (base legal de consentimento);
 - uma **negociação** (deal) com esse contato, nomeada assim: `Nome · Objetivo · Faixa de investimento · Aulão 20/10` — por exemplo, `Ana Souza · Imóvel · Acima de R$ 5.000 · Aulão 20/10`. Assim vocês veem o essencial direto na lista de negociações, sem precisar abrir cada uma.
-- a negociação sai marcada com a **fonte** "Aulão Patrimônio Alavancado (20/10)" (criada automaticamente no CRM na primeira inscrição, se ainda não existir).
+- a negociação sai marcada com a **fonte** "Aulão Patrimônio Alavancado (20/10)" (criada automaticamente no CRM na primeira inscrição, se ainda não existir);
+- a negociação entra no funil **"LIVE – LEADS"**, na etapa **"Em andamento"** — o funil que vocês criaram para estes leads. Se algum dia renomearem o funil ou a etapa, veja o Passo 4.
 
 ---
 
@@ -40,14 +41,17 @@ Inscreva-se na página com o seu próprio e-mail. Em até 1 minuto a negociaçã
 
 Se aparecer "Não conseguimos confirmar sua inscrição", veja o motivo em **Vercel > projeto > Logs**. As linhas começam com `[lead]`.
 
-## Passo 4 (opcional): escolher em qual etapa do funil a negociação entra
+## Passo 4 (opcional): mudar o funil ou a etapa
 
-Por padrão, a negociação cai na etapa inicial do funil padrão da conta. Se você quiser que ela entre numa etapa específica (de qualquer funil), crie a variável:
+Por padrão, a negociação entra no funil **"LIVE – LEADS"**, na etapa **"Em andamento"**. Se vocês renomearem o funil ou a etapa, ou quiserem usar outro, crie estas variáveis na Vercel:
 
-- **Key:** `RDCRM_STAGE_NAME`
-- **Value:** o nome exato da etapa, como aparece no RD Station CRM (ex.: `Novo Lead`)
+- **Key:** `RDCRM_PIPELINE_NAME` → **Value:** o nome exato do funil, como aparece no RD Station CRM
+- **Key:** `RDCRM_STAGE_NAME` → **Value:** o nome exato da etapa, dentro desse funil
 
-Se o nome não for encontrado em nenhum funil, a negociação segue normalmente para a etapa padrão (nada se perde).
+Como funciona a busca (para não arriscar cair no funil errado por causa de uma etapa com o mesmo nome em outro lugar):
+- Se o **funil** configurado não for encontrado, a negociação é criada **sem** funil/etapa específicos (cai no padrão da conta) — nunca se perde.
+- Se o funil for encontrado mas a **etapa** não, a negociação entra na **primeira etapa** desse mesmo funil.
+- Pequenas diferenças de hífen (`-` vs `–`) e maiúsculas/minúsculas não importam na comparação.
 
 ## Passo 5 (opcional): renomear a fonte
 

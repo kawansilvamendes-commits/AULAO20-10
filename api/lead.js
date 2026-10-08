@@ -9,17 +9,31 @@
  *   RDCRM_SOURCE_NAME   (opcional) — nome da "fonte" da negociação no CRM.
  *                       Se não existir uma fonte com esse nome, ela é criada
  *                       automaticamente na primeira inscrição. Padrão abaixo.
- *   RDCRM_STAGE_NAME    (opcional) — nome exato de uma etapa de funil (em
- *                       qualquer funil da conta) onde a negociação deve
- *                       entrar. Se vazio ou não encontrada, a negociação cai
- *                       na etapa padrão do funil padrão da conta.
+ *   RDCRM_PIPELINE_NAME (opcional) — nome exato do funil onde a negociação
+ *                       deve entrar (ex.: "LIVE – LEADS"). Se não for
+ *                       encontrado, a negociação NÃO entra em nenhum funil
+ *                       específico (para não arriscar cair num funil
+ *                       errado) — mas o lead nunca se perde por isso.
+ *   RDCRM_STAGE_NAME    (opcional) — nome exato da etapa, dentro do funil
+ *                       acima, onde a negociação deve entrar. Se vazio ou
+ *                       não encontrada, usa a primeira etapa do funil.
+ *
+ * Os padrões abaixo (funil "LIVE – LEADS", etapa "Em andamento") refletem o
+ * funil criado no RD Station CRM em 08/10/2026. Ajuste via variável de
+ * ambiente se os nomes mudarem.
  *
  * Veja docs/rd-station.md para o passo a passo completo.
  */
 
 const CRM_BASE = 'https://crm.rdstation.com/api/v1';
 const SOURCE_NAME = (process.env.RDCRM_SOURCE_NAME || 'Aulão Patrimônio Alavancado (20/10)').trim();
-const STAGE_NAME = (process.env.RDCRM_STAGE_NAME || '').trim();
+const PIPELINE_NAME = (process.env.RDCRM_PIPELINE_NAME || 'LIVE – LEADS').trim();
+const STAGE_NAME = (process.env.RDCRM_STAGE_NAME || 'Em andamento').trim();
+
+// Compara nomes ignorando maiúsculas/minúsculas, espaços nas pontas e a
+// diferença entre hífen (-), en-dash (–) e em-dash (—) — fácil de digitar
+// errado ao copiar o nome de um funil.
+const normaliza = s => texto(s).toLowerCase().replace(/[‒-―]/g, '-').replace(/\s+/g, ' ');
 
 // Cache em memória: vale enquanto a função serverless ficar "quente" entre
 // chamadas, só para evitar repetir essas duas consultas em toda inscrição.
@@ -62,7 +76,7 @@ async function resolveSourceId(token) {
   try {
     const lista = await rdFetch(token, '/deal_sources?limit=200');
     const fontes = Array.isArray(lista.json) ? lista.json : (lista.json && lista.json.deal_sources) || [];
-    const achada = fontes.find(f => texto(f.name).toLowerCase() === SOURCE_NAME.toLowerCase());
+    const achada = fontes.find(f => normaliza(f.name) === normaliza(SOURCE_NAME));
     if (achada) {
       cachedSourceId = achada._id || achada.id;
       return cachedSourceId;
@@ -82,20 +96,42 @@ async function resolveSourceId(token) {
   return null;
 }
 
-// Acha o id de uma etapa de funil pelo nome (procura em todos os funis da conta).
+// Acha o id da etapa onde a negociação deve entrar.
+// Se RDCRM_PIPELINE_NAME estiver definido, a busca é restrita a ESSE funil
+// (evita cair na etapa de mesmo nome de outro funil, por engano). Sem um
+// funil configurado, procura a etapa em todos os funis da conta.
 async function resolveStageId(token) {
-  if (!STAGE_NAME) return null;
   if (stageLookupDone) return cachedStageId;
   stageLookupDone = true;
   try {
     const lista = await rdFetch(token, '/deal_pipelines?limit=200');
     const funis = Array.isArray(lista.json) ? lista.json : (lista.json && lista.json.deal_pipelines) || [];
-    for (const funil of funis) {
-      const etapas = funil.deal_stages || [];
-      const achada = etapas.find(e => texto(e.name).toLowerCase() === STAGE_NAME.toLowerCase());
-      if (achada) { cachedStageId = achada._id || achada.id; break; }
+
+    let candidatos = funis;
+    if (PIPELINE_NAME) {
+      const funil = funis.find(f => normaliza(f.name) === normaliza(PIPELINE_NAME));
+      if (!funil) {
+        console.warn(`[lead] Funil "${PIPELINE_NAME}" (RDCRM_PIPELINE_NAME) não encontrado na conta. Negociação criada sem funil específico.`);
+        return null;
+      }
+      candidatos = [funil];
     }
-    if (!cachedStageId) console.warn(`[lead] Etapa "${STAGE_NAME}" (RDCRM_STAGE_NAME) não encontrada em nenhum funil. Usando a etapa padrão da conta.`);
+
+    for (const funil of candidatos) {
+      const etapas = [...(funil.deal_stages || [])].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+      if (!etapas.length) continue;
+      const achada = STAGE_NAME ? etapas.find(e => normaliza(e.name) === normaliza(STAGE_NAME)) : null;
+      if (achada) { cachedStageId = achada._id || achada.id; break; }
+      // Etapa não informada ou não encontrada: se já sabemos o funil certo
+      // (PIPELINE_NAME casou), usamos a primeira etapa dele como fallback
+      // seguro, em vez de desistir.
+      if (PIPELINE_NAME) {
+        if (STAGE_NAME) console.warn(`[lead] Etapa "${STAGE_NAME}" não encontrada no funil "${PIPELINE_NAME}". Usando a primeira etapa dele.`);
+        cachedStageId = etapas[0]._id || etapas[0].id;
+        break;
+      }
+    }
+    if (!cachedStageId && !PIPELINE_NAME) console.warn(`[lead] Etapa "${STAGE_NAME}" (RDCRM_STAGE_NAME) não encontrada em nenhum funil. Usando a etapa padrão da conta.`);
   } catch (err) {
     console.warn('[lead] Falha ao resolver a etapa de funil no RD CRM:', err && err.message);
   }
