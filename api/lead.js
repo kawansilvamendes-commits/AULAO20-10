@@ -76,6 +76,7 @@ async function resolveSourceId(token) {
   try {
     const lista = await rdFetch(token, '/deal_sources?limit=200');
     const fontes = Array.isArray(lista.json) ? lista.json : (lista.json && lista.json.deal_sources) || [];
+    if (!fontes.length) console.warn('[lead] GET /deal_sources não retornou nenhuma fonte. Resposta recebida:', lista.status, lista.texto.slice(0, 500));
     const achada = fontes.find(f => chave(f.name) === chave(SOURCE_NAME));
     if (achada) {
       cachedSourceId = achada._id || achada.id;
@@ -85,7 +86,10 @@ async function resolveSourceId(token) {
       method: 'POST',
       body: { deal_source: { name: SOURCE_NAME, description: 'Criada automaticamente pela landing page do aulão.' } }
     });
-    if (criada.ok && criada.json) {
+    // Mesmo quando o RD recusa (ex.: 422 porque o nome já existe), a resposta
+    // costuma trazer o próprio registro existente — aproveitamos o _id dela
+    // em vez de desistir.
+    if (criada.json && (criada.json._id || criada.json.id)) {
       cachedSourceId = criada.json._id || criada.json.id;
       return cachedSourceId;
     }
@@ -114,7 +118,8 @@ async function resolveStageId(token) {
 
     let candidatos = funis;
     if (PIPELINE_NAME) {
-      const funil = funis.find(f => chave(f.name) === chave(PIPELINE_NAME));
+      const alvo = chave(PIPELINE_NAME);
+      const funil = funis.find(f => chave(f.name) === alvo || chave(f.nickname) === alvo);
       if (!funil) {
         console.warn(`[lead] Funil "${PIPELINE_NAME}" (RDCRM_PIPELINE_NAME) não encontrado. Funis existentes na conta: ${funis.map(f => `"${f.name}"`).join(', ')}. Negociação criada sem funil específico.`);
         return null;
@@ -125,7 +130,8 @@ async function resolveStageId(token) {
     for (const funil of candidatos) {
       const etapas = [...(funil.deal_stages || [])].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
       if (!etapas.length) continue;
-      const achada = STAGE_NAME ? etapas.find(e => chave(e.name) === chave(STAGE_NAME)) : null;
+      const alvoEtapa = chave(STAGE_NAME);
+      const achada = STAGE_NAME ? etapas.find(e => chave(e.name) === alvoEtapa || chave(e.nickname) === alvoEtapa) : null;
       if (achada) { cachedStageId = achada._id || achada.id; break; }
       // Etapa não informada ou não encontrada: se já sabemos o funil certo
       // (PIPELINE_NAME casou), usamos a primeira etapa dele como fallback
