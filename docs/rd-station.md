@@ -13,7 +13,7 @@ Cada inscrição cria:
 - um **contato** com nome, e-mail, celular e o aceite da LGPD (base legal de consentimento);
 - uma **negociação** (deal) com esse contato, nomeada assim: `Nome · Objetivo · Faixa de investimento · Aulão 20/10` — por exemplo, `Ana Souza · Imóvel · Acima de R$ 5.000 · Aulão 20/10`. Assim vocês veem o essencial direto na lista de negociações, sem precisar abrir cada uma.
 - a negociação sai marcada com a **fonte** "Aulão Patrimônio Alavancado (20/10)" (criada automaticamente no CRM na primeira inscrição, se ainda não existir);
-- a negociação entra no funil **"LIVE – LEADS"**, na etapa **"Em andamento"** — o funil que vocês criaram para estes leads. Se algum dia renomearem o funil ou a etapa, veja o Passo 4.
+- a negociação entra na etapa **"LIVE – LEADS"** (uma coluna do quadro de Negociações) — a etapa criada para estes leads. Se algum dia renomearem essa etapa, veja o Passo 4.
 
 ---
 
@@ -41,17 +41,15 @@ Inscreva-se na página com o seu próprio e-mail. Em até 1 minuto a negociaçã
 
 Se aparecer "Não conseguimos confirmar sua inscrição", veja o motivo em **Vercel > projeto > Logs**. As linhas começam com `[lead]`.
 
-## Passo 4 (opcional): mudar o funil ou a etapa
+## Passo 4 (opcional): mudar a etapa
 
-Por padrão, a negociação entra no funil **"LIVE – LEADS"**, na etapa **"Em andamento"**. Se vocês renomearem o funil ou a etapa, ou quiserem usar outro, crie estas variáveis na Vercel:
+Por padrão, a negociação entra na etapa **"LIVE – LEADS"** (procurada em todos os funis da conta). Se vocês renomearem essa etapa, crie a variável na Vercel:
 
-- **Key:** `RDCRM_PIPELINE_NAME` → **Value:** o nome exato do funil, como aparece no RD Station CRM
-- **Key:** `RDCRM_STAGE_NAME` → **Value:** o nome exato da etapa, dentro desse funil
+- **Key:** `RDCRM_STAGE_NAME` → **Value:** o nome exato da nova etapa, como aparece no RD Station CRM
 
-Como funciona a busca (para não arriscar cair no funil errado por causa de uma etapa com o mesmo nome em outro lugar):
-- Se o **funil** configurado não for encontrado, a negociação é criada **sem** funil/etapa específicos (cai no padrão da conta) — nunca se perde.
-- Se o funil for encontrado mas a **etapa** não, a negociação entra na **primeira etapa** desse mesmo funil.
-- Pequenas diferenças de hífen (`-` vs `–`) e maiúsculas/minúsculas não importam na comparação.
+Pequenas diferenças de hífen (`-` vs `–`), acentos, maiúsculas/minúsculas e espaçamento não importam na comparação.
+
+Se um dia a conta tiver **duas etapas com esse mesmo nome em funis diferentes**, crie também `RDCRM_PIPELINE_NAME` com o nome exato do funil certo, para a busca não escolher a etapa errada por engano. Sem essa variável, a negociação é criada sem etapa específica (nunca se perde) se o funil indicado não existir; com o funil certo mas a etapa não encontrada dentro dele, cai na primeira etapa desse funil.
 
 ## Passo 5 (opcional): renomear a fonte
 

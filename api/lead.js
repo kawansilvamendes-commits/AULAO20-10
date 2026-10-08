@@ -9,26 +9,23 @@
  *   RDCRM_SOURCE_NAME   (opcional) — nome da "fonte" da negociação no CRM.
  *                       Se não existir uma fonte com esse nome, ela é criada
  *                       automaticamente na primeira inscrição. Padrão abaixo.
- *   RDCRM_PIPELINE_NAME (opcional) — nome exato do funil onde a negociação
- *                       deve entrar (ex.: "LIVE – LEADS"). Se não for
- *                       encontrado, a negociação NÃO entra em nenhum funil
- *                       específico (para não arriscar cair num funil
- *                       errado) — mas o lead nunca se perde por isso.
- *   RDCRM_STAGE_NAME    (opcional) — nome exato da etapa, dentro do funil
- *                       acima, onde a negociação deve entrar. Se vazio ou
- *                       não encontrada, usa a primeira etapa do funil.
+ *   RDCRM_STAGE_NAME    (opcional) — nome exato da etapa (coluna do quadro
+ *                       de negociações) onde o lead deve entrar. Busca em
+ *                       todos os funis da conta. Padrão: "LIVE – LEADS".
+ *   RDCRM_PIPELINE_NAME (opcional, raramente necessário) — se a etapa acima
+ *                       existir com o mesmo nome em mais de um funil, use
+ *                       esta variável para dizer em qual funil procurar.
  *
- * Os padrões abaixo (funil "LIVE – LEADS", etapa "Em andamento") refletem o
- * funil criado no RD Station CRM em 08/10/2026. Ajuste via variável de
- * ambiente se os nomes mudarem.
+ * O padrão "LIVE – LEADS" é a etapa criada no RD Station CRM em 08/10/2026
+ * para os leads deste aulão. Ajuste via variável de ambiente se renomearem.
  *
  * Veja docs/rd-station.md para o passo a passo completo.
  */
 
 const CRM_BASE = 'https://crm.rdstation.com/api/v1';
 const SOURCE_NAME = (process.env.RDCRM_SOURCE_NAME || 'Aulão Patrimônio Alavancado (20/10)').trim();
-const PIPELINE_NAME = (process.env.RDCRM_PIPELINE_NAME || 'LIVE – LEADS').trim();
-const STAGE_NAME = (process.env.RDCRM_STAGE_NAME || 'Em andamento').trim();
+const PIPELINE_NAME = (process.env.RDCRM_PIPELINE_NAME || '').trim();
+const STAGE_NAME = (process.env.RDCRM_STAGE_NAME || 'LIVE – LEADS').trim();
 
 // Compara nomes de forma bem tolerante: tira acento, maiúsculas/minúsculas
 // e QUALQUER espaço, hífen, en-dash (–), em-dash (—) ou outra pontuação.
