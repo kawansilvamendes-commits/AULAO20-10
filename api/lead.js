@@ -27,7 +27,7 @@ const CRM_BASE = 'https://crm.rdstation.com/api/v1';
 const SOURCE_NAME = (process.env.RDCRM_SOURCE_NAME || 'Aulão Patrimônio Alavancado (20/10)').trim();
 const PIPELINE_NAME = (process.env.RDCRM_PIPELINE_NAME || '').trim();
 const STAGE_NAME = (process.env.RDCRM_STAGE_NAME || '').trim();
-const VERSAO = '2026-10-09';
+const VERSAO = '2026-10-09b';
 
 // Compara nomes de forma bem tolerante: tira acento, maiúsculas/minúsculas
 // e QUALQUER espaço, hífen, en-dash (–), em-dash (—) ou outra pontuação.
@@ -149,6 +149,26 @@ async function resolveStageId(token) {
   return cachedStageId;
 }
 
+// Primeira etapa (por ordem) do primeiro funil (por ordem) da conta. Usada
+// como alternativa quando o RD recusa a negociação sem etapa indicada.
+async function primeiraEtapa(token) {
+  try {
+    const lista = await rdFetch(token, '/deal_pipelines?limit=200');
+    const funis = Array.isArray(lista.json) ? lista.json : (lista.json && lista.json.deal_pipelines) || [];
+    const porOrdem = (a, b) => (a.order ?? 0) - (b.order ?? 0);
+    for (const funil of [...funis].sort(porOrdem)) {
+      const etapa = [...(funil.deal_stages || [])].sort(porOrdem)[0];
+      if (!etapa) continue;
+      const ids = [...new Set([etapa.id, etapa._id].filter(Boolean))];
+      return { ids, descricao: `${funil.name} > ${etapa.name}` };
+    }
+    console.warn('[lead] Nenhum funil com etapas retornado pelo RD:', lista.status, lista.texto.slice(0, 300));
+  } catch (err) {
+    console.warn('[lead] Falha ao buscar a primeira etapa:', err && err.message);
+  }
+  return null;
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -196,25 +216,62 @@ module.exports = async function handler(req, res) {
     ...(sourceId ? { deal_source: { _id: sourceId } } : {})
   };
 
-  try {
-    let r = await rdFetch(token, '/deals', { method: 'POST', body: payload });
+  const tentativas = [];
+  const criar = async (corpo, rotulo) => {
+    const r = await rdFetch(token, '/deals', { method: 'POST', body: corpo });
+    tentativas.push({ tentativa: rotulo, status: r.status });
+    if (!r.ok) console.warn(`[lead] Tentativa "${rotulo}" recusada pelo RD (${r.status}): ${r.texto.slice(0, 300)}`);
+    return r;
+  };
 
-    // Rede de segurança: se o RD recusar com etapa/fonte, tenta de novo só
-    // com o essencial (contato + negociação), para não perder o lead.
+  try {
+    // 1) Completo (com etapa e fonte, se houver).
+    let r = await criar(payload, 'completo');
+
+    // 2) Sem etapa e sem fonte.
     if (!r.ok && (payload.deal.deal_stage_id || payload.deal_source)) {
-      console.warn(`[lead] RD recusou a negociação com etapa/fonte (${r.status}): ${r.texto}. Tentando de novo sem elas.`);
       delete payload.deal.deal_stage_id;
       delete payload.deal_source;
-      r = await rdFetch(token, '/deals', { method: 'POST', body: payload });
+      r = await criar(payload, 'sem_etapa_fonte');
+    }
+
+    // 3) Indicando explicitamente a primeira etapa do primeiro funil — cobre o
+    //    caso de a etapa padrão da conta ter sido movida ou removida no CRM.
+    let primeira = null;
+    if (!r.ok) {
+      primeira = await primeiraEtapa(token);
+      for (const id of (primeira ? primeira.ids : [])) {
+        payload.deal.deal_stage_id = id;
+        r = await criar(payload, `primeira_etapa:${primeira.descricao}`);
+        if (r.ok) break;
+      }
+    }
+
+    // 4) Contato mínimo (sem telefone estruturado nem base legal), com o
+    //    WhatsApp no nome da negociação para não perder o dado.
+    if (!r.ok) {
+      const minimo = {
+        contacts: [{ name: nome, emails: [{ email }] }],
+        deal: {
+          name: `${nomeDaNegociacao} · WhatsApp +55${digitos}`.slice(0, 200),
+          ...(primeira && primeira.ids[0] ? { deal_stage_id: primeira.ids[0] } : {})
+        }
+      };
+      r = await criar(minimo, 'minimo');
     }
 
     if (!r.ok) {
-      console.error(`[lead] RD Station CRM respondeu ${r.status}:`, r.texto);
-      return res.status(502).json({ ok: false, erro: 'crm' });
+      const sondagem = {};
+      for (const [rotulo, caminho] of [['listar_negociacoes', '/deals?limit=1'], ['listar_funis', '/deal_pipelines?limit=1']]) {
+        try { sondagem[rotulo] = (await rdFetch(token, caminho)).status; } catch (_) { sondagem[rotulo] = 'falhou'; }
+      }
+      console.error('[lead] RD Station CRM recusou todas as tentativas.', JSON.stringify({ tentativas, sondagem, ultima_resposta: r.texto.slice(0, 300) }));
+      return res.status(502).json({ ok: false, erro: 'crm', versao: VERSAO, tentativas, sondagem, mensagem_rd: r.texto.slice(0, 160) });
     }
+    if (tentativas.length > 1) console.warn('[lead] Lead salvo depois de tentativas extras:', JSON.stringify(tentativas));
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('[lead] Falha ao falar com o RD Station CRM:', err && err.message);
-    return res.status(502).json({ ok: false, erro: 'crm' });
+    return res.status(502).json({ ok: false, erro: 'crm', versao: VERSAO, tentativas });
   }
 };
