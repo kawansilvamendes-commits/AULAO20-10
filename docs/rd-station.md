@@ -81,13 +81,13 @@ Os textos abaixo ficam aqui prontos para quando a automação de e-mail existir 
 ### E-mail 1: confirmação (imediato)
 
 **Assunto:** Sua vaga no Aulão Patrimônio Alavancado está confirmada
-**Pré-cabeçalho:** Terça, 20/10, às 20h. Já salve na sua agenda.
+**Pré-cabeçalho:** Terça, 20/10, às 20h30. Já salve na sua agenda.
 
 > Olá, [Nome]!
 >
 > Sua vaga no **Aulão Patrimônio Alavancado** está garantida.
 >
-> **Terça-feira, 20 de outubro, às 20h (horário de Brasília)**
+> **Terça-feira, 20 de outubro, às 20h30 (horário de Brasília) / 19h30 (horário de MT)**
 > Online e ao vivo
 >
 > O link de acesso será enviado por aqui e no nosso grupo VIP do WhatsApp. Entre no grupo agora para não perder nenhum aviso:
@@ -104,12 +104,12 @@ Os textos abaixo ficam aqui prontos para quando a automação de e-mail existir 
 
 ### E-mail 2: véspera (segunda, 19/10, às 19h)
 
-**Assunto:** Amanhã, 20h: o consórcio como estratégia de investimento
+**Assunto:** Amanhã, 20h30: o consórcio como estratégia de investimento
 **Pré-cabeçalho:** Reserve 90 minutos na sua agenda.
 
 > Olá, [Nome].
 >
-> Amanhã, às 20h, acontece o Aulão Patrimônio Alavancado.
+> Amanhã, às 20h30 (Brasília) / 19h30 (MT), acontece o Aulão Patrimônio Alavancado.
 >
 > Uma pergunta para você pensar até lá: se o mesmo imóvel pode custar até R$ 255 mil a menos no total, por que tanta gente ainda escolhe o financiamento?
 >
@@ -121,12 +121,12 @@ Os textos abaixo ficam aqui prontos para quando a automação de e-mail existir 
 
 ### E-mail 3: manhã do evento (terça, 20/10, às 10h)
 
-**Assunto:** É hoje, [Nome]: aulão às 20h
+**Assunto:** É hoje, [Nome]: aulão às 20h30
 **Pré-cabeçalho:** O link de acesso chega aqui 1 hora antes.
 
 > Olá, [Nome]!
 >
-> É hoje, às 20h (horário de Brasília).
+> É hoje, às 20h30 (horário de Brasília) / 19h30 (horário de MT).
 >
 > Uma sugestão: anote as suas dúvidas sobre consórcio durante o dia. O último bloco do aulão é de perguntas e respostas ao vivo com os especialistas.
 >
@@ -135,10 +135,10 @@ Os textos abaixo ficam aqui prontos para quando a automação de e-mail existir 
 > Até a noite!
 > Equipe Monetizze Investimentos
 
-### E-mail 4: 1 hora antes (terça, 20/10, às 19h)
+### E-mail 4: 1 hora antes (terça, 20/10, às 19h30)
 
 **Assunto:** Começa em 1 hora: aqui está o seu link
-**Pré-cabeçalho:** Aulão Patrimônio Alavancado, hoje às 20h.
+**Pré-cabeçalho:** Aulão Patrimônio Alavancado, hoje às 20h30.
 
 > [Nome], falta 1 hora.
 >
@@ -151,7 +151,7 @@ Os textos abaixo ficam aqui prontos para quando a automação de e-mail existir 
 > Te vejo lá!
 > Equipe Monetizze Investimentos
 
-### E-mail 5: ao vivo (terça, 20/10, às 20h)
+### E-mail 5: ao vivo (terça, 20/10, às 20h30)
 
 **Assunto:** Estamos ao vivo agora
 **Pré-cabeçalho:** Ainda dá tempo de entrar.

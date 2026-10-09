@@ -15,8 +15,8 @@ Para funcionar, crie a variável de ambiente `RDCRM_TOKEN` na Vercel. O passo a 
 ```js
 const CONFIG = {
   evento: 'Aulão Patrimônio Alavancado',
-  inicio: '2026-10-20T20:00:00-03:00',   // data/hora de início (horário de Brasília)
-  fim: '2026-10-20T21:30:00-03:00',      // usado na agenda e no aviso "ao vivo"
+  inicio: '2026-10-20T20:30:00-03:00',   // data/hora de início (horário de Brasília)
+  fim: '2026-10-20T22:00:00-03:00',      // usado na agenda e no aviso "ao vivo"
   endpoint: '/api/lead',                  // função que envia ao RD Station CRM
   paginaObrigado: ''                      // opcional: redireciona para uma página de obrigado
 };
@@ -32,7 +32,7 @@ Se o Meta Pixel (`fbq`), o Google Analytics (`gtag`) ou o Google Tag Manager (`d
 
 ## 3. O que revisar antes de publicar
 
-- **Horário:** a página assume 20h (Brasília) e duração de 1h30.
+- **Horário:** 20h30 de Brasília (19h30 em Mato Grosso), com duração de 1h30.
 - **Política de Privacidade:** troque os links `href="#"` pelo endereço real.
 - **Logo:** o logo foi recriado em vetor a partir da identidade visual. Se tiver o SVG oficial, substitua o `<symbol id="logo">` no topo do `<body>`.
 - **Simulação de custo:** os números são ilustrativos (R$ 300 mil, 240 meses, financiamento SAC a 11% a.a., consórcio com taxa de administração de 20%). Ajuste se preferir outro cenário.
