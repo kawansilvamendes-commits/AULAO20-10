@@ -498,8 +498,6 @@
     .success h2 { font-size: 1.6rem; letter-spacing: -.03em; }
     .success p { margin: 10px auto 0; max-width: 30em; font-size: 14.5px; color: var(--texto-2); }
     .success__actions { display: grid; gap: 10px; margin-top: 24px; }
-    .success__small { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-size: 13px; color: var(--azul); }
-    .success__small svg { width: 15px; height: 15px; }
 
     /* Selos flutuantes */
     .float-badge {
@@ -979,8 +977,6 @@
     <symbol id="i-live" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M8.5 15.5a5 5 0 0 1 0-7M18.4 5.6a9 9 0 0 1 0 12.8M5.6 18.4a9 9 0 0 1 0-12.8"/></g></symbol>
     <symbol id="i-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="1"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/></g></symbol>
     <symbol id="i-gift" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="8" width="17" height="4" rx=".5"/><path d="M5 12v8.5h14V12M12 8v12.5M12 8S10.5 3.5 8 4.2C6 4.8 7 8 12 8zM12 8s1.5-4.5 4-3.8c2 .6 1 3.8-4 3.8z"/></g></symbol>
-    <symbol id="i-whats" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 20l1.2-3.9A8.5 8.5 0 1 1 8.2 19z"/><path d="M9.2 8.3c-.3 0-.7.3-.7.9 0 2.8 3.5 6.3 6.3 6.3.6 0 .9-.4.9-.7v-1l-1.8-.8-.9.8a5 5 0 0 1-2.8-2.8l.8-.9-.8-1.8z"/></g></symbol>
-    <symbol id="i-download" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10.5l5 5 5-5M4.5 19.5h15"/></g></symbol>
     <symbol id="i-lever" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20.5h18M4 16l16-8M12 12l-2.5 8.5h5z"/><circle cx="18" cy="5.5" r="2"/></g></symbol>
     <symbol id="i-target" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></g></symbol>
     <symbol id="i-card" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="1"/><path d="M2.5 9.5h19M6 14.5h4M15 14.5l1.5 1.5 3-3"/></g></symbol>
@@ -1127,16 +1123,12 @@
               </svg>
               <span class="label">Inscrição confirmada</span>
               <h2 style="margin-top:10px">Sua vaga está garantida<span data-success-name></span>!</h2>
-              <p>Vamos enviar o link de acesso por e-mail e WhatsApp. Reserve na sua agenda: <strong>terça, 20/10, às 20h</strong>.</p>
+              <p>Você vai receber mensagens sobre o aulão por <strong>WhatsApp</strong> e <strong>e-mail</strong>, incluindo o link de acesso. Reserve na sua agenda: <strong>terça, 20/10, às 20h</strong>.</p>
               <div class="success__actions">
-                <a class="btn btn--primary btn--shine" data-whats-group href="#" target="_blank" rel="noopener" hidden>
-                  <svg><use href="#i-whats"/></svg>Entrar no grupo VIP do WhatsApp
-                </a>
-                <a class="btn btn--outline" data-gcal href="#" target="_blank" rel="noopener">
+                <a class="btn btn--primary btn--shine" data-gcal href="#" target="_blank" rel="noopener">
                   <svg><use href="#i-calendar"/></svg>Adicionar ao Google Agenda
                 </a>
               </div>
-              <a class="success__small" href="#" data-ics><svg><use href="#i-download"/></svg>Baixar convite (.ics) para outras agendas</a>
             </div>
           </div>
         </div>
@@ -1490,10 +1482,8 @@
       evento: 'Aulão Patrimônio Alavancado',
       inicio: '2026-10-20T20:00:00-03:00',
       fim: '2026-10-20T21:30:00-03:00',
-      // Função na Vercel que envia cada inscrição para o RD Station Marketing (veja api/lead.js).
+      // Função na Vercel que envia cada inscrição para o RD Station CRM (veja api/lead.js).
       endpoint: '/api/lead',
-      // Link do grupo VIP do WhatsApp exibido após a inscrição (deixe vazio para ocultar o botão).
-      grupoWhatsapp: '',
       // Página de obrigado opcional. Se preenchida, o lead é redirecionado para ela após a inscrição.
       paginaObrigado: ''
     };
@@ -1737,26 +1727,6 @@
         + '&dates=' + toGcal(CONFIG.inicio) + '/' + toGcal(CONFIG.fim)
         + '&details=' + encodeURIComponent(details)
         + '&location=' + encodeURIComponent('Online (link enviado por e-mail e WhatsApp)');
-      $('[data-ics]').addEventListener('click', e => {
-        e.preventDefault();
-        const ics = [
-          'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Monetizze Investimentos//Aulao//PT-BR', 'BEGIN:VEVENT',
-          'UID:aulao-' + start + '@monetizze-investimentos',
-          'DTSTAMP:' + toGcal(new Date().toISOString()),
-          'DTSTART:' + toGcal(CONFIG.inicio), 'DTEND:' + toGcal(CONFIG.fim),
-          'SUMMARY:' + CONFIG.evento + ' | Monetizze Investimentos',
-          'DESCRIPTION:' + details,
-          'LOCATION:Online',
-          'BEGIN:VALARM', 'TRIGGER:-PT30M', 'ACTION:DISPLAY', 'DESCRIPTION:O aulão começa em 30 minutos', 'END:VALARM',
-          'END:VEVENT', 'END:VCALENDAR'
-        ].join('\r\n');
-        const url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
-        const a = Object.assign(document.createElement('a'), { href: url, download: 'aulao-patrimonio-alavancado.ics' });
-        document.body.appendChild(a); a.click(); a.remove();
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
-      });
-      const groupBtn = $('[data-whats-group]');
-      if (CONFIG.grupoWhatsapp) { groupBtn.href = CONFIG.grupoWhatsapp; groupBtn.hidden = false; }
 
       /* ---------- Envio ---------- */
       function trackLead(payload) {

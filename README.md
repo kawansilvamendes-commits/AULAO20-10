@@ -17,8 +17,7 @@ const CONFIG = {
   evento: 'Aulão Patrimônio Alavancado',
   inicio: '2026-10-20T20:00:00-03:00',   // data/hora de início (horário de Brasília)
   fim: '2026-10-20T21:30:00-03:00',      // usado na agenda e no aviso "ao vivo"
-  endpoint: '/api/lead',                  // função que envia ao RD Station
-  grupoWhatsapp: '',                      // link do grupo VIP (botão aparece após a inscrição)
+  endpoint: '/api/lead',                  // função que envia ao RD Station CRM
   paginaObrigado: ''                      // opcional: redireciona para uma página de obrigado
 };
 ```

@@ -70,7 +70,7 @@ O RD Station **CRM** não tem fluxo de automação de e-mail (isso é um recurso
 
 Como vocês decidiram usar e-mail + grupo de WhatsApp para os lembretes, isso precisa de uma destas soluções:
 
-1. **Grupo de WhatsApp como canal principal** — simples, já está desenhado na página (o botão para entrar no grupo aparece depois da inscrição). Os lembretes são por lá; sem automação de e-mail.
+1. **WhatsApp como canal principal** — a tela de confirmação avisa que a pessoa vai receber mensagens por WhatsApp e e-mail (não há mais botão de grupo VIP na página). Os lembretes saem pelo WhatsApp da equipe.
 2. **Adicionar envio de e-mail direto na função `/api/lead`** — eu implemento o envio do e-mail de confirmação (via um serviço como Resend ou SendGrid) no exato momento da inscrição. Os lembretes seguintes (véspera, 1h antes) precisariam de um agendamento separado (ex.: uma rotina programada), que também posso montar.
 3. **Assinar o RD Station Marketing** — aí a automação de e-mail completa (os 6 e-mails abaixo) funciona como desenhado originalmente.
 
