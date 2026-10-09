@@ -11,13 +11,14 @@
  *                       automaticamente na primeira inscrição. Padrão abaixo.
  *   RDCRM_STAGE_NAME    (opcional) — nome exato da etapa (coluna do quadro
  *                       de negociações) onde o lead deve entrar. Busca em
- *                       todos os funis da conta. Padrão: "LIVE – LEADS".
+ *                       todos os funis da conta. Sem ela, o lead cai na
+ *                       etapa padrão da conta.
  *   RDCRM_PIPELINE_NAME (opcional, raramente necessário) — se a etapa acima
  *                       existir com o mesmo nome em mais de um funil, use
  *                       esta variável para dizer em qual funil procurar.
  *
- * O padrão "LIVE – LEADS" é a etapa criada no RD Station CRM em 08/10/2026
- * para os leads deste aulão. Ajuste via variável de ambiente se renomearem.
+ * Se o RD recusar a negociação com a etapa ou a fonte indicadas, a função
+ * tenta de novo sem elas — o lead nunca se perde por causa disso.
  *
  * Veja docs/rd-station.md para o passo a passo completo.
  */
@@ -25,7 +26,8 @@
 const CRM_BASE = 'https://crm.rdstation.com/api/v1';
 const SOURCE_NAME = (process.env.RDCRM_SOURCE_NAME || 'Aulão Patrimônio Alavancado (20/10)').trim();
 const PIPELINE_NAME = (process.env.RDCRM_PIPELINE_NAME || '').trim();
-const STAGE_NAME = (process.env.RDCRM_STAGE_NAME || 'LIVE – LEADS').trim();
+const STAGE_NAME = (process.env.RDCRM_STAGE_NAME || '').trim();
+const VERSAO = '2026-10-09';
 
 // Compara nomes de forma bem tolerante: tira acento, maiúsculas/minúsculas
 // e QUALQUER espaço, hífen, en-dash (–), em-dash (—) ou outra pontuação.
@@ -102,6 +104,7 @@ async function resolveSourceId(token) {
 // (evita cair na etapa de mesmo nome de outro funil, por engano). Sem um
 // funil configurado, procura a etapa em todos os funis da conta.
 async function resolveStageId(token) {
+  if (!STAGE_NAME && !PIPELINE_NAME) return null;
   if (stageLookupDone) return cachedStageId;
   stageLookupDone = true;
   try {
@@ -149,7 +152,7 @@ async function resolveStageId(token) {
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
-    return res.status(405).json({ ok: false, erro: 'metodo' });
+    return res.status(405).json({ ok: false, erro: 'metodo', versao: VERSAO });
   }
 
   const dados = lerCorpo(req);
@@ -194,7 +197,17 @@ module.exports = async function handler(req, res) {
   };
 
   try {
-    const r = await rdFetch(token, '/deals', { method: 'POST', body: payload });
+    let r = await rdFetch(token, '/deals', { method: 'POST', body: payload });
+
+    // Rede de segurança: se o RD recusar com etapa/fonte, tenta de novo só
+    // com o essencial (contato + negociação), para não perder o lead.
+    if (!r.ok && (payload.deal.deal_stage_id || payload.deal_source)) {
+      console.warn(`[lead] RD recusou a negociação com etapa/fonte (${r.status}): ${r.texto}. Tentando de novo sem elas.`);
+      delete payload.deal.deal_stage_id;
+      delete payload.deal_source;
+      r = await rdFetch(token, '/deals', { method: 'POST', body: payload });
+    }
+
     if (!r.ok) {
       console.error(`[lead] RD Station CRM respondeu ${r.status}:`, r.texto);
       return res.status(502).json({ ok: false, erro: 'crm' });

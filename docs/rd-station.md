@@ -13,7 +13,7 @@ Cada inscrição cria:
 - um **contato** com nome, e-mail, celular e o aceite da LGPD (base legal de consentimento);
 - uma **negociação** (deal) com esse contato, nomeada assim: `Nome · Objetivo · Faixa de investimento · Aulão 20/10` — por exemplo, `Ana Souza · Imóvel · Acima de R$ 5.000 · Aulão 20/10`. Assim vocês veem o essencial direto na lista de negociações, sem precisar abrir cada uma.
 - a negociação sai marcada com a **fonte** "Aulão Patrimônio Alavancado (20/10)" (criada automaticamente no CRM na primeira inscrição, se ainda não existir);
-- a negociação entra na etapa **"LIVE – LEADS"** (uma coluna do quadro de Negociações) — a etapa criada para estes leads. Se algum dia renomearem essa etapa, veja o Passo 4.
+- a negociação entra na **etapa padrão da conta** (hoje, a coluna "Leads"). Para direcionar para outra etapa, veja o Passo 4.
 
 ---
 
@@ -41,15 +41,13 @@ Inscreva-se na página com o seu próprio e-mail. Em até 1 minuto a negociaçã
 
 Se aparecer "Não conseguimos confirmar sua inscrição", veja o motivo em **Vercel > projeto > Logs**. As linhas começam com `[lead]`.
 
-## Passo 4 (opcional): mudar a etapa
+## Passo 4 (opcional): direcionar para outra etapa
 
-Por padrão, a negociação entra na etapa **"LIVE – LEADS"** (procurada em todos os funis da conta). Se vocês renomearem essa etapa, crie a variável na Vercel:
+Por padrão, a negociação entra na etapa padrão da conta. Para tentar direcionar para uma etapa específica (ex.: "LIVE – LEADS"), crie a variável na Vercel:
 
-- **Key:** `RDCRM_STAGE_NAME` → **Value:** o nome exato da nova etapa, como aparece no RD Station CRM
+- **Key:** `RDCRM_STAGE_NAME` → **Value:** o nome da etapa, como aparece no quadro de Negociações
 
-Pequenas diferenças de hífen (`-` vs `–`), acentos, maiúsculas/minúsculas e espaçamento não importam na comparação.
-
-Se um dia a conta tiver **duas etapas com esse mesmo nome em funis diferentes**, crie também `RDCRM_PIPELINE_NAME` com o nome exato do funil certo, para a busca não escolher a etapa errada por engano. Sem essa variável, a negociação é criada sem etapa específica (nunca se perde) se o funil indicado não existir; com o funil certo mas a etapa não encontrada dentro dele, cai na primeira etapa desse funil.
+> Em 08/10/2026, ao enviar a etapa "LIVE – LEADS", o RD recusou a criação da negociação (404). Por isso ficou desativado por padrão. Se ativarem de novo e o RD recusar, a função **tenta de novo sem a etapa** — o lead cai na etapa padrão, mas nunca se perde. O motivo aparece em Vercel > Logs, numa linha `[lead] RD recusou a negociação com etapa/fonte`.
 
 ## Passo 5 (opcional): renomear a fonte
 
