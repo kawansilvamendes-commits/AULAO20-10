@@ -388,6 +388,8 @@
     .form-card__head .label { margin-bottom: 10px; }
     .form-card__title { font-size: clamp(1.4rem, 2vw, 1.65rem); letter-spacing: -.03em; }
     .form-card__desc { margin-top: 8px; font-size: 14px; color: var(--texto-2); line-height: 1.6; }
+    .form-card__when { display: none; align-items: center; gap: 8px; margin-top: 10px; font-size: 13px; font-weight: 600; line-height: 1.4; color: var(--azul); }
+    .form-card__when svg { width: 16px; height: 16px; flex: none; }
 
     .field { position: relative; margin-bottom: 12px; }
     .field > label, .field > .field__label { display: block; margin-bottom: 7px; font-size: 13px; font-weight: 600; color: var(--texto); }
@@ -892,7 +894,8 @@
       .header__info { display: none; }
       .hero__inner { grid-template-columns: 1fr; }
       .hero__copy { max-width: 680px; }
-      .form-wrap { max-width: 560px; width: 100%; }
+      .form-wrap { max-width: 560px; width: 100%; order: -1; }
+      .form-card__when { display: flex; }
       .cost { grid-template-columns: 1fr; }
       .cost__aside { border-left: 0; border-top: 1px solid var(--borda); flex-direction: row; flex-wrap: wrap; }
       .cost__aside .stat { flex: 1 1 220px; }
@@ -1051,6 +1054,7 @@
               <span class="label">Inscrição gratuita</span>
               <h2 class="form-card__title">Garanta sua vaga no aulão</h2>
               <p class="form-card__desc">Preencha abaixo para receber o link de acesso por e-mail e WhatsApp.</p>
+              <p class="form-card__when"><svg><use href="#i-calendar"/></svg>Ter, 20.10 · 20h30 Brasília · 19h30 MT · online e gratuito</p>
             </div>
 
             <form id="lead-form" novalidate>
