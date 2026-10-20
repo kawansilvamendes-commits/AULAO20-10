@@ -142,8 +142,10 @@ def convert(src, key, tapes_a, tapes_b):
     # ilustrações geradas por fontes/ilustracoes.py (img/<id>.svg)
     def slot(m):
         uid = re.search(r'id="([^"]+)"', m.group(0)).group(1)
-        if os.path.exists(os.path.join(OUT, 'img', uid + '.svg')):
-            return f'<img class="ph-img" src="/site/img/{uid}.svg" alt="" loading="lazy" decoding="async">'
+        # foto real (jpg/webp/png) tem prioridade sobre a ilustração
+        for ext in ('jpg', 'webp', 'png', 'svg'):
+            if os.path.exists(os.path.join(OUT, 'img', f'{uid}.{ext}')):
+                return f'<img class="ph-img" src="/site/img/{uid}.{ext}" alt="" loading="lazy" decoding="async">'
         return '<div class="ph" aria-hidden="true"><svg viewBox="-2 -2 184 104"><use href="#mk"/></svg></div>'
     body = re.sub(r'<image-slot [^>]*></image-slot>', slot, body)
 
