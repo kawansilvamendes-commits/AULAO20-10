@@ -11,7 +11,6 @@
   --ease: cubic-bezier(.22, 1, .36, 1);
   --promo-h: 0px;
 }
-.has-promo { --promo-h: 42px; }
 @property --a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -69,18 +68,6 @@ a:hover { color: #0A3459; }
   .mz-mnav a { font-size: 17px; font-weight: 500; color: #FFFFFF; padding: 13px 0; border-bottom: 1px solid rgba(255, 255, 255, .1); }
   .mz-mnav a:last-child { border-bottom: 0; }
   .mz-header.is-open .mz-mnav { grid-template-rows: 1fr; }
-}
-
-/* Aviso do aulão (some sozinho depois do evento) */
-.promo { display: none; height: var(--promo-h); align-items: center; justify-content: center; gap: 12px; padding: 0 16px; background: var(--destaque); color: var(--navy-900); font-size: 13px; font-weight: 600; overflow: hidden; }
-.promo:hover { color: var(--navy-900); }
-.has-promo .promo { display: flex; }
-.promo b { font-weight: 700; }
-.promo__cta { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; background: var(--navy-900); color: #FFFFFF; border-radius: 2px; font-size: 12px; white-space: nowrap; }
-.promo .dot { background: var(--navy-900); }
-@media (max-width: 640px) {
-  .promo { font-size: 12px; gap: 8px; justify-content: space-between; }
-  .promo__long { display: none; }
 }
 
 .dot { position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--destaque); flex: none; display: inline-block; }

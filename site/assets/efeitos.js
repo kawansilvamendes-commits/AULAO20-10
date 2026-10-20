@@ -3,9 +3,7 @@
    renderVals); este arquivo a executa sem React e aplica os efeitos. */
 (() => {
   const CONFIG = {
-    whatsapp: '5565996745162',
-    // Aviso do aulão no topo. Some sozinho depois de "fim".
-    aulao: { url: '/', inicio: '2026-10-20T20:30:00-03:00', fim: '2026-10-20T22:00:00-03:00' }
+    whatsapp: '5565996745162'
   };
 
   const $ = (s, el = document) => el.querySelector(s);
@@ -57,17 +55,6 @@
   function efeitos() {
     const fone = CONFIG.whatsapp;
     $$('[data-wa]').forEach(a => { a.href = 'https://wa.me/' + fone + '?text=' + encodeURIComponent(a.dataset.wa); });
-
-    /* Aviso do aulão */
-    const agora = Date.now(), ini = new Date(CONFIG.aulao.inicio).getTime(), fim = new Date(CONFIG.aulao.fim).getTime();
-    const promo = $('[data-promo]');
-    if (promo && agora < fim) {
-      document.documentElement.classList.add('has-promo');
-      promo.href = CONFIG.aulao.url;
-      const txt = $('[data-promo-text]');
-      if (agora >= ini) txt.innerHTML = '<b>Estamos ao vivo agora</b><span class="promo__long"> · Aulão Patrimônio Alavancado</span>';
-      else if (new Date(ini).toDateString() === new Date(agora).toDateString()) txt.innerHTML = '<b>É hoje, às 20h30</b> · Aulão<span class="promo__long"> Patrimônio Alavancado, ao vivo e</span> gratuito';
-    }
 
     /* Menu ativo e menu do celular */
     const pagina = document.body.dataset.page;
