@@ -169,7 +169,7 @@ def documento(x, y, w, cor=WHITE, linha=LIGHT, titulo=BLUE, rot=0, check=False, 
 
 def moeda(x, y, r, cor='#F2C14E', borda='#D9A62E', simbolo='$'):
     return (f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.1f}" fill="{borda}"/><circle cx="{x:.1f}" cy="{y - r * .08:.1f}" r="{r * .92:.1f}" fill="{cor}"/>'
-            f'<text x="{x:.1f}" y="{y + r * .26:.1f}" font-family="Sora, Arial, sans-serif" font-weight="700" font-size="{r * .9:.1f}" text-anchor="middle" fill="{borda}">{simbolo}</text>')
+            f'<text x="{x:.1f}" y="{y + r * .26:.1f}" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="{r * .9:.1f}" text-anchor="middle" fill="{borda}">{simbolo}</text>')
 
 
 def pilha(x, base, r, n):
@@ -202,7 +202,7 @@ def escudo(x, y, s, cor=BLUE, simbolo='check', sc=WHITE):
 
 def selo(x, y, r, texto, cor=SKY, tc=WHITE):
     return (f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.1f}" fill="{cor}"/>'
-            f'<text x="{x:.1f}" y="{y + r * .3:.1f}" font-family="Sora, Arial, sans-serif" font-weight="700" font-size="{r * .82:.1f}" text-anchor="middle" fill="{tc}">{texto}</text>')
+            f'<text x="{x:.1f}" y="{y + r * .3:.1f}" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="{r * .82:.1f}" text-anchor="middle" fill="{tc}">{texto}</text>')
 
 
 def cartao(x, y, w, fundo=WHITE, rot=0, rotulo='CARTA DE CRÉDITO', valor='R$ 300.000'):
@@ -211,8 +211,8 @@ def cartao(x, y, w, fundo=WHITE, rot=0, rotulo='CARTA DE CRÉDITO', valor='R$ 30
             f'<rect x="{x + 8:.1f}" y="{y + 10:.1f}" width="{w:.1f}" height="{h:.1f}" rx="6" fill="rgba(7,29,48,.25)"/>'
             f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" rx="6" fill="{fundo}"/>'
             f'<rect x="{x:.1f}" y="{y:.1f}" width="{w * .05:.1f}" height="{h:.1f}" fill="{SKY}"/>'
-            f'<text x="{x + w * .12:.1f}" y="{y + h * .28:.1f}" font-family="Sora, Arial, sans-serif" font-size="{w * .055:.1f}" letter-spacing="2" font-weight="600" fill="{MID}">{rotulo}</text>'
-            f'<text x="{x + w * .12:.1f}" y="{y + h * .6:.1f}" font-family="Sora, Arial, sans-serif" font-size="{w * .12:.1f}" font-weight="700" fill="{NAVY}">{valor}</text>'
+            f'<text x="{x + w * .12:.1f}" y="{y + h * .28:.1f}" font-family="Arial, Helvetica, sans-serif" font-size="{w * .055:.1f}" letter-spacing="2" font-weight="600" fill="{MID}">{rotulo}</text>'
+            f'<text x="{x + w * .12:.1f}" y="{y + h * .6:.1f}" font-family="Arial, Helvetica, sans-serif" font-size="{w * .12:.1f}" font-weight="700" fill="{NAVY}">{valor}</text>'
             f'<rect x="{x + w * .12:.1f}" y="{y + h * .74:.1f}" width="{w * .4:.1f}" height="{w * .03:.1f}" fill="{LIGHT}"/>'
             f'<path d="M{x + w * .74:.1f} {y + h * .82:.1f} l{w * .08:.1f} -{w * .16:.1f} l{w * .08:.1f} {w * .16:.1f}Z" fill="none" stroke="{SKY}" stroke-width="2.5"/></g>')
 

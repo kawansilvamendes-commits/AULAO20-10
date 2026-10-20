@@ -15,7 +15,8 @@
 @property --a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: #FFFFFF; color: #0A1B2A; font-family: 'Sora', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+button, input, select, textarea { font-family: inherit; }
+body { margin: 0; background: #FFFFFF; color: #0A1B2A; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; -webkit-font-smoothing: antialiased; }
 * { box-sizing: border-box; }
 a { color: #124A7C; text-decoration: none; transition: color 240ms ease, background 240ms ease, border-color 240ms ease, transform 300ms cubic-bezier(.22,.61,.36,1), box-shadow 300ms ease; }
 a:hover { color: #0A3459; }
