@@ -388,8 +388,9 @@
       .tl-dot { left: 0; top: 7px; }
     }
     @media (max-width: 640px) {
-      .has-promo { --promo-h: 52px; }
+      .has-promo { --promo-h: 44px; }
       .promo { font-size: 12px; gap: 8px; text-align: left; justify-content: space-between; }
+      .promo__long { display: none; }
       .promo__txt { line-height: 1.3; }
       .brand img { height: 28px; }
       .brand__sep, .brand__sub { display: none; }
@@ -444,7 +445,7 @@
     <!-- Aviso do aulão: aparece só até o fim do evento (CONFIG.aulao) -->
     <a class="promo" href="/" data-promo>
       <span class="dot" aria-hidden="true"></span>
-      <span class="promo__txt" data-promo-text><b>Aulão Patrimônio Alavancado</b> · ao vivo e gratuito · 20.10 às 20h30</span>
+      <span class="promo__txt" data-promo-text><b>Aulão ao vivo e gratuito</b><span class="promo__long"> · Patrimônio Alavancado</span> · 20.10 às 20h30</span>
       <span class="promo__cta">Inscreva-se<svg><use href="#i-arrow"/></svg></span>
     </a>
     <div class="container header__inner">
@@ -795,8 +796,8 @@
         $('[data-promo]').href = CONFIG.aulao.url;
         const hoje = new Date(ini).toDateString() === new Date(agora).toDateString();
         const txt = $('[data-promo-text]');
-        if (agora >= ini) txt.innerHTML = '<b>Estamos ao vivo agora</b> · Aulão Patrimônio Alavancado';
-        else if (hoje) txt.innerHTML = '<b>É hoje, às 20h30</b> · Aulão Patrimônio Alavancado, ao vivo e gratuito';
+        if (agora >= ini) txt.innerHTML = '<b>Estamos ao vivo agora</b><span class="promo__long"> · Aulão Patrimônio Alavancado</span>';
+        else if (hoje) txt.innerHTML = '<b>É hoje, às 20h30</b> · Aulão<span class="promo__long"> Patrimônio Alavancado, ao vivo e</span> gratuito';
       }
 
       /* Título palavra a palavra */
