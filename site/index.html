@@ -3,901 +3,583 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Criação de Sites | Monetizze</title>
-  <meta name="description" content="Sites institucionais sob medida para profissionais e empresas. Projeto, texto, publicação e domínio, com foco em gerar contato no WhatsApp.">
-  <meta name="keywords" content="criação de sites, site institucional, site para médicos, site para advogados, landing page, desenvolvimento de sites Mato Grosso">
+  <title>Monetizze Investimentos | Consórcio, Home Equity e Planos de Saúde</title>
+  <meta name="description" content="Crédito, patrimônio e proteção em um só atendimento. Consórcio como ferramenta de planejamento patrimonial, home equity com garantia de imóvel e planos de saúde.">
+  <meta name="keywords" content="consórcio investimento, carta de crédito imobiliário, home equity, auto equity, crédito com garantia de imóvel, planos de saúde, Monetizze Investimentos, Kawan Mendes">
   <meta name="theme-color" content="#071D30">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Criação de Sites | Monetizze">
-  <meta property="og:description" content="Seu trabalho é bom. Seu site precisa dizer isso em cinco segundos.">
+  <meta property="og:title" content="Monetizze Investimentos | Consórcio, Home Equity e Planos de Saúde">
+  <meta property="og:description" content="Crédito, patrimônio e proteção em um só atendimento. Consórcio como ferramenta de planejamento patrimonial, home equity com garantia de imóvel e planos de saúde.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-10 -40 200 180'%3E%3Crect x='-10' y='-40' width='200' height='180' fill='%230B2A45'/%3E%3Cg fill='%23fff'%3E%3Cpath d='M0 100L64.7 0 87.7 35.5 46.4 100Z'/%3E%3Cpath fill-rule='evenodd' d='M51.7 100L115.7 0 179.7 100ZM89 100L115.7 49 142.4 100Z'/%3E%3Cpath d='M100 100L115.7 74.5 131.4 100Z'/%3E%3C/g%3E%3C/svg%3E">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js')</script>
-
+  <link rel="stylesheet" href="/site/assets/efeitos.css">
   <style>
-    :root {
-      --navy: #0B2A45;
-      --navy-900: #071D30;
-      --azul: #124A7C;
-      --azul-2: #2E7BB8;
-      --destaque: #5B9BD5;
-      --claro: #9CC6E8;
-      --branco: #FFFFFF;
-      --fundo: #F6F9FC;
-      --borda: #E1E7ED;
-      --texto-2: #4A5A6B;
-      --texto: #0A1B2A;
-      --linha-escura: rgba(156, 198, 232, .16);
-      --r: 2px;
-      --container: 1200px;
-      --gutter: clamp(20px, 4vw, 40px);
-      --ease: cubic-bezier(.22, 1, .36, 1);
-      --header-h: 76px;
-      --promo-h: 0px;
-    }
-    .has-promo { --promo-h: 42px; }
-
-    @property --a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
-
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-    body { margin: 0; font-family: 'Sora', system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.6; color: var(--texto); background: var(--branco); -webkit-font-smoothing: antialiased; }
-    img, svg { display: block; max-width: 100%; }
-    a { color: inherit; }
-    button { font: inherit; color: inherit; }
-    ::selection { background: var(--claro); color: var(--navy-900); }
-    [id] { scroll-margin-top: calc(var(--header-h) + var(--promo-h) + 16px); }
-
-    .container { width: 100%; max-width: calc(var(--container) + var(--gutter) * 2); margin: 0 auto; padding: 0 var(--gutter); }
-    .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
-
-    h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: -.032em; line-height: 1.08; }
-    p { margin: 0; }
-    .label { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: var(--azul); }
-    .on-dark .label, .label--light { color: var(--claro); }
-    .h2 { font-size: clamp(1.9rem, 4.1vw, 3.15rem); }
-    .lead { font-size: clamp(1rem, 1.4vw, 1.125rem); color: var(--texto-2); line-height: 1.7; }
-    .on-dark .lead { color: rgba(255, 255, 255, .72); }
-
-    .grad { background: linear-gradient(90deg, var(--azul), var(--destaque), var(--azul)); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gradient-pan 7s ease-in-out infinite; }
-    .grad--light { background-image: linear-gradient(90deg, var(--destaque), var(--claro), var(--destaque)); }
-
-    .tag { display: inline-flex; align-items: center; gap: 10px; padding: 9px 14px; border: 1px solid var(--claro); border-radius: var(--r); background: var(--branco); font-size: 11.5px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--azul); white-space: nowrap; }
-    .tag--dark { background: rgba(91, 155, 213, .08); border-color: rgba(156, 198, 232, .35); color: var(--claro); }
-    .dot { position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--destaque); flex: none; }
-    .dot::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: inherit; animation: ping 1.8s var(--ease) infinite; }
-
-    /* Botões */
-    .btn { position: relative; isolation: isolate; display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 54px; padding: 0 28px; border: 1px solid transparent; border-radius: var(--r); font-size: 15px; font-weight: 600; letter-spacing: .01em; line-height: 1.2; text-align: center; text-decoration: none; white-space: nowrap; cursor: pointer; overflow: hidden; transition: background-color .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease); }
-    .btn svg { width: 18px; height: 18px; flex: none; transition: transform .35s var(--ease); }
-    .btn:hover svg.arrow { transform: translateX(4px); }
-    .btn:hover { transform: translateY(-2px); }
-    .btn:focus-visible { outline: 2px solid var(--destaque); outline-offset: 3px; }
-    .btn--primary { background: var(--navy); color: var(--branco); }
-    .btn--primary:hover { background: var(--azul); }
-    .btn--light { background: var(--branco); color: var(--navy); }
-    .btn--light:hover { background: #EAF2F9; }
-    .btn--outline { background: transparent; border-color: #D6DFE7; color: var(--texto); }
-    .btn--outline:hover { border-color: var(--azul); background: #EAF2F9; }
-    .btn--ghost-dark { background: transparent; border-color: rgba(255, 255, 255, .32); color: var(--branco); }
-    .btn--ghost-dark:hover { border-color: rgba(255, 255, 255, .6); background: rgba(255, 255, 255, .08); }
-    .btn--sm { min-height: 42px; padding: 0 18px; font-size: 13.5px; }
-    .btn--block { width: 100%; }
-    .btn--shine::after { content: ''; position: absolute; z-index: -1; top: 0; bottom: 0; left: 0; width: 45%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .28), transparent); transform: translateX(-120%) skewX(-20deg); animation: shine 3.6s var(--ease) infinite; }
-    .btn--light.btn--shine::after { background: linear-gradient(90deg, transparent, rgba(91, 155, 213, .35), transparent); }
-    .btn--pulse { animation: pulse-ring 2.2s var(--ease) infinite; }
-
-    /* Revelação */
-    .js [data-reveal] { opacity: 0; transform: translateY(28px); filter: blur(6px); transition: opacity .9s var(--ease), transform .9s var(--ease), filter .9s var(--ease); transition-delay: var(--d, 0s); }
-    .js [data-reveal="left"] { transform: translateX(-32px); }
-    .js [data-reveal="right"] { transform: translateX(32px); }
-    .js [data-reveal="scale"] { transform: scale(.96); }
-    .js [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
-
-    .progress { position: fixed; top: 0; left: 0; right: 0; z-index: 80; height: 2px; background: linear-gradient(90deg, var(--azul), var(--destaque), var(--claro)); transform-origin: left; transform: scaleX(0); }
-
-    /* Header */
-    .header { position: fixed; top: 0; left: 0; right: 0; z-index: 60; color: var(--branco); border-bottom: 1px solid transparent; transition: background-color .4s var(--ease), border-color .4s var(--ease); -webkit-transform: translateZ(0); transform: translateZ(0); }
-    .header.is-scrolled, .header.is-open { background: rgba(7, 29, 48, .9); -webkit-backdrop-filter: saturate(150%) blur(16px); backdrop-filter: saturate(150%) blur(16px); border-color: rgba(156, 198, 232, .12); }
-    .header__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: var(--header-h); }
-    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--branco); }
-    .brand img { height: 36px; width: auto; }
-    .brand__sep { width: 1px; height: 26px; background: rgba(255, 255, 255, .24); }
-    .brand__sub { font-size: 12px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--claro); white-space: nowrap; }
-    .nav { display: flex; align-items: center; gap: 26px; }
-    .nav a:not(.btn) { position: relative; font-size: 13.5px; text-decoration: none; color: rgba(255, 255, 255, .82); white-space: nowrap; transition: color .25s; }
-    .nav a:not(.btn)::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px; background: var(--destaque); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
-    .nav a:not(.btn):hover { color: var(--branco); }
-    .nav a:not(.btn):hover::after { transform: scaleX(1); }
-    .menu-btn { display: none; width: 42px; height: 42px; flex: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; background: transparent; border: 1px solid rgba(255, 255, 255, .28); border-radius: var(--r); cursor: pointer; }
-    .menu-btn span { width: 16px; height: 1.5px; background: var(--branco); transition: transform .3s var(--ease); }
-    .header.is-open .menu-btn span:first-child { transform: translateY(3.25px) rotate(45deg); }
-    .header.is-open .menu-btn span:last-child { transform: translateY(-3.25px) rotate(-45deg); }
-    .header__mobile-cta { display: none; }
-    .mobile-nav { display: none; }
-
-    /* Aviso do aulão */
-    .promo { display: none; height: var(--promo-h); align-items: center; justify-content: center; gap: 12px; padding: 0 16px; background: var(--destaque); color: var(--navy-900); font-size: 13px; font-weight: 600; text-decoration: none; letter-spacing: .01em; overflow: hidden; }
-    .has-promo .promo { display: flex; }
-    .promo b { font-weight: 700; }
-    .promo__cta { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; background: var(--navy-900); color: var(--branco); border-radius: var(--r); font-size: 12px; white-space: nowrap; }
-    .promo__cta svg { width: 14px; height: 14px; transition: transform .3s var(--ease); }
-    .promo:hover .promo__cta svg { transform: translateX(3px); }
-    .promo .dot { background: var(--navy-900); }
-
-    /* Hero */
-    .hero { position: relative; isolation: isolate; overflow: hidden; color: var(--branco); background: radial-gradient(120% 80% at 15% 0%, var(--navy) 0%, var(--navy-900) 62%); padding: calc(var(--header-h) + var(--promo-h) + clamp(40px, 6vw, 80px)) 0 clamp(120px, 12vw, 150px); }
-    .bg-grid { position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(rgba(156, 198, 232, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(156, 198, 232, .07) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 20%, transparent 75%); pointer-events: none; }
-    .blob { position: absolute; z-index: -1; border-radius: 50%; filter: blur(90px); opacity: .5; pointer-events: none; animation: blob 18s ease-in-out infinite; }
-    .blob--1 { width: 460px; height: 460px; left: -140px; top: 40px; background: var(--azul); }
-    .blob--2 { width: 520px; height: 520px; right: -160px; top: 28%; background: var(--destaque); opacity: .22; animation-delay: -6s; }
-    .blob--3 { width: 320px; height: 320px; left: 38%; bottom: -160px; background: var(--azul); opacity: .4; animation-delay: -11s; }
-    .hero__mark { position: absolute; z-index: -1; right: -4%; bottom: -2%; width: min(760px, 70vw); fill: none; stroke: rgba(156, 198, 232, .1); stroke-width: .35; pointer-events: none; }
-    .hero__inner { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(40px, 6vw, 80px); align-items: center; }
-    .hero__title { margin-top: 26px; font-size: clamp(2.3rem, 4.4vw, 3.6rem); line-height: 1.06; letter-spacing: -.04em; max-width: 14em; }
-    .hero__title em { font-style: normal; }
-    .hero__sub { margin-top: 24px; max-width: 34em; font-size: clamp(1rem, 1.35vw, 1.13rem); font-weight: 300; line-height: 1.75; color: rgba(255, 255, 255, .76); }
-    .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
-    .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 28px; margin-top: 40px; padding-top: 26px; border-top: 1px solid var(--linha-escura); }
-    .stat__num { display: block; font-size: clamp(24px, 2.4vw, 30px); font-weight: 700; letter-spacing: -.03em; line-height: 1; font-variant-numeric: tabular-nums; }
-    .stat__lbl { display: block; margin-top: 8px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.5; color: rgba(255, 255, 255, .6); }
-
-    .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .1em; margin-bottom: -.1em; }
-    .w__i { display: inline-block; transform: translateY(108%); animation: word-up 1s var(--ease) forwards; animation-delay: calc(var(--i) * 55ms + .15s); }
-    .w__i.grad { animation: word-up 1s var(--ease) forwards, gradient-pan 7s ease-in-out infinite; animation-delay: calc(var(--i) * 55ms + .15s), 0s; }
-
-    /* Mockup do hero */
-    .mock { position: relative; }
-    .mock__halo { position: absolute; inset: 6% -4% -2%; background: radial-gradient(closest-side, rgba(91, 155, 213, .38), transparent); filter: blur(30px); pointer-events: none; }
-    .browser { position: relative; z-index: 1; border-radius: 10px; background: #0E3152; animation: float 8s ease-in-out infinite; }
-    .glow::before { content: ''; position: absolute; inset: -1.5px; z-index: -1; border-radius: inherit; padding: 1.5px; background: conic-gradient(from var(--a), rgba(156, 198, 232, .22) 0 62%, var(--destaque) 78%, var(--branco) 84%, var(--claro) 90%, rgba(156, 198, 232, .22) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); animation: rotate-a 6s linear infinite; pointer-events: none; }
-    .browser__bar { display: flex; align-items: center; gap: 6px; height: 34px; padding: 0 14px; border-bottom: 1px solid rgba(156, 198, 232, .14); }
-    .browser__bar i { width: 9px; height: 9px; border-radius: 50%; background: rgba(156, 198, 232, .35); }
-    .browser__url { margin-left: 12px; flex: 1; height: 18px; border-radius: 9px; background: rgba(156, 198, 232, .1); font-size: 10px; line-height: 18px; padding: 0 10px; color: rgba(255, 255, 255, .5); white-space: nowrap; overflow: hidden; }
-    .browser__body { padding: 22px 22px 26px; }
-    .sk { border-radius: 2px; background: rgba(156, 198, 232, .16); }
-    .sk--tag { width: 34%; height: 10px; }
-    .sk--h1 { width: 86%; height: 18px; margin-top: 14px; background: rgba(255, 255, 255, .78); }
-    .sk--h1b { width: 62%; height: 18px; margin-top: 8px; background: linear-gradient(90deg, var(--destaque), var(--claro)); }
-    .sk--p { width: 92%; height: 8px; margin-top: 14px; }
-    .sk--p2 { width: 70%; height: 8px; margin-top: 7px; }
-    .sk-row { display: flex; gap: 8px; margin-top: 18px; }
-    .sk--btn { width: 92px; height: 26px; background: var(--branco); }
-    .sk--btn2 { width: 76px; height: 26px; background: transparent; border: 1px solid rgba(255, 255, 255, .3); }
-    .sk-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 22px; }
-    .sk-cards div { height: 58px; border: 1px solid rgba(156, 198, 232, .16); background: rgba(255, 255, 255, .03); }
-    .phone { position: absolute; z-index: 2; right: -18px; bottom: -40px; width: 23%; min-width: 96px; aspect-ratio: 9 / 18; border-radius: 18px; padding: 8px; background: #061827; border: 1px solid rgba(156, 198, 232, .3); animation: float 7s ease-in-out infinite; animation-delay: -3.5s; }
-    .phone__screen { height: 100%; border-radius: 12px; background: radial-gradient(120% 60% at 20% 0%, var(--navy), #0A2238 70%); padding: 18px 10px 10px; display: flex; flex-direction: column; gap: 6px; }
-    .phone .sk--h1 { margin-top: 6px; height: 10px; }
-    .phone .sk--h1b { height: 10px; margin-top: 4px; }
-    .phone .sk--p { height: 5px; margin-top: 6px; }
-    .phone__wa { margin-top: auto; height: 22px; border-radius: 2px; background: var(--branco); }
-    .float-badge { position: absolute; z-index: 3; display: inline-flex; align-items: center; gap: 10px; padding: 11px 15px; border: 1px solid rgba(156, 198, 232, .3); border-radius: var(--r); background: rgba(11, 42, 69, .86); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--branco); white-space: nowrap; animation: float 7s ease-in-out infinite; }
-    .float-badge svg { width: 16px; height: 16px; color: var(--destaque); }
-    .float-badge--a { top: -22px; left: -26px; }
-    .float-badge--b { bottom: 40px; left: -34px; animation-delay: -2.5s; }
-
-    /* Faixas */
-    .tapes { position: relative; z-index: 2; height: 150px; margin-top: -75px; overflow: hidden; display: grid; place-items: center; pointer-events: none; }
-    .tape { position: absolute; left: -5%; width: 110%; padding: 15px 0; overflow: hidden; }
-    .tape--a { background: var(--destaque); color: var(--navy-900); transform: rotate(-2.8deg); }
-    .tape--b { background: var(--navy); color: var(--branco); transform: rotate(2.2deg); border-block: 1px solid rgba(156, 198, 232, .22); }
-    .tape__track { display: flex; align-items: center; gap: 34px; width: max-content; animation: marquee 38s linear infinite; }
-    .tape--b .tape__track { animation-direction: reverse; animation-duration: 44s; }
-    .tape__item { display: inline-flex; align-items: center; gap: 34px; font-size: 14px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; white-space: nowrap; }
-    .tape__item svg { width: 11px; height: 10px; opacity: .8; }
-    .tape--b .tape__item svg { color: var(--destaque); opacity: 1; }
-
-    /* Seções */
-    .section { position: relative; padding: clamp(88px, 10vw, 136px) 0; }
-    .section--fundo { background: var(--fundo); }
-    .section--dark { background: var(--navy-900); color: var(--branco); overflow: hidden; isolation: isolate; }
-    .section--navy { background: var(--navy); color: var(--branco); overflow: hidden; isolation: isolate; }
-    .section-head { max-width: 760px; margin-bottom: clamp(44px, 6vw, 64px); }
-    .section-head .label { margin-bottom: 20px; }
-    .section-head .lead { margin-top: 20px; }
-
-    /* Por que */
-    .why { background: var(--fundo); border-bottom: 1px solid var(--borda); padding: clamp(64px, 7vw, 96px) 0 clamp(40px, 5vw, 60px); }
-    .why__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--borda); border-left: 1px solid var(--borda); }
-    .why__item { position: relative; isolation: isolate; overflow: hidden; padding: 30px 28px 32px; border-right: 1px solid var(--borda); border-bottom: 1px solid var(--borda); background: var(--branco); }
-    .why__item strong { display: block; font-size: clamp(22px, 2.4vw, 28px); font-weight: 700; letter-spacing: -.03em; line-height: 1; color: var(--azul); }
-    .why__item p { margin-top: 12px; font-size: 14px; line-height: 1.65; color: var(--texto-2); }
-
-    .spot::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(91, 155, 213, .12), transparent 45%); opacity: 0; transition: opacity .4s; pointer-events: none; }
-    .spot:hover::before { opacity: 1; }
-    .section--dark .spot::before, .section--navy .spot::before { background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(91, 155, 213, .16), transparent 45%); }
-
-    /* Cards numerados (entregamos) */
-    .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--borda); border-left: 1px solid var(--borda); }
-    .card { position: relative; isolation: isolate; overflow: hidden; min-height: 300px; padding: 34px 30px 38px; border-right: 1px solid var(--borda); border-bottom: 1px solid var(--borda); background: var(--branco); display: flex; flex-direction: column; }
-    .card::after { content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--azul), var(--destaque)); transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease); }
-    .card:hover::after { transform: scaleX(1); }
-    .card__ghost { position: absolute; z-index: -1; right: -8px; top: -22px; font-size: 150px; font-weight: 800; line-height: 1; letter-spacing: -.07em; color: transparent; -webkit-text-stroke: 1px var(--borda); transition: -webkit-text-stroke-color .5s, transform .7s var(--ease); pointer-events: none; }
-    .card:hover .card__ghost { -webkit-text-stroke-color: var(--claro); transform: translate(-6px, 6px); }
-    .card__num { font-size: 12px; font-weight: 600; letter-spacing: .24em; color: var(--destaque); }
-    .card__icon { width: 44px; height: 44px; margin-top: 56px; display: grid; place-items: center; border: 1px solid var(--borda); border-radius: var(--r); color: var(--azul); background: var(--fundo); transition: background-color .4s, color .4s, border-color .4s; }
-    .card__icon svg { width: 22px; height: 22px; }
-    .card:hover .card__icon { background: var(--navy); border-color: var(--navy); color: var(--branco); }
-    .card h3 { margin: 22px 0 12px; font-size: 20px; letter-spacing: -.025em; }
-    .card p { font-size: 14.5px; line-height: 1.72; color: var(--texto-2); }
-
-    /* Citação */
-    .quote-section { padding: clamp(90px, 12vw, 160px) 0; }
-    .quote { max-width: 1040px; margin: 0; font-size: clamp(1.8rem, 4.3vw, 3.4rem); font-weight: 600; line-height: 1.16; letter-spacing: -.035em; color: var(--navy); }
-    .quote .qw { color: #D4DDE6; transition: color .35s ease; }
-    .quote .qw.on { color: var(--navy); }
-    .quote .qw.k.on { color: var(--destaque); }
-    .quote-sign { display: flex; align-items: center; gap: 14px; margin-top: 36px; font-size: 13px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--texto-2); }
-    .quote-sign::before { content: ''; width: 48px; height: 1px; background: var(--borda); }
-
-    /* Planos */
-    .plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
-    .plan { position: relative; isolation: isolate; display: flex; flex-direction: column; gap: 20px; padding: clamp(28px, 3.2vw, 40px); border: 1px solid var(--borda); border-radius: var(--r); background: var(--branco); overflow: hidden; transition: transform .6s var(--ease), border-color .4s; }
-    .plan:hover { transform: translateY(-6px); border-color: var(--claro); }
-    .plan--featured { background: var(--navy); border-color: transparent; color: var(--branco); overflow: visible; }
-    .plan--featured:hover { border-color: transparent; }
-    .plan__badge { position: absolute; top: -1px; right: -1px; background: var(--destaque); color: var(--navy-900); font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; padding: 7px 14px; }
-    .plan__tier { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--azul); }
-    .plan--featured .plan__tier { color: var(--claro); }
-    .plan h3 { margin-top: 10px; font-size: clamp(22px, 2.3vw, 27px); letter-spacing: -.025em; }
-    .plan__desc { margin-top: 10px; font-size: 14.5px; line-height: 1.7; color: var(--texto-2); }
-    .plan--featured .plan__desc { color: rgba(255, 255, 255, .74); }
-    .plan__list { list-style: none; margin: 0; padding: 20px 0 0; border-top: 1px solid var(--borda); display: grid; gap: 12px; flex: 1; align-content: start; }
-    .plan--featured .plan__list { border-color: rgba(255, 255, 255, .18); }
-    .plan__list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14.5px; line-height: 1.55; }
-    .plan__list svg { width: 18px; height: 18px; flex: none; margin-top: 2px; color: var(--destaque); }
-    .footnote { margin-top: 22px; font-size: 12.5px; line-height: 1.7; color: var(--texto-2); max-width: 820px; }
-
-    /* Processo (linha do tempo) */
-    .timeline { position: relative; max-width: 960px; margin: 0 auto; }
-    .timeline__rail { position: absolute; top: 8px; bottom: 40px; left: 163px; width: 1px; background: var(--borda); }
-    .timeline__fill { position: absolute; inset: 0; background: linear-gradient(var(--destaque), var(--azul)); transform-origin: top; transform: scaleY(0); }
-    .tl-item { position: relative; display: grid; grid-template-columns: 130px 1fr; gap: 0 68px; padding-bottom: 24px; }
-    .tl-item:last-child { padding-bottom: 0; }
-    .tl-step { padding-top: 22px; text-align: right; font-size: clamp(22px, 2.4vw, 30px); font-weight: 700; letter-spacing: -.035em; color: #A9B6C3; transition: color .5s; }
-    .tl-dot { position: absolute; left: 157px; top: 32px; width: 13px; height: 13px; border: 2px solid var(--borda); border-radius: 50%; background: var(--fundo); transition: border-color .5s, background-color .5s, box-shadow .5s; }
-    .tl-card { padding: 24px 28px 26px; border: 1px solid var(--borda); border-radius: var(--r); background: var(--branco); transition: border-color .5s; }
-    .tl-card h3 { font-size: 19px; letter-spacing: -.02em; margin-bottom: 8px; }
-    .tl-card p { font-size: 14.5px; color: var(--texto-2); line-height: 1.7; }
-    .tl-item.is-active .tl-step { color: var(--navy); }
-    .tl-item.is-active .tl-dot { border-color: var(--destaque); background: var(--destaque); box-shadow: 0 0 0 6px rgba(91, 155, 213, .18); }
-    .tl-item.is-active .tl-card { border-color: var(--claro); }
-    .tl-item--last .tl-card { background: var(--navy); border-color: var(--navy); color: var(--branco); }
-    .tl-item--last .tl-card p { color: rgba(255, 255, 255, .74); }
-
-    /* Portfólio */
-    .portfolio-head { display: flex; flex-wrap: wrap; gap: 24px 40px; align-items: flex-end; justify-content: space-between; margin-bottom: clamp(40px, 5vw, 56px); }
-    .portfolio-head .section-head { margin-bottom: 0; }
-    .cases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-    .case { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; border: 1px solid rgba(156, 198, 232, .18); border-radius: var(--r); background: rgba(255, 255, 255, .03); transition: border-color .4s, transform .6s var(--ease); }
-    .case:hover { border-color: rgba(156, 198, 232, .45); transform: translateY(-4px); }
-    .case__shot { position: relative; height: 210px; overflow: hidden; background: rgba(255, 255, 255, .04); border-bottom: 1px solid rgba(156, 198, 232, .14); }
-    .case__site { position: absolute; inset: 22px 22px -40px; border-radius: 8px 8px 0 0; background: var(--branco); box-shadow: 0 -10px 30px rgba(0, 0, 0, .25); transition: transform .6s var(--ease); padding: 0; overflow: hidden; }
-    .case:hover .case__site { transform: translateY(-8px) scale(1.02); }
-    .case__nav { height: 24px; display: flex; align-items: center; gap: 6px; padding: 0 12px; border-bottom: 1px solid #EEF2F6; }
-    .case__nav i { width: 7px; height: 7px; border-radius: 50%; background: #D6DFE7; }
-    .case__hero { height: 74px; padding: 14px; display: flex; flex-direction: column; gap: 6px; justify-content: center; }
-    .case__hero b { display: block; height: 9px; width: 70%; border-radius: 2px; background: rgba(255, 255, 255, .85); }
-    .case__hero b + b { width: 45%; opacity: .6; }
-    .case__body { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 12px 14px; }
-    .case__body i { height: 34px; border-radius: 2px; background: #EEF2F6; }
-    .case--saude .case__hero { background: linear-gradient(120deg, #0F5E63, #2A9D8F); }
-    .case--estetica .case__hero { background: linear-gradient(120deg, #7A4A5A, #C98B9B); }
-    .case--servicos .case__hero { background: linear-gradient(120deg, var(--navy), var(--azul-2)); }
-    .case__info { padding: 26px 24px 28px; display: flex; flex-direction: column; gap: 9px; }
-    .case__info .label { font-size: 11px; letter-spacing: .18em; }
-    .case__info h3 { font-size: 18px; letter-spacing: -.02em; }
-    .case__info p { font-size: 14px; line-height: 1.7; color: rgba(255, 255, 255, .7); }
-
-    /* FAQ */
-    .split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(40px, 7vw, 104px); align-items: start; }
-    .split__aside { position: sticky; top: calc(var(--header-h) + var(--promo-h) + 40px); }
-    .faq { border-top: 1px solid var(--borda); }
-    .faq__item { border-bottom: 1px solid var(--borda); }
-    .faq__q { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 0; border: 0; background: none; text-align: left; font-size: clamp(16px, 1.5vw, 18px); font-weight: 600; letter-spacing: -.015em; color: var(--texto); cursor: pointer; transition: color .3s; }
-    .faq__q:hover { color: var(--azul); }
-    .faq__q:focus-visible { outline: 2px solid var(--destaque); outline-offset: 4px; }
-    .faq__icon { position: relative; width: 34px; height: 34px; flex: none; border: 1px solid var(--borda); border-radius: var(--r); transition: background-color .35s, border-color .35s, transform .5s var(--ease); }
-    .faq__icon::before, .faq__icon::after { content: ''; position: absolute; left: 50%; top: 50%; width: 12px; height: 1.5px; background: var(--navy); transform: translate(-50%, -50%); transition: transform .45s var(--ease), background-color .35s; }
-    .faq__icon::after { transform: translate(-50%, -50%) rotate(90deg); }
-    .faq__q[aria-expanded="true"] .faq__icon { background: var(--navy); border-color: var(--navy); transform: rotate(180deg); }
-    .faq__q[aria-expanded="true"] .faq__icon::before, .faq__q[aria-expanded="true"] .faq__icon::after { background: var(--branco); }
-    .faq__q[aria-expanded="true"] .faq__icon::after { transform: translate(-50%, -50%) rotate(0deg); }
-    .faq__a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .5s var(--ease); }
-    .faq__a > div { overflow: hidden; }
-    .faq__a p { padding: 0 56px 26px 0; font-size: 15px; line-height: 1.75; color: var(--texto-2); }
-    .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
-
-    /* CTA final */
-    .final { text-align: center; padding: clamp(100px, 12vw, 160px) 0; background: radial-gradient(90% 70% at 50% 100%, var(--navy) 0%, var(--navy-900) 65%); }
-    .final .bg-grid { -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000 10%, transparent 75%); mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000 10%, transparent 75%); }
-    .final .blob--1 { left: 8%; top: 18%; }
-    .final .blob--2 { right: 4%; top: 30%; }
-    .final__ring { position: absolute; z-index: -1; left: 50%; top: 50%; width: min(760px, 92vw); aspect-ratio: 1; border: 1px dashed rgba(156, 198, 232, .16); border-radius: 50%; translate: -50% -50%; animation: spin-slow 70s linear infinite; }
-    .final__title { max-width: 16em; margin: 26px auto 0; font-size: clamp(2rem, 4.4vw, 3.5rem); line-height: 1.1; }
-    .final .lead { max-width: 32em; margin: 20px auto 0; }
-    .final .btn { margin-top: 38px; }
-
-    /* Rodapé */
-    .footer { background: #05172A; color: rgba(255, 255, 255, .66); padding: 64px 0 40px; font-size: 14px; }
-    .footer__grid { display: flex; flex-wrap: wrap; gap: 36px 64px; justify-content: space-between; padding-bottom: 36px; border-bottom: 1px solid var(--linha-escura); }
-    .footer__brand { max-width: 320px; display: flex; flex-direction: column; gap: 16px; }
-    .footer__brand img { height: 42px; width: auto; align-self: flex-start; }
-    .footer__col { display: flex; flex-direction: column; gap: 12px; }
-    .footer__col span { font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255, 255, 255, .6); }
-    .footer__col a { text-decoration: none; color: rgba(255, 255, 255, .78); transition: color .3s; }
-    .footer__col a:hover { color: var(--claro); }
-    .footer__legal { display: flex; flex-wrap: wrap; gap: 14px 40px; justify-content: space-between; padding-top: 26px; font-size: 12px; line-height: 1.75; color: rgba(255, 255, 255, .5); }
-    .footer__legal p { max-width: 720px; }
-
-    /* WhatsApp fixo */
-    .wa-float { position: fixed; right: 24px; bottom: 24px; z-index: 55; display: flex; align-items: center; gap: 10px; padding: 16px 24px; background: var(--navy); color: var(--branco); border: 1px solid rgba(156, 198, 232, .25); border-radius: var(--r); box-shadow: 0 14px 36px rgba(7, 29, 48, .4); font-size: 13.5px; font-weight: 600; text-decoration: none; transform: translateY(140%); transition: transform .55s var(--ease), background-color .3s; animation: pulse-ring 2.4s var(--ease) infinite; }
-    .wa-float.is-visible { transform: none; }
-    .wa-float:hover { background: var(--azul); }
-    .wa-float svg { width: 18px; height: 18px; color: var(--destaque); }
-    .wa-bar { display: none; }
-
-    /* Keyframes */
-    @keyframes gradient-pan { 0%, 100% { background-position: 0% center; } 50% { background-position: 100% center; } }
-    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-    @keyframes marquee { to { transform: translateX(-50%); } }
-    @keyframes spin-slow { to { rotate: 360deg; } }
-    @keyframes rotate-a { to { --a: 360deg; } }
-    @keyframes ping { 75%, 100% { opacity: 0; transform: scale(2.6); } }
-    @keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(91, 155, 213, .55); } 100% { box-shadow: 0 0 0 18px rgba(91, 155, 213, 0); } }
-    @keyframes shine { 0% { transform: translateX(-120%) skewX(-20deg); } 60%, 100% { transform: translateX(260%) skewX(-20deg); } }
-    @keyframes blob { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(50px, -40px) scale(1.1); } 66% { transform: translate(-40px, 30px) scale(.94); } }
-    @keyframes word-up { to { transform: translateY(0); } }
-
-    /* Responsivo */
-    @media (max-width: 1100px) {
-      .nav { gap: 20px; }
-      .why__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-    @media (max-width: 1060px) {
-      :root { --header-h: 68px; }
-      .nav { display: none; }
-      .menu-btn { display: flex; }
-      .header__mobile-cta { display: flex; align-items: center; gap: 10px; }
-      .mobile-nav { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s var(--ease); background: var(--navy); }
-      .mobile-nav > div { overflow: hidden; }
-      .mobile-nav nav { display: flex; flex-direction: column; padding: 4px var(--gutter) 18px; border-top: 1px solid rgba(255, 255, 255, .1); }
-      .mobile-nav a { font-size: 17px; font-weight: 500; text-decoration: none; color: var(--branco); padding: 13px 0; border-bottom: 1px solid rgba(255, 255, 255, .1); }
-      .mobile-nav a:last-child { border-bottom: 0; }
-      .header.is-open .mobile-nav { grid-template-rows: 1fr; }
-      .hero__inner { grid-template-columns: 1fr; }
-      .mock { max-width: 560px; width: 100%; margin: 20px auto 30px; }
-      .plans { grid-template-columns: 1fr; max-width: 560px; }
-      .cases { grid-template-columns: 1fr; max-width: 560px; }
-      .split { grid-template-columns: 1fr; }
-      .split__aside { position: static; }
-      .wa-float { display: none; }
-      .wa-bar { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 55; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: rgba(11, 42, 69, .96); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-top: 1px solid rgba(255, 255, 255, .14); }
-      .footer { padding-bottom: 120px; }
-    }
-    @media (max-width: 720px) {
-      .timeline__rail { left: 6px; }
-      .tl-item { grid-template-columns: 1fr; padding-left: 36px; }
-      .tl-step { text-align: left; padding-top: 0; margin-bottom: 10px; font-size: 22px; }
-      .tl-dot { left: 0; top: 7px; }
-    }
-    @media (max-width: 640px) {
-      .has-promo { --promo-h: 44px; }
-      .promo { font-size: 12px; gap: 8px; text-align: left; justify-content: space-between; }
-      .promo__long { display: none; }
-      .promo__txt { line-height: 1.3; }
-      .brand img { height: 28px; }
-      .brand__sep, .brand__sub { display: none; }
-      .hero__title { font-size: clamp(2.05rem, 9.4vw, 2.7rem); }
-      .hero__actions .btn { flex: 1 1 100%; }
-      .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-      .stat__lbl { font-size: 10px; letter-spacing: .1em; }
-      .float-badge { display: none; }
-      .phone { right: -6px; bottom: -26px; }
-      .tapes { height: 120px; margin-top: -60px; }
-      .tape { padding: 12px 0; }
-      .tape__item { font-size: 12px; gap: 26px; }
-      .tape__track { gap: 26px; }
-      .why__grid { grid-template-columns: 1fr; }
-      .cards { grid-template-columns: 1fr; }
-      .card { min-height: 0; }
-      .card__icon { margin-top: 36px; }
-      .faq__a p { padding-right: 0; }
-      .footer__grid { flex-direction: column; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
-      .js [data-reveal] { opacity: 1; transform: none; filter: none; }
-      .w__i { transform: none; }
-      .tape__track { animation: none; }
-    }
+[data-hv="0"]:hover { background:#EAF2F9 !important; color:#0B2A45 !important; transform:translateY(-2px) !important; }
+[data-hv="1"]:hover { background:rgba(255,255,255,0.1) !important; color:#FFFFFF !important; border-color:rgba(255,255,255,0.6) !important; }
+[data-hv="2"]:hover { background:rgba(255,255,255,0.12) !important; color:#FFFFFF !important; transform:translateX(4px) !important; }
+[data-hv="3"]:hover { background:#F6F9FC !important; color:#0A1B2A !important; }
+[data-hv="4"]:hover { background:#124A7C !important; color:#FFFFFF !important; }
+[data-hv="5"]:hover { background:#EAF2F9 !important; color:#0A1B2A !important; }
+[data-hv="6"]:hover { background:#EAF2F9 !important; color:#0B2A45 !important; }
+[data-hv="7"]:hover { color:#9CC6E8 !important; }
   </style>
 </head>
-<body>
+<body data-page="home">
   <svg class="sprite" aria-hidden="true" focusable="false">
-    <symbol id="logo-mark" viewBox="0 0 180 100">
-      <path d="M0 100L64.7 0 87.7 35.5 46.4 100Z"/>
-      <path fill-rule="evenodd" d="M51.7 100L115.7 0 179.7 100ZM89 100L115.7 49 142.4 100Z"/>
-      <path d="M100 100L115.7 74.5 131.4 100Z"/>
-    </symbol>
+    <symbol id="mk" viewBox="0 0 180 100"><path d="M0 100L64.7 0 87.7 35.5 46.4 100Z"/><path fill-rule="evenodd" d="M51.7 100L115.7 0 179.7 100ZM89 100L115.7 49 142.4 100Z"/><path d="M100 100L115.7 74.5 131.4 100Z"/></symbol>
     <symbol id="i-tri" viewBox="0 0 11 10"><path d="M5.5 0L11 10H0z" fill="currentColor"/></symbol>
-    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l4.8 4.8L19.5 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-whats" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 20l1.2-3.9A8.5 8.5 0 1 1 8.2 19z"/><path d="M9.2 8.3c-.3 0-.7.3-.7.9 0 2.8 3.5 6.3 6.3 6.3.6 0 .9-.4.9-.7v-1l-1.8-.8-.9.8a5 5 0 0 1-2.8-2.8l.8-.9-.8-1.8z"/></g></symbol>
-    <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></g></symbol>
-    <symbol id="i-layout" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="1"/><path d="M3.5 9h17M9.5 9v10.5"/></g></symbol>
-    <symbol id="i-pen" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4.5-1 10-10-3.5-3.5-10 10z"/><path d="M13.5 6.5l3.5 3.5"/></g></symbol>
-    <symbol id="i-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 17.5h2"/></g></symbol>
-    <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></g></symbol>
-    <symbol id="i-globe" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.5 3.5 5.5 3.5 8.5s-1 6-3.5 8.5c-2.5-2.5-3.5-5.5-3.5-8.5s1-6 3.5-8.5z"/></g></symbol>
   </svg>
-
   <div class="progress" aria-hidden="true"></div>
+  <main>
+<div style="width:100%;overflow-x:clip;background:#FFFFFF">
 
-  <!-- ============ HEADER ============ -->
-  <header class="header" id="topo">
-    <!-- Aviso do aulão: aparece só até o fim do evento (CONFIG.aulao) -->
+  <header class="mz-header">
     <a class="promo" href="/" data-promo>
       <span class="dot" aria-hidden="true"></span>
-      <span class="promo__txt" data-promo-text><b>Aulão ao vivo e gratuito</b><span class="promo__long"> · Patrimônio Alavancado</span> · 20.10 às 20h30</span>
-      <span class="promo__cta">Inscreva-se<svg><use href="#i-arrow"/></svg></span>
+      <span data-promo-text><b>Aulão ao vivo e gratuito</b><span class="promo__long"> · Patrimônio Alavancado</span> · 20.10 às 20h30</span>
+      <span class="promo__cta">Inscreva-se →</span>
     </a>
-    <div class="container header__inner">
-      <a class="brand" href="#inicio" aria-label="Monetizze — início">
-        <img src="/site/logo-monetizze.png" alt="Monetizze" width="923" height="215">
-        <span class="brand__sep" aria-hidden="true"></span>
-        <span class="brand__sub">Sites</span>
-      </a>
-      <nav class="nav" aria-label="Seções">
-        <a href="#por-que">Por que um site</a>
-        <a href="#entrega">O que entregamos</a>
-        <a href="#planos">Planos</a>
-        <a href="#processo">Processo</a>
-        <a href="#portfolio">Portfólio</a>
-        <a href="#faq">Dúvidas</a>
-        <a class="btn btn--light btn--sm btn--shine" data-wa="Olá! Vim pelo site e gostaria de um orçamento para criação de site." href="#" target="_blank" rel="noopener">Pedir orçamento</a>
+    <div class="mz-header__inner">
+      <a class="mz-brand" href="/site/" aria-label="Monetizze Investimentos — início"><img src="/site/logo-monetizze.png" alt="Monetizze Investimentos" width="923" height="215"></a>
+      <nav class="mz-nav" aria-label="Páginas">
+        <a href="/site/" data-nav="home">Início</a>
+        <a href="/site/consorcio/" data-nav="consorcio">Consórcio</a>
+        <a href="/site/home-equity/" data-nav="equity">Home Equity</a>
+        <a href="/site/planos-de-saude/" data-nav="saude">Planos de Saúde</a>
+        <a class="mz-cta" data-wa="Olá! Vim pelo site da Monetizze e gostaria de falar com um consultor." href="#" target="_blank" rel="noopener">Falar com um consultor</a>
       </nav>
-      <div class="header__mobile-cta">
-        <a class="btn btn--light btn--sm" data-wa="Olá! Vim pelo site e gostaria de um orçamento para criação de site." href="#" target="_blank" rel="noopener">Orçamento</a>
-        <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" data-menu><span></span><span></span></button>
+      <div class="mz-mobile">
+        <a class="mz-cta" data-wa="Olá! Vim pelo site da Monetizze e gostaria de falar com um consultor." href="#" target="_blank" rel="noopener">Consultor</a>
+        <button class="mz-menu" type="button" aria-label="Abrir menu" aria-expanded="false" data-menu><span></span><span></span></button>
       </div>
     </div>
-    <div class="mobile-nav"><div>
-      <nav aria-label="Seções">
-        <a href="#por-que">Por que um site</a>
-        <a href="#entrega">O que entregamos</a>
-        <a href="#planos">Planos</a>
-        <a href="#processo">Processo</a>
-        <a href="#portfolio">Portfólio</a>
-        <a href="#faq">Dúvidas</a>
+    <div class="mz-mnav"><div>
+      <nav aria-label="Páginas">
+        <a href="/site/" data-nav="home">Início</a>
+        <a href="/site/consorcio/" data-nav="consorcio">Consórcio</a>
+        <a href="/site/home-equity/" data-nav="equity">Home Equity</a>
+        <a href="/site/planos-de-saude/" data-nav="saude">Planos de Saúde</a>
       </nav>
     </div></div>
   </header>
 
-  <main>
-    <!-- ============ HERO ============ -->
-    <section class="hero" id="inicio" aria-labelledby="titulo">
-      <div class="bg-grid" aria-hidden="true"></div>
-      <div class="blob blob--1" aria-hidden="true"></div>
-      <div class="blob blob--2" aria-hidden="true"></div>
-      <div class="blob blob--3" aria-hidden="true"></div>
-      <svg class="hero__mark" viewBox="-2 -2 184 104" aria-hidden="true"><use href="#logo-mark"/></svg>
-
-      <div class="container hero__inner">
-        <div>
-          <span class="tag tag--dark" data-reveal><span class="dot"></span>Criação de sites profissionais</span>
-          <h1 class="hero__title" id="titulo" data-split>Seu trabalho é bom. Seu site precisa <em class="grad grad--light">dizer isso em cinco segundos.</em></h1>
-          <p class="hero__sub" data-reveal style="--d:.5s">Sites institucionais sob medida para profissionais e empresas que dependem de confiança para vender. Projeto, texto, publicação e domínio, com um objetivo só: <strong>transformar visita em contato no WhatsApp.</strong></p>
-          <div class="hero__actions" data-reveal style="--d:.6s">
-            <a class="btn btn--light btn--shine btn--pulse" data-wa="Olá! Vim pelo site e gostaria de um orçamento para criação de site." href="#" target="_blank" rel="noopener">Pedir um orçamento<svg class="arrow"><use href="#i-arrow"/></svg></a>
-            <a class="btn btn--ghost-dark" href="#portfolio">Ver trabalhos</a>
+  <section class="fx-hero fx-dark fx-has-tapes" id="inicio" style="position:relative;background:#0B2A45;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(70% 80% at 84% 18%, rgba(30,96,155,0.55) 0%, rgba(11,42,69,0) 70%), linear-gradient(140deg, #071D30 0%, #0B2A45 52%, #10365A 100%)"></div><div class="bg-grid" aria-hidden="true"></div><div class="blob blob--1" aria-hidden="true"></div><div class="blob blob--2" aria-hidden="true"></div><div class="blob blob--3" aria-hidden="true"></div><svg class="hero__mark" viewBox="-2 -2 184 104" aria-hidden="true"><use href="#mk"/></svg>
+    <div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(52px,8vw,110px) clamp(16px,3vw,44px) clamp(44px,6vw,84px)">
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,72px);align-items:center">
+        <div style="flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:22px">
+          <span style="display:inline-flex;align-items:center;gap:11px;align-self:flex-start;border:1px solid rgba(155,198,232,0.4);border-radius:2px;padding:8px 15px;font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#9CC6E8">
+            <span style="width:5px;height:5px;background:#5B9BD5;display:block"></span>
+            Crédito · Patrimônio · Proteção
+          </span>
+          <h1 data-split style="font-weight:600;font-size:clamp(34px,5.6vw,68px);font-weight:400;line-height:1.06;letter-spacing:-0.02em;color:#FFFFFF;margin:0;max-width:700px;text-wrap:pretty">Seu patrimônio merece mais do que <em class="grad">uma única porta</em></h1>
+          <p style="font-size:clamp(15px,1.5vw,18.5px);line-height:1.68;color:rgba(255,255,255,0.76);margin:0;max-width:520px;text-wrap:pretty">Consórcio, home equity e planos de saúde em um só atendimento. Reunimos as três frentes para que a decisão parta da sua estratégia, não do produto que alguém tem para vender.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:4px">
+            <a href="#" data-tpl-href="{{ waLink }}" target="_blank" rel="noopener" style="background:#FFFFFF;color:#0B2A45;font-size:14.5px;font-weight:600;padding:18px 32px;border-radius:2px" data-hv="0">Falar com um consultor</a>
+            <a href="#solucoes" style="border:1px solid rgba(255,255,255,0.32);color:#FFFFFF;font-size:14.5px;font-weight:500;padding:18px 32px;border-radius:2px" data-hv="1">Conhecer as soluções</a>
           </div>
-          <div class="stats" data-reveal style="--d:.7s">
-            <div><span class="stat__num"><span data-count="7">7</span> dias</span><span class="stat__lbl">Prazo médio de entrega</span></div>
-            <div><span class="stat__num"><span data-count="100">100</span>%</span><span class="stat__lbl">Sob medida, sem template</span></div>
-            <div><span class="stat__num">Mobile</span><span class="stat__lbl">Pensado primeiro no celular</span></div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:20px 28px;width:100%;margin-top:14px;padding-top:26px;border-top:1px solid rgba(255,255,255,0.14)">
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <span style="font-weight:600;font-size:30px;line-height:1;color:#FFFFFF">3</span>
+              <span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.6);line-height:1.5">Frentes de negócio</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <span style="font-weight:600;font-size:30px;line-height:1;color:#FFFFFF">1</span>
+              <span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.6);line-height:1.5">Consultor dedicado</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <span style="font-weight:600;font-size:30px;line-height:1;color:#FFFFFF">0%</span>
+              <span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.6);line-height:1.5">De juros no consórcio</span>
+            </div>
           </div>
         </div>
 
-        <div class="mock" data-reveal="scale" style="--d:.35s" aria-hidden="true">
-          <div class="mock__halo"></div>
-          <span class="float-badge float-badge--a"><span class="dot"></span>Pronto em cerca de 7 dias</span>
-          <span class="float-badge float-badge--b"><svg><use href="#i-whats"/></svg>WhatsApp integrado</span>
-          <div class="browser glow">
-            <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url">seunegocio.com.br</span></div>
-            <div class="browser__body">
-              <div class="sk sk--tag"></div>
-              <div class="sk sk--h1"></div>
-              <div class="sk sk--h1b"></div>
-              <div class="sk sk--p"></div>
-              <div class="sk sk--p2"></div>
-              <div class="sk-row"><div class="sk sk--btn"></div><div class="sk sk--btn2"></div></div>
-              <div class="sk-cards"><div></div><div></div><div></div></div>
-            </div>
-          </div>
-          <div class="phone">
-            <div class="phone__screen">
-              <div class="sk sk--tag" style="width:50%;height:6px"></div>
-              <div class="sk sk--h1"></div>
-              <div class="sk sk--h1b"></div>
-              <div class="sk sk--p"></div>
-              <div class="sk sk--p" style="width:70%"></div>
-              <div class="phone__wa"></div>
-            </div>
-          </div>
+        <div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:12px">
+          <a href="/site/consorcio/" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);border-left:2px solid #5B9BD5;padding:24px 26px;display:flex;align-items:center;justify-content:space-between;gap:18px;color:#FFFFFF" data-hv="2">
+            <span style="display:flex;flex-direction:column;gap:5px">
+              <span style="font-size:17px;font-weight:600;letter-spacing:-0.01em;color:#FFFFFF">Consórcio</span>
+              <span style="font-size:13.5px;line-height:1.5;color:rgba(255,255,255,0.68)">Planejamento patrimonial e aquisição</span>
+            </span>
+            <span style="font-size:17px;color:#5B9BD5;flex:none">→</span>
+          </a>
+          <a href="/site/home-equity/" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);border-left:2px solid #5B9BD5;padding:24px 26px;display:flex;align-items:center;justify-content:space-between;gap:18px;color:#FFFFFF" data-hv="2">
+            <span style="display:flex;flex-direction:column;gap:5px">
+              <span style="font-size:17px;font-weight:600;letter-spacing:-0.01em;color:#FFFFFF">Home Equity</span>
+              <span style="font-size:13.5px;line-height:1.5;color:rgba(255,255,255,0.68)">Crédito com garantia de imóvel ou veículo</span>
+            </span>
+            <span style="font-size:17px;color:#5B9BD5;flex:none">→</span>
+          </a>
+          <a href="/site/planos-de-saude/" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);border-left:2px solid #5B9BD5;padding:24px 26px;display:flex;align-items:center;justify-content:space-between;gap:18px;color:#FFFFFF" data-hv="2">
+            <span style="display:flex;flex-direction:column;gap:5px">
+              <span style="font-size:17px;font-weight:600;letter-spacing:-0.01em;color:#FFFFFF">Planos de Saúde</span>
+              <span style="font-size:13.5px;line-height:1.5;color:rgba(255,255,255,0.68)">Proteção do que você construiu</span>
+            </span>
+            <span style="font-size:17px;color:#5B9BD5;flex:none">→</span>
+          </a>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+  <div class="tapes" aria-hidden="true">
+    <div class="tape tape--b"><div class="tape__track" data-marquee><span class="tape__item">Consórcio<svg><use href="#i-tri"/></svg></span><span class="tape__item">Home Equity<svg><use href="#i-tri"/></svg></span><span class="tape__item">Auto Equity<svg><use href="#i-tri"/></svg></span><span class="tape__item">Planos de Saúde<svg><use href="#i-tri"/></svg></span><span class="tape__item">Carta de crédito<svg><use href="#i-tri"/></svg></span></div></div>
+    <div class="tape tape--a"><div class="tape__track" data-marquee><span class="tape__item">Crédito<svg><use href="#i-tri"/></svg></span><span class="tape__item">Patrimônio<svg><use href="#i-tri"/></svg></span><span class="tape__item">Proteção<svg><use href="#i-tri"/></svg></span><span class="tape__item">Monetizze Investimentos<svg><use href="#i-tri"/></svg></span><span class="tape__item">Um só atendimento<svg><use href="#i-tri"/></svg></span></div></div>
+  </div>
 
-    <!-- ============ FAIXAS ============ -->
-    <div class="tapes" aria-hidden="true">
-      <div class="tape tape--b"><div class="tape__track" data-marquee>
-        <span class="tape__item">Projeto sob medida<svg><use href="#i-tri"/></svg></span>
-        <span class="tape__item">Texto que vende<svg><use href="#i-tri"/></svg></span>
-        <span class="tape__item">Responsivo de verdade<svg><use href="#i-tri"/></svg></span>
-        <span class="tape__item">SEO e Google Maps<svg><use href="#i-tri"/></svg></span>
-        <span class="tape__item">Publicação e domínio<svg><use href="#i-tri"/></svg></span>
-      </div></div>
-      <div class="tape tape--a"><div class="tape__track" data-marquee>
-        <span class="tape__item">WhatsApp integrado<svg><use href="#i-tri"/></svg></span>
-        <span class="tape__item">Pronto em cerca de 7 dias<svg><use href="#i-tri"/></svg></span>
-        <span class="tape__item">Sem template<svg><use href="#i-tri"/></svg></span>
-        <span class="tape__item">Monetizze<svg><use href="#i-tri"/></svg></span>
-        <span class="tape__item">Mato Grosso<svg><use href="#i-tri"/></svg></span>
-      </div></div>
+
+  <section data-reveal="1" style="max-width:1280px;margin:0 auto;padding:clamp(36px,5vw,72px) clamp(16px,3vw,44px) 0">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px">
+      <div style="min-height:clamp(220px,24vw,300px);background:#F4F7FA;overflow:hidden">
+        <div class="ph" aria-hidden="true"><svg viewBox="-2 -2 184 104"><use href="#mk"/></svg></div>
+      </div>
+      <div style="min-height:clamp(220px,24vw,300px);background:#F4F7FA;overflow:hidden">
+        <div class="ph" aria-hidden="true"><svg viewBox="-2 -2 184 104"><use href="#mk"/></svg></div>
+      </div>
+      <div style="min-height:clamp(220px,24vw,300px);background:#F4F7FA;overflow:hidden">
+        <div class="ph" aria-hidden="true"><svg viewBox="-2 -2 184 104"><use href="#mk"/></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="solucoes" data-reveal="1" style="max-width:1280px;margin:0 auto;padding:clamp(44px,7vw,96px) clamp(16px,3vw,44px) clamp(36px,5vw,72px)">
+    <div style="max-width:680px;margin-bottom:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:16px">
+      <span style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#124A7C">Três soluções em um só lugar</span>
+      <h2 style="font-weight:600;font-size:clamp(28px,3.8vw,48px);font-weight:400;line-height:1.1;letter-spacing:-0.02em;color:#0A1B2A;margin:0;text-wrap:pretty">Escolha por onde começar</h2>
+      <p style="font-size:16.5px;line-height:1.7;color:#4A5A6B;margin:0;text-wrap:pretty">Cada frente resolve uma necessidade diferente. Juntas, formam a base de um planejamento financeiro que cresce com você.</p>
     </div>
 
-    <!-- ============ POR QUE ============ -->
-    <section class="why" id="por-que" aria-label="Por que ter um site">
-      <div class="container">
-        <div class="why__grid">
-          <div class="why__item spot" data-reveal style="--d:0s"><strong>Autoridade</strong><p>Um perfil no Instagram mostra o seu dia. Um site mostra que o negócio é sério.</p></div>
-          <div class="why__item spot" data-reveal style="--d:.08s"><strong>Google</strong><p>Quem procura pelo seu serviço na sua cidade precisa encontrar você.</p></div>
-          <div class="why__item spot" data-reveal style="--d:.16s"><strong>Conversão</strong><p>Cada seção conduz a uma ação clara, com o WhatsApp sempre ao alcance.</p></div>
-          <div class="why__item spot" data-reveal style="--d:.24s"><strong>Tempo</strong><p>O site responde as dúvidas repetidas antes de a conversa começar.</p></div>
-        </div>
-      </div>
-    </section>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:1px;background:#E1E7ED;border:1px solid #E1E7ED">
+      <a href="/site/consorcio/" style="background:#FFFFFF;padding:clamp(28px,3.4vw,44px);display:flex;flex-direction:column;gap:16px;color:#0A1B2A;min-height:300px" data-hv="3">
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#124A7C">01 · Consórcio</span>
+        <h3 style="font-weight:600;font-size:clamp(23px,2.6vw,31px);font-weight:400;line-height:1.16;letter-spacing:-0.015em;color:#0A1B2A;margin:0">Patrimônio construído com parcela, não com juros</h3>
+        <p style="font-size:15px;line-height:1.7;color:#4A5A6B;margin:0;flex:1">Cartas de crédito imobiliário e de veículo para quem quer investir, gerar capital ou adquirir um bem com previsibilidade.</p>
+        <span style="font-size:13.5px;font-weight:600;color:#124A7C">Ver a página do consórcio →</span>
+      </a>
+      <a href="/site/home-equity/" style="background:#FFFFFF;padding:clamp(28px,3.4vw,44px);display:flex;flex-direction:column;gap:16px;color:#0A1B2A;min-height:300px" data-hv="3">
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#124A7C">02 · Home Equity</span>
+        <h3 style="font-weight:600;font-size:clamp(23px,2.6vw,31px);font-weight:400;line-height:1.16;letter-spacing:-0.015em;color:#0A1B2A;margin:0">Seu imóvel quitado pode virar liquidez</h3>
+        <p style="font-size:15px;line-height:1.7;color:#4A5A6B;margin:0;flex:1">Crédito com garantia de imóvel — e também de veículo, no auto equity — com taxas menores e prazos mais longos que as linhas comuns.</p>
+        <span style="font-size:13.5px;font-weight:600;color:#124A7C">Ver a página do home equity →</span>
+      </a>
+      <a href="/site/planos-de-saude/" style="background:#FFFFFF;padding:clamp(28px,3.4vw,44px);display:flex;flex-direction:column;gap:16px;color:#0A1B2A;min-height:300px" data-hv="3">
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#124A7C">03 · Planos de Saúde</span>
+        <h3 style="font-weight:600;font-size:clamp(23px,2.6vw,31px);font-weight:400;line-height:1.16;letter-spacing:-0.015em;color:#0A1B2A;margin:0">Proteção para o patrimônio que você construiu</h3>
+        <p style="font-size:15px;line-height:1.7;color:#4A5A6B;margin:0;flex:1">Planos individuais, familiares e empresariais analisados com o mesmo critério que aplicamos a crédito e investimento.</p>
+        <span style="font-size:13.5px;font-weight:600;color:#124A7C">Ver a página de planos de saúde →</span>
+      </a>
+    </div>
+  </section>
 
-    <!-- ============ O QUE ENTREGAMOS ============ -->
-    <section class="section" id="entrega" aria-labelledby="t-entrega">
-      <div class="container">
-        <div class="section-head">
-          <span class="label" data-reveal>O que entregamos</span>
-          <h2 class="h2" id="t-entrega" data-reveal style="--d:.08s">Um projeto completo, <span class="grad">não só um arquivo bonito</span></h2>
-          <p class="lead" data-reveal style="--d:.16s">Todo site sai daqui pronto para funcionar: texto escrito, estrutura pensada, publicado no ar e no seu domínio.</p>
+  <section id="consorcio" data-reveal="1" style="background:#F6F9FC;padding:clamp(44px,7vw,96px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,3vw,44px)">
+      <div style="display:flex;flex-wrap:wrap;gap:24px clamp(28px,4vw,64px);align-items:flex-end;justify-content:space-between;margin-bottom:clamp(28px,4vw,48px)">
+        <div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:16px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#124A7C">Consórcio</span>
+          <h2 style="font-weight:600;font-size:clamp(28px,3.8vw,48px);font-weight:400;line-height:1.1;letter-spacing:-0.02em;color:#0A1B2A;margin:0;max-width:620px;text-wrap:pretty">Duas formas de usar a mesma carta de crédito</h2>
+          <p style="font-size:16.5px;line-height:1.7;color:#4A5A6B;margin:0;max-width:580px;text-wrap:pretty">O consórcio pode ser um instrumento de construção patrimonial ou o caminho planejado para conquistar um bem. Os dois são legítimos — muda a estratégia por trás.</p>
         </div>
-        <div class="cards">
-          <article class="card spot" data-reveal style="--d:0s"><span class="card__ghost" aria-hidden="true">01</span><span class="card__num">01</span><div class="card__icon"><svg><use href="#i-layout"/></svg></div><h3>Projeto sob medida</h3><p>Layout desenhado para o seu negócio, com suas cores, sua logo e as seções que a sua venda exige. Sem template genérico.</p></article>
-          <article class="card spot" data-reveal style="--d:.08s"><span class="card__ghost" aria-hidden="true">02</span><span class="card__num">02</span><div class="card__icon"><svg><use href="#i-pen"/></svg></div><h3>Texto que vende</h3><p>Escrevemos o conteúdo com você. Cada frase existe para explicar o serviço, gerar confiança ou levar ao contato.</p></article>
-          <article class="card spot" data-reveal style="--d:.16s"><span class="card__ghost" aria-hidden="true">03</span><span class="card__num">03</span><div class="card__icon"><svg><use href="#i-phone"/></svg></div><h3>Responsivo de verdade</h3><p>A maior parte das visitas vem do celular. O site é desenhado pensando nisso primeiro, e depois adaptado ao desktop.</p></article>
-          <article class="card spot" data-reveal style="--d:0s"><span class="card__ghost" aria-hidden="true">04</span><span class="card__num">04</span><div class="card__icon"><svg><use href="#i-whats"/></svg></div><h3>WhatsApp integrado</h3><p>Botões em todas as seções, com mensagem já preenchida, e barra fixa no celular. O caminho até você fica óbvio.</p></article>
-          <article class="card spot" data-reveal style="--d:.08s"><span class="card__ghost" aria-hidden="true">05</span><span class="card__num">05</span><div class="card__icon"><svg><use href="#i-search"/></svg></div><h3>SEO e Google Maps</h3><p>Título, descrição e palavras-chave da sua cidade e do seu serviço, mais mapa integrado com o endereço do atendimento.</p></article>
-          <article class="card spot" data-reveal style="--d:.16s"><span class="card__ghost" aria-hidden="true">06</span><span class="card__num">06</span><div class="card__icon"><svg><use href="#i-globe"/></svg></div><h3>Publicação e domínio</h3><p>Colocamos o site no ar, configuramos o domínio e o certificado de segurança. Você recebe pronto, funcionando.</p></article>
-        </div>
+        <span style="display:flex;flex-wrap:wrap;gap:10px">
+          <a href="/site/consorcio/" style="background:#0B2A45;color:#FFFFFF;font-size:14px;font-weight:600;padding:17px 30px;border-radius:2px;white-space:nowrap" data-hv="4">Página completa do consórcio →</a>
+          <a href="#" data-tpl-href="{{ waConsorcio }}" target="_blank" rel="noopener" style="border:1px solid #D6DFE7;color:#0A1B2A;font-size:14px;font-weight:500;padding:17px 30px;border-radius:2px;white-space:nowrap" data-hv="5">Simular minha carta</a>
+        </span>
       </div>
-    </section>
 
-    <!-- ============ CITAÇÃO ============ -->
-    <section class="section section--fundo quote-section" aria-label="Manifesto">
-      <div class="container">
-        <p class="quote" data-words>Um perfil no Instagram mostra o seu dia. Um <em>site</em> mostra que o negócio é <em>sério.</em></p>
-        <div class="quote-sign" data-reveal>Monetizze</div>
-      </div>
-    </section>
-
-    <!-- ============ PLANOS ============ -->
-    <section class="section" id="planos" aria-labelledby="t-planos">
-      <div class="container">
-        <div class="section-head">
-          <span class="label" data-reveal>Planos</span>
-          <h2 class="h2" id="t-planos" data-reveal style="--d:.08s">Escolha o <span class="grad">tamanho do projeto</span></h2>
-          <p class="lead" data-reveal style="--d:.16s">Três formatos para necessidades diferentes. O orçamento final depende do número de páginas e do conteúdo envolvido.</p>
-        </div>
-        <div class="plans">
-          <article class="plan" data-reveal style="--d:0s">
-            <div><span class="plan__tier">Essencial</span><h3>Landing page</h3><p class="plan__desc">Uma página única e completa, para quem quer presença profissional e um canal direto de contato.</p></div>
-            <ul class="plan__list">
-              <li><svg><use href="#i-check"/></svg>Página única com todas as seções</li>
-              <li><svg><use href="#i-check"/></svg>Texto escrito junto com você</li>
-              <li><svg><use href="#i-check"/></svg>WhatsApp, mapa e SEO local</li>
-              <li><svg><use href="#i-check"/></svg>Publicação e domínio configurados</li>
-            </ul>
-            <a class="btn btn--outline btn--block" data-wa="Olá! Gostaria de um orçamento para uma landing page (plano Essencial)." href="#" target="_blank" rel="noopener">Pedir orçamento</a>
-          </article>
-          <article class="plan plan--featured glow" data-reveal style="--d:.1s">
-            <span class="plan__badge">Mais escolhido</span>
-            <div><span class="plan__tier">Profissional</span><h3>Site institucional</h3><p class="plan__desc">Várias seções e páginas internas, para quem tem mais de um serviço a apresentar e quer aparecer no Google.</p></div>
-            <ul class="plan__list">
-              <li><svg><use href="#i-check"/></svg>Tudo do plano Essencial</li>
-              <li><svg><use href="#i-check"/></svg>Páginas internas por serviço</li>
-              <li><svg><use href="#i-check"/></svg>Seção de dúvidas e depoimentos</li>
-              <li><svg><use href="#i-check"/></svg>Animações e transições suaves</li>
-              <li><svg><use href="#i-check"/></svg>Uma rodada de ajustes incluída</li>
-            </ul>
-            <a class="btn btn--light btn--block btn--shine" data-wa="Olá! Gostaria de um orçamento para um site institucional (plano Profissional)." href="#" target="_blank" rel="noopener">Pedir orçamento</a>
-          </article>
-          <article class="plan" data-reveal style="--d:.2s">
-            <div><span class="plan__tier">Sob demanda</span><h3>Projeto especial</h3><p class="plan__desc">Para quem precisa de simulador, calculadora, catálogo ou integração com outra ferramenta.</p></div>
-            <ul class="plan__list">
-              <li><svg><use href="#i-check"/></svg>Tudo do plano Profissional</li>
-              <li><svg><use href="#i-check"/></svg>Simuladores e calculadoras</li>
-              <li><svg><use href="#i-check"/></svg>Catálogo ou portfólio navegável</li>
-              <li><svg><use href="#i-check"/></svg>Escopo e prazo definidos em conjunto</li>
-            </ul>
-            <a class="btn btn--outline btn--block" data-wa="Olá! Tenho um projeto especial de site e gostaria de conversar sobre o escopo." href="#" target="_blank" rel="noopener">Conversar sobre o projeto</a>
-          </article>
-        </div>
-        <p class="footnote" data-reveal>O valor de cada projeto é definido após uma conversa inicial, conforme o número de páginas, o conteúdo a produzir e as funcionalidades necessárias. O domínio é registrado no nome do cliente, com custo anual pago diretamente ao registrador.</p>
-      </div>
-    </section>
-
-    <!-- ============ PROCESSO ============ -->
-    <section class="section section--fundo" id="processo" aria-labelledby="t-processo">
-      <div class="container">
-        <div class="section-head">
-          <span class="label" data-reveal>Processo</span>
-          <h2 class="h2" id="t-processo" data-reveal style="--d:.08s">Do primeiro contato <span class="grad">ao site no ar</span></h2>
-          <p class="lead" data-reveal style="--d:.16s">Você acompanha cada etapa e aprova antes de seguir. Nada é publicado sem o seu sim.</p>
-        </div>
-        <div class="timeline" data-timeline>
-          <div class="timeline__rail" aria-hidden="true"><div class="timeline__fill"></div></div>
-          <div class="tl-item" data-reveal><div class="tl-step">01</div><span class="tl-dot" aria-hidden="true"></span><div class="tl-card"><h3>Conversa inicial</h3><p>Entendemos o seu serviço, o seu público e o que o site precisa resolver. Daí sai o escopo e o orçamento.</p></div></div>
-          <div class="tl-item" data-reveal><div class="tl-step">02</div><span class="tl-dot" aria-hidden="true"></span><div class="tl-card"><h3>Material e conteúdo</h3><p>Você envia logo, fotos e informações. Nós organizamos e escrevemos os textos de cada seção.</p></div></div>
-          <div class="tl-item" data-reveal><div class="tl-step">03</div><span class="tl-dot" aria-hidden="true"></span><div class="tl-card"><h3>Criação</h3><p>Montamos o site e enviamos um link para você navegar no celular e no computador.</p></div></div>
-          <div class="tl-item" data-reveal><div class="tl-step">04</div><span class="tl-dot" aria-hidden="true"></span><div class="tl-card"><h3>Ajustes</h3><p>Você aponta o que quer mudar em cores, textos e imagens, e nós refinamos até ficar do seu jeito.</p></div></div>
-          <div class="tl-item tl-item--last" data-reveal><div class="tl-step">05</div><span class="tl-dot" aria-hidden="true"></span><div class="tl-card"><h3>Publicação</h3><p>Site no ar, domínio e segurança configurados, e o link pronto para entrar na sua bio e nos seus anúncios.</p></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ PORTFÓLIO ============ -->
-    <section class="section section--navy on-dark" id="portfolio" aria-labelledby="t-portfolio">
-      <div class="bg-grid" aria-hidden="true"></div>
-      <div class="container">
-        <div class="portfolio-head">
-          <div class="section-head">
-            <span class="label" data-reveal>Portfólio</span>
-            <h2 class="h2" id="t-portfolio" data-reveal style="--d:.08s">Projetos <span class="grad grad--light">já publicados</span></h2>
-            <p class="lead" data-reveal style="--d:.16s">Profissionais da saúde, estética, nutrição, direito e serviços financeiros. Cada site desenhado para o público de quem atende.</p>
-          </div>
-          <a class="btn btn--light btn--shine" data-reveal style="--d:.24s" data-wa="Olá! Gostaria de ver mais exemplos de sites já publicados." href="#" target="_blank" rel="noopener">Ver mais exemplos<svg class="arrow"><use href="#i-arrow"/></svg></a>
-        </div>
-        <div class="cases">
-          <article class="case case--saude spot" data-reveal style="--d:0s">
-            <div class="case__shot" aria-hidden="true"><div class="case__site"><div class="case__nav"><i></i><i></i><i></i></div><div class="case__hero"><b></b><b></b></div><div class="case__body"><i></i><i></i><i></i></div></div></div>
-            <div class="case__info"><span class="label">Saúde</span><h3>Consultórios e clínicas</h3><p>Sites para médicos e nutricionistas, com áreas de atuação, localização e agendamento por WhatsApp.</p></div>
-          </article>
-          <article class="case case--estetica spot" data-reveal style="--d:.1s">
-            <div class="case__shot" aria-hidden="true"><div class="case__site"><div class="case__nav"><i></i><i></i><i></i></div><div class="case__hero"><b></b><b></b></div><div class="case__body"><i></i><i></i><i></i></div></div></div>
-            <div class="case__info"><span class="label">Estética e beleza</span><h3>Studios e profissionais</h3><p>Portfólio visual, tabela de serviços e valores, com foco em reserva de horário.</p></div>
-          </article>
-          <article class="case case--servicos spot" data-reveal style="--d:.2s">
-            <div class="case__shot" aria-hidden="true"><div class="case__site"><div class="case__nav"><i></i><i></i><i></i></div><div class="case__hero"><b></b><b></b></div><div class="case__body"><i></i><i></i><i></i></div></div></div>
-            <div class="case__info"><span class="label">Serviços e finanças</span><h3>Consultorias e escritórios</h3><p>Estrutura institucional com páginas por produto, simuladores e conteúdo educativo.</p></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ FAQ ============ -->
-    <section class="section" id="faq" aria-labelledby="t-faq">
-      <div class="container split">
-        <div class="split__aside">
-          <span class="label" data-reveal>Dúvidas frequentes</span>
-          <h2 class="h2" id="t-faq" data-reveal style="--d:.08s;margin-top:20px">O que costumam nos perguntar</h2>
-          <p class="lead" data-reveal style="--d:.16s;margin-top:20px">Ficou alguma dúvida que não está aqui? Me chame no WhatsApp, respondo pessoalmente.</p>
-          <div data-reveal style="--d:.24s;margin-top:32px">
-            <a class="btn btn--primary btn--shine" data-wa="Olá! Vim pelo site e gostaria de um orçamento para criação de site." href="#" target="_blank" rel="noopener">Tirar minhas dúvidas<svg class="arrow"><use href="#i-arrow"/></svg></a>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;margin-bottom:clamp(28px,3.6vw,48px)">
+        <div style="background:#0B2A45;padding:clamp(28px,3.4vw,44px);display:flex;flex-direction:column;gap:16px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#9CC6E8">Estratégia patrimonial</span>
+          <h3 style="font-weight:600;font-size:clamp(22px,2.4vw,29px);font-weight:400;line-height:1.18;color:#FFFFFF;margin:0">Consórcio como investimento</h3>
+          <p style="font-size:15px;line-height:1.72;color:rgba(255,255,255,0.74);margin:0">Formar capital com aporte mensal previsível, sem juros, e usar a carta contemplada para gerar renda ou reposicionar patrimônio. A carta é um ativo: pode ser aplicada em imóvel de renda, na troca por um bem de maior valor ou na aquisição à vista com poder de negociação.</p>
+          <div style="display:flex;flex-direction:column;gap:11px;margin-top:4px">
+            <span style="display:flex;align-items:flex-start;gap:11px;font-size:14.5px;line-height:1.6;color:#FFFFFF"><span style="width:5px;height:5px;flex:none;margin-top:8px;background:#5B9BD5;display:block"></span>Aporte mensal sem juros, apenas taxa de administração</span>
+            <span style="display:flex;align-items:flex-start;gap:11px;font-size:14.5px;line-height:1.6;color:#FFFFFF"><span style="width:5px;height:5px;flex:none;margin-top:8px;background:#5B9BD5;display:block"></span>Carta contemplada equivale a compra à vista</span>
+            <span style="display:flex;align-items:flex-start;gap:11px;font-size:14.5px;line-height:1.6;color:#FFFFFF"><span style="width:5px;height:5px;flex:none;margin-top:8px;background:#5B9BD5;display:block"></span>Uso flexível: renda, revenda ou reposicionamento</span>
           </div>
         </div>
-        <div class="faq" data-faq>
-          <div class="faq__item" data-reveal><button class="faq__q" aria-expanded="false">Quanto tempo leva para o site ficar pronto?<span class="faq__icon" aria-hidden="true"></span></button><div class="faq__a"><div><p>Uma landing page costuma ficar pronta em cerca de uma semana. Sites com páginas internas levam um pouco mais. O que mais influencia o prazo é a rapidez no envio do material e das aprovações.</p></div></div></div>
-          <div class="faq__item" data-reveal><button class="faq__q" aria-expanded="false">Eu preciso ter logo e fotos prontas?<span class="faq__icon" aria-hidden="true"></span></button><div class="faq__a"><div><p>Logo ajuda muito, e se você já tem, trabalhamos com ela e com as suas cores. Fotos profissionais fazem diferença grande no resultado: se ainda não tiver, orientamos o que fotografar antes de começarmos.</p></div></div></div>
-          <div class="faq__item" data-reveal><button class="faq__q" aria-expanded="false">Depois de publicado, consigo alterar o site?<span class="faq__icon" aria-hidden="true"></span></button><div class="faq__a"><div><p>Sim. Alterações de texto, foto, valores e novas seções podem ser feitas a qualquer momento. Combinamos como funciona a manutenção logo na conversa inicial.</p></div></div></div>
-          <div class="faq__item" data-reveal><button class="faq__q" aria-expanded="false">O domínio fica no meu nome?<span class="faq__icon" aria-hidden="true"></span></button><div class="faq__a"><div><p>Sim, sempre. O endereço do site é registrado no seu nome ou no da sua empresa, com custo anual pago direto ao registrador. O site é seu, sem amarras.</p></div></div></div>
-          <div class="faq__item" data-reveal><button class="faq__q" aria-expanded="false">Vou aparecer no Google?<span class="faq__icon" aria-hidden="true"></span></button><div class="faq__a"><div><p>O site sai preparado para isso: título, descrição e palavras-chave do seu serviço e da sua cidade, além da ligação com o Google Maps. Posição nos resultados depende de tempo e concorrência, e nenhum profissional sério garante primeiro lugar.</p></div></div></div>
+        <div style="background:#FFFFFF;border:1px solid #E1E7ED;padding:clamp(28px,3.4vw,44px);display:flex;flex-direction:column;gap:16px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#124A7C">Aquisição planejada</span>
+          <h3 style="font-weight:600;font-size:clamp(22px,2.4vw,29px);font-weight:400;line-height:1.18;color:#0A1B2A;margin:0">Consórcio para conquistar o bem</h3>
+          <p style="font-size:15px;line-height:1.72;color:#4A5A6B;margin:0">A casa própria, a troca do carro, o terreno para construir. Quando não há pressa, o consórcio entrega o mesmo objetivo do financiamento sem o peso dos juros — e com parcela que cabe no orçamento desde o primeiro mês.</p>
+          <div style="display:flex;flex-direction:column;gap:11px;margin-top:4px">
+            <span style="display:flex;align-items:flex-start;gap:11px;font-size:14.5px;line-height:1.6;color:#0A1B2A"><span style="width:5px;height:5px;flex:none;margin-top:8px;background:#124A7C;display:block"></span>Imóvel residencial, comercial, terreno ou construção</span>
+            <span style="display:flex;align-items:flex-start;gap:11px;font-size:14.5px;line-height:1.6;color:#0A1B2A"><span style="width:5px;height:5px;flex:none;margin-top:8px;background:#124A7C;display:block"></span>Carro, moto ou veículo de trabalho</span>
+            <span style="display:flex;align-items:flex-start;gap:11px;font-size:14.5px;line-height:1.6;color:#0A1B2A"><span style="width:5px;height:5px;flex:none;margin-top:8px;background:#124A7C;display:block"></span>Possibilidade de antecipar a contemplação via lance</span>
+          </div>
         </div>
       </div>
-    </section>
 
-    <!-- ============ CTA FINAL ============ -->
-    <section class="section section--dark final on-dark" id="contato" aria-labelledby="t-final">
-      <div class="bg-grid" aria-hidden="true"></div>
-      <div class="blob blob--1" aria-hidden="true"></div>
-      <div class="blob blob--2" aria-hidden="true"></div>
-      <span class="final__ring" aria-hidden="true"></span>
-      <div class="container">
-        <span class="tag tag--dark" data-reveal><span class="dot"></span>Próximo passo</span>
-        <h2 class="final__title" id="t-final" data-reveal style="--d:.1s">Me conte sobre o seu negócio. <span class="grad grad--light">O orçamento vem depois.</span></h2>
-        <p class="lead" data-reveal style="--d:.2s">Uma conversa rápida no WhatsApp para entender o que você precisa e qual formato faz sentido.</p>
-        <div data-reveal style="--d:.3s">
-          <a class="btn btn--light btn--shine btn--pulse" data-wa="Olá! Vim pelo site e gostaria de um orçamento para criação de site." href="#" target="_blank" rel="noopener"><svg><use href="#i-whats"/></svg>Falar no WhatsApp</a>
+      <span style="display:block;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#566878;margin-bottom:18px">Como funciona, em quatro etapas</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1px;background:#E1E7ED;border:1px solid #E1E7ED;margin-bottom:clamp(28px,3.6vw,48px)">
+        <div style="background:#FFFFFF;padding:28px 26px 30px;display:flex;flex-direction:column;gap:12px">
+          <span style="font-weight:600;font-size:26px;color:#2E7BB8;line-height:1">01</span>
+          <h4 style="font-size:16.5px;font-weight:600;letter-spacing:-0.01em;color:#0A1B2A;margin:0">Carta de crédito</h4>
+          <p style="font-size:14px;line-height:1.7;color:#4A5A6B;margin:0">Você define o valor do crédito e o prazo. Esse valor é corrigido ao longo do plano para não perder poder de compra.</p>
+        </div>
+        <div style="background:#FFFFFF;padding:28px 26px 30px;display:flex;flex-direction:column;gap:12px">
+          <span style="font-weight:600;font-size:26px;color:#2E7BB8;line-height:1">02</span>
+          <h4 style="font-size:16.5px;font-weight:600;letter-spacing:-0.01em;color:#0A1B2A;margin:0">Grupo e assembleias</h4>
+          <p style="font-size:14px;line-height:1.7;color:#4A5A6B;margin:0">Você entra em um grupo administrado e acompanha as assembleias mensais, onde ocorrem os sorteios e a apuração dos lances.</p>
+        </div>
+        <div style="background:#FFFFFF;padding:28px 26px 30px;display:flex;flex-direction:column;gap:12px">
+          <span style="font-weight:600;font-size:26px;color:#2E7BB8;line-height:1">03</span>
+          <h4 style="font-size:16.5px;font-weight:600;letter-spacing:-0.01em;color:#0A1B2A;margin:0">Contemplação</h4>
+          <p style="font-size:14px;line-height:1.7;color:#4A5A6B;margin:0">A contemplação vem por sorteio ou por lance. A estratégia de lance é o ponto em que a consultoria faz mais diferença.</p>
+        </div>
+        <div style="background:#FFFFFF;padding:28px 26px 30px;display:flex;flex-direction:column;gap:12px">
+          <span style="font-weight:600;font-size:26px;color:#2E7BB8;line-height:1">04</span>
+          <h4 style="font-size:16.5px;font-weight:600;letter-spacing:-0.01em;color:#0A1B2A;margin:0">Uso do crédito</h4>
+          <p style="font-size:14px;line-height:1.7;color:#4A5A6B;margin:0">Com a carta em mãos, você compra à vista, investe ou reposiciona seu patrimônio conforme o plano traçado no início.</p>
         </div>
       </div>
-    </section>
-  </main>
 
-  <!-- ============ RODAPÉ ============ -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__grid">
-        <div class="footer__brand">
-          <img src="/site/logo-monetizze.png" alt="Monetizze" width="923" height="215" loading="lazy">
-          <p>Criação de sites institucionais para profissionais e empresas que dependem de confiança para vender.</p>
+      <div style="background:#FFFFFF;border:1px solid #E1E7ED">
+        <div style="padding:clamp(24px,3vw,36px) clamp(22px,3vw,36px) 0">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#124A7C">Comparativo</span>
+          <h3 style="font-weight:600;font-size:clamp(22px,2.6vw,32px);font-weight:400;line-height:1.16;color:#0A1B2A;margin:14px 0 0">Consórcio e financiamento, lado a lado</h3>
         </div>
-        <div class="footer__col">
-          <span>Nesta página</span>
-          <a href="#entrega">O que entregamos</a>
-          <a href="#planos">Planos</a>
-          <a href="#processo">Processo</a>
-          <a href="#portfolio">Portfólio</a>
+        <div style="padding:clamp(20px,3vw,36px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px">
+          <div style="display:flex;flex-direction:column">
+            <span style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#566878;padding-bottom:14px">Consórcio</span>
+            <span style="display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid #E1E7ED;font-size:14.5px;color:#0A1B2A">Custo do crédito <strong style="font-weight:600;color:#124A7C;text-align:right">Taxa de administração</strong></span>
+            <span style="display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid #E1E7ED;font-size:14.5px;color:#0A1B2A">Entrada <strong style="font-weight:600;color:#124A7C;text-align:right">Não exigida</strong></span>
+            <span style="display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid #E1E7ED;font-size:14.5px;color:#0A1B2A">Acesso ao bem <strong style="font-weight:600;color:#124A7C;text-align:right">Na contemplação</strong></span>
+            <span style="display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid #E1E7ED;font-size:14.5px;color:#0A1B2A">Poder de compra <strong style="font-weight:600;color:#124A7C;text-align:right">À vista</strong></span>
+          </div>
+          <div style="display:flex;flex-direction:column">
+            <span style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#566878;padding-bottom:14px">Financiamento</span>
+            <span style="display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid #E1E7ED;font-size:14.5px;color:#0A1B2A">Custo do crédito <strong style="font-weight:600;color:#4A5A6B;text-align:right">Juros + taxas</strong></span>
+            <span style="display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid #E1E7ED;font-size:14.5px;color:#0A1B2A">Entrada <strong style="font-weight:600;color:#4A5A6B;text-align:right">Em regra, exigida</strong></span>
+            <span style="display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid #E1E7ED;font-size:14.5px;color:#0A1B2A">Acesso ao bem <strong style="font-weight:600;color:#4A5A6B;text-align:right">Imediato</strong></span>
+            <span style="display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid #E1E7ED;font-size:14.5px;color:#0A1B2A">Poder de compra <strong style="font-weight:600;color:#4A5A6B;text-align:right">Financiado</strong></span>
+          </div>
         </div>
-        <div class="footer__col">
-          <span>Contato</span>
-          <a data-wa="Olá! Vim pelo site e gostaria de um orçamento para criação de site." href="#" target="_blank" rel="noopener">WhatsApp</a>
-          <a data-instagram href="#" target="_blank" rel="noopener">@instagram</a>
-          <a data-email href="#">e-mail</a>
+        <p style="margin:0;padding:0 clamp(22px,3vw,36px) clamp(24px,3vw,36px);font-size:12.5px;line-height:1.7;color:#566878;max-width:760px">Comparativo de natureza educativa. Condições, taxas e prazos variam conforme a administradora, o grupo e o perfil do contratante, e são apresentados em proposta formal antes de qualquer contratação.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="equity" data-reveal="1" style="max-width:1280px;margin:0 auto;padding:clamp(44px,7vw,96px) clamp(16px,3vw,44px) clamp(36px,5vw,72px)">
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,64px);align-items:flex-start">
+      <div style="flex:1.1 1 400px;min-width:0;display:flex;flex-direction:column;gap:18px">
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#124A7C">Home Equity &amp; Auto Equity</span>
+        <h2 style="font-weight:600;font-size:clamp(28px,3.8vw,48px);font-weight:400;line-height:1.1;letter-spacing:-0.02em;color:#0A1B2A;margin:0;max-width:560px;text-wrap:pretty">O bem que você já tem pode destravar o próximo passo</h2>
+        <p style="font-size:16.5px;line-height:1.72;color:#4A5A6B;margin:0;max-width:540px;text-wrap:pretty">No home equity, o imóvel quitado entra como garantia de um empréstimo. Por ter lastro real, as taxas são menores e os prazos mais longos do que nas linhas de crédito pessoal — e o imóvel continua sendo seu, em seu uso.</p>
+        <p style="font-size:16.5px;line-height:1.72;color:#4A5A6B;margin:0;max-width:540px;text-wrap:pretty">No auto equity, a mesma lógica se aplica ao veículo quitado, com liberação mais rápida e valores proporcionais ao bem.</p>
+        <div style="display:flex;flex-direction:column;margin-top:6px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#566878;padding-bottom:14px">Para quem faz sentido</span>
+          <span style="display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-top:1px solid #E1E7ED;font-size:15px;line-height:1.6;color:#0A1B2A"><span style="width:5px;height:5px;flex:none;margin-top:8px;background:#5B9BD5;display:block"></span>Quem precisa quitar dívidas caras e reorganizar o fluxo de caixa</span>
+          <span style="display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-top:1px solid #E1E7ED;font-size:15px;line-height:1.6;color:#0A1B2A"><span style="width:5px;height:5px;flex:none;margin-top:8px;background:#5B9BD5;display:block"></span>Empresários que buscam capital de giro sem comprometer a operação</span>
+          <span style="display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-top:1px solid #E1E7ED;font-size:15px;line-height:1.6;color:#0A1B2A"><span style="width:5px;height:5px;flex:none;margin-top:8px;background:#5B9BD5;display:block"></span>Investidores que querem liquidez para uma oportunidade pontual</span>
+          <span style="display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-top:1px solid #E1E7ED;border-bottom:1px solid #E1E7ED;font-size:15px;line-height:1.6;color:#0A1B2A"><span style="width:5px;height:5px;flex:none;margin-top:8px;background:#5B9BD5;display:block"></span>Quem vai reformar, construir ou ampliar um imóvel</span>
+        </div>
+        <span style="display:flex;flex-wrap:wrap;gap:10px;margin-top:6px">
+          <a href="/site/home-equity/" style="background:#0B2A45;color:#FFFFFF;font-size:14px;font-weight:600;padding:17px 30px;border-radius:2px;white-space:nowrap" data-hv="4">Página completa do home equity →</a>
+          <a href="#" data-tpl-href="{{ waEquity }}" target="_blank" rel="noopener" style="border:1px solid #D6DFE7;color:#0A1B2A;font-size:14px;font-weight:500;padding:17px 30px;border-radius:2px;white-space:nowrap" data-hv="5">Avaliar meu caso</a>
+        </span>
+      </div>
+
+      <div style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:16px">
+        <div style="height:clamp(200px,20vw,260px);background:#F4F7FA;overflow:hidden">
+          <div class="ph" aria-hidden="true"><svg viewBox="-2 -2 184 104"><use href="#mk"/></svg></div>
+        </div>
+        <div style="background:#F6F9FC;border:1px solid #E1E7ED;padding:clamp(26px,3vw,36px);display:flex;flex-direction:column;gap:14px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#124A7C">Home Equity</span>
+          <span style="font-weight:600;font-size:clamp(20px,2.2vw,26px);line-height:1.2;color:#0A1B2A">Garantia de imóvel</span>
+          <span style="font-size:14.5px;line-height:1.7;color:#4A5A6B">Imóvel residencial ou comercial quitado, em seu nome ou da empresa. Prazos longos e uso livre do recurso.</span>
+        </div>
+        <div style="background:#F6F9FC;border:1px solid #E1E7ED;padding:clamp(26px,3vw,36px);display:flex;flex-direction:column;gap:14px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#124A7C">Auto Equity</span>
+          <span style="font-weight:600;font-size:clamp(20px,2.2vw,26px);line-height:1.2;color:#0A1B2A">Garantia de veículo</span>
+          <span style="font-size:14.5px;line-height:1.7;color:#4A5A6B">Para quem precisa de agilidade. O veículo quitado garante a operação e permanece em uso durante o contrato.</span>
+        </div>
+        <div style="background:#0B2A45;padding:clamp(26px,3vw,36px);display:flex;flex-direction:column;gap:12px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#9CC6E8">Importante</span>
+          <span style="font-size:15px;line-height:1.72;color:rgba(255,255,255,0.82)">Crédito com garantia exige análise responsável. Avaliamos capacidade de pagamento antes de qualquer proposta — nosso papel é dizer também quando a operação não é indicada.</span>
         </div>
       </div>
-      <div class="footer__legal">
-        <p>Prazos, valores e escopo são definidos em proposta formal após a conversa inicial. Posicionamento em buscadores depende de fatores externos e não é garantido.</p>
-        <span>© <span data-year>2026</span> Monetizze</span>
+    </div>
+  </section>
+
+  <section id="saude" data-reveal="1" style="background:#0B2A45;padding:clamp(44px,7vw,96px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,3vw,44px)">
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,64px);align-items:center">
+        <div style="flex:1.1 1 400px;min-width:0;display:flex;flex-direction:column;gap:18px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#9CC6E8">Planos de Saúde</span>
+          <h2 style="font-weight:600;font-size:clamp(28px,3.8vw,48px);font-weight:400;line-height:1.1;letter-spacing:-0.02em;color:#FFFFFF;margin:0;max-width:560px;text-wrap:pretty">Nenhum plano patrimonial resiste a uma emergência sem cobertura</h2>
+          <p style="font-size:16.5px;line-height:1.72;color:rgba(255,255,255,0.76);margin:0;max-width:540px;text-wrap:pretty">Saúde é proteção patrimonial. Um tratamento não previsto pode consumir em semanas o que levou anos para ser construído — e é por isso que essa frente está aqui, ao lado de crédito e investimento.</p>
+          <p style="font-size:16.5px;line-height:1.72;color:rgba(255,255,255,0.76);margin:0;max-width:540px;text-wrap:pretty">Analisamos rede credenciada, carências, coparticipação e reajuste com o mesmo critério técnico que aplicamos a uma carta de crédito.</p>
+          <a href="#" data-tpl-href="{{ waSaude }}" target="_blank" rel="noopener" style="align-self:flex-start;background:#FFFFFF;color:#0B2A45;font-size:14px;font-weight:600;padding:17px 30px;border-radius:2px;margin-top:6px" data-hv="6">Receber uma cotação →</a>
+        </div>
+        <div style="flex:1 1 300px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:1px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.14)">
+          <div style="background:#0B2A45;padding:28px 26px;display:flex;flex-direction:column;gap:10px">
+            <span style="font-weight:600;font-size:24px;color:#9CC6E8;line-height:1">01</span>
+            <span style="font-size:16px;font-weight:600;color:#FFFFFF">Individual e familiar</span>
+            <span style="font-size:14px;line-height:1.68;color:rgba(255,255,255,0.68)">Para você e para quem depende de você, com a rede que faz sentido na sua região.</span>
+          </div>
+          <div style="background:#0B2A45;padding:28px 26px;display:flex;flex-direction:column;gap:10px">
+            <span style="font-weight:600;font-size:24px;color:#9CC6E8;line-height:1">02</span>
+            <span style="font-size:16px;font-weight:600;color:#FFFFFF">Empresarial</span>
+            <span style="font-size:14px;line-height:1.68;color:rgba(255,255,255,0.68)">Condições de grupo para empresas de qualquer porte, inclusive MEI.</span>
+          </div>
+          <div style="background:#0B2A45;padding:28px 26px;display:flex;flex-direction:column;gap:10px">
+            <span style="font-weight:600;font-size:24px;color:#9CC6E8;line-height:1">03</span>
+            <span style="font-size:16px;font-weight:600;color:#FFFFFF">Migração de plano</span>
+            <span style="font-size:14px;line-height:1.68;color:rgba(255,255,255,0.68)">Revisão do que você já paga hoje, com comparativo honesto de custo e cobertura.</span>
+          </div>
+          <div style="background:#0B2A45;padding:28px 26px;display:flex;flex-direction:column;gap:10px">
+            <span style="font-weight:600;font-size:24px;color:#9CC6E8;line-height:1">04</span>
+            <span style="font-size:16px;font-weight:600;color:#FFFFFF">Odontológico</span>
+            <span style="font-size:14px;line-height:1.68;color:rgba(255,255,255,0.68)">Como complemento ao plano de saúde ou como contratação isolada.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="simulador" data-reveal="1" style="max-width:1280px;margin:0 auto;padding:clamp(44px,7vw,96px) clamp(16px,3vw,44px) clamp(36px,5vw,72px)">
+    <div style="max-width:660px;margin-bottom:clamp(26px,3.4vw,42px);display:flex;flex-direction:column;gap:16px">
+      <span style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#124A7C">Simulador</span>
+      <h2 style="font-weight:600;font-size:clamp(28px,3.8vw,48px);font-weight:400;line-height:1.1;letter-spacing:-0.02em;color:#0A1B2A;margin:0;text-wrap:pretty">Uma estimativa para começar a conversa</h2>
+      <p style="font-size:16.5px;line-height:1.7;color:#4A5A6B;margin:0;text-wrap:pretty">Ajuste o crédito e o prazo para ver a ordem de grandeza da parcela. O número exato depende da administradora e do grupo, e é apresentado em proposta formal.</p>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:1px;background:#E1E7ED;border:1px solid #E1E7ED">
+      <div style="flex:1.1 1 380px;min-width:0;background:#FFFFFF;padding:clamp(26px,3.4vw,44px);display:flex;flex-direction:column;gap:30px">
+        <label style="display:flex;flex-direction:column;gap:14px">
+          <span style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px">
+            <span style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#566878">Valor da carta de crédito</span>
+            <span style="font-weight:600;font-size:clamp(24px,2.6vw,32px);line-height:1;color:#0A1B2A"><span data-v="creditoFmt"></span></span>
+          </span>
+          <input type="range" min="50000" max="1500000" step="10000" data-tpl-value="{{ credito }}" data-on-input="setCredito" style="width:100%;accent-color:#124A7C;height:28px;cursor:pointer" />
+        </label>
+        <label style="display:flex;flex-direction:column;gap:14px">
+          <span style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px">
+            <span style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#566878">Prazo do plano</span>
+            <span style="font-weight:600;font-size:clamp(24px,2.6vw,32px);line-height:1;color:#0A1B2A"><span data-v="prazo"></span> meses</span>
+          </span>
+          <input type="range" min="60" max="240" step="12" data-tpl-value="{{ prazo }}" data-on-input="setPrazo" style="width:100%;accent-color:#124A7C;height:28px;cursor:pointer" />
+        </label>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#566878">Objetivo</span>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <button data-on-click="setObjInvest" data-tpl-style="cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:500;padding:12px 20px;border-radius:2px;border:1px solid {{ objInvestBorder }};background:{{ objInvestBg }};color:{{ objInvestColor }}">Investir / gerar patrimônio</button>
+            <button data-on-click="setObjBem" data-tpl-style="cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:500;padding:12px 20px;border-radius:2px;border:1px solid {{ objBemBorder }};background:{{ objBemBg }};color:{{ objBemColor }}">Adquirir um bem</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex:1 1 300px;min-width:0;background:#0B2A45;padding:clamp(26px,3.4vw,44px);display:flex;flex-direction:column;justify-content:center;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#9CC6E8">Parcela estimada</span>
+          <span style="font-weight:600;font-size:clamp(34px,4.4vw,54px);line-height:1;color:#FFFFFF"><span data-v="parcelaFmt"></span></span>
+          <span style="font-size:13.5px;line-height:1.6;color:rgba(255,255,255,0.6)">por mês, ao longo de <span data-v="prazo"></span> meses</span>
+        </div>
+        <div style="display:flex;flex-direction:column;padding-top:20px;border-top:1px solid rgba(255,255,255,0.16)">
+          <span style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;font-size:14px;color:rgba(255,255,255,0.72)">Total de aportes <strong style="font-weight:600;color:#FFFFFF"><span data-v="totalFmt"></span></strong></span>
+          <span style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;font-size:14px;color:rgba(255,255,255,0.72)">Objetivo <strong style="font-weight:600;color:#FFFFFF"><span data-v="objetivoLabel"></span></strong></span>
+        </div>
+        <a href="#" data-tpl-href="{{ waSimulacao }}" target="_blank" rel="noopener" style="background:#FFFFFF;color:#0B2A45;font-size:14px;font-weight:600;padding:17px 28px;border-radius:2px;text-align:center" data-hv="6">Receber proposta detalhada →</a>
+        <p style="margin:0;font-size:12px;line-height:1.66;color:rgba(255,255,255,0.5)">Estimativa educativa, calculada sobre o crédito e a taxa de administração de referência. Não constitui oferta, proposta de crédito ou promessa de rentabilidade.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre" data-reveal="1" style="max-width:1280px;margin:0 auto;padding:clamp(44px,7vw,96px) clamp(16px,3vw,44px) clamp(36px,5vw,72px)">
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,64px);align-items:center">
+      <div style="flex:1 1 300px;min-width:0;background:#F6F9FC;border:1px solid #E1E7ED;overflow:hidden;aspect-ratio:4/5">
+        <div class="ph" aria-hidden="true"><svg viewBox="-2 -2 184 104"><use href="#mk"/></svg></div>
+      </div>
+      <div style="flex:1.2 1 400px;min-width:0;display:flex;flex-direction:column;gap:18px">
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#124A7C">Sobre a Monetizze</span>
+        <h2 style="font-weight:600;font-size:clamp(28px,3.8vw,48px);font-weight:400;line-height:1.1;letter-spacing:-0.02em;color:#0A1B2A;margin:0;max-width:560px;text-wrap:pretty">Uma consultoria nova, com um jeito antigo de trabalhar</h2>
+        <p style="font-size:16.5px;line-height:1.72;color:#4A5A6B;margin:0;max-width:540px;text-wrap:pretty">A Monetizze Investimentos nasceu há menos de dois anos, com foco em cartas de crédito imobiliário via consórcio. De lá para cá, ampliamos a atuação para home equity e planos de saúde, sempre com a mesma premissa: entender o cenário do cliente antes de apresentar qualquer produto.</p>
+        <p style="font-size:16.5px;line-height:1.72;color:#4A5A6B;margin:0;max-width:540px;text-wrap:pretty">À frente do atendimento está Kawan Mendes, consultor responsável pelo conteúdo educativo da marca no Instagram e pela estratégia de cada operação estruturada aqui.</p>
+        <div style="display:flex;flex-direction:column;margin-top:6px">
+          <span style="display:flex;justify-content:space-between;gap:16px;padding:15px 0;border-top:1px solid #E1E7ED;font-size:15px;color:#0A1B2A">Consultor responsável <strong style="font-weight:600;color:#124A7C;text-align:right">Kawan Mendes</strong></span>
+          <span style="display:flex;justify-content:space-between;gap:16px;padding:15px 0;border-top:1px solid #E1E7ED;font-size:15px;color:#0A1B2A">Conteúdo educativo <a href="#" data-tpl-href="{{ instagramLink }}" target="_blank" rel="noopener" style="font-weight:600;text-align:right">@kawannmendess</a></span>
+          <span style="display:flex;justify-content:space-between;gap:16px;padding:15px 0;border-top:1px solid #E1E7ED;border-bottom:1px solid #E1E7ED;font-size:15px;color:#0A1B2A">Atuação <strong style="font-weight:600;color:#124A7C;text-align:right">Consórcio · Equity · Saúde</strong></span>
+        </div>
+        <a href="#" data-tpl-href="{{ waLink }}" target="_blank" rel="noopener" style="align-self:flex-start;background:#0B2A45;color:#FFFFFF;font-size:14px;font-weight:600;padding:17px 30px;border-radius:2px;margin-top:6px" data-hv="4">Conversar com o Kawan →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="fx-dark" data-reveal="1" style="position:relative;background:#071D30;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(60% 80% at 80% 20%, rgba(30,96,155,0.45) 0%, rgba(7,29,48,0) 70%)"></div><div class="bg-grid" aria-hidden="true"></div><div class="blob blob--1" aria-hidden="true"></div><div class="blob blob--2" aria-hidden="true"></div><span class="fx-ring" aria-hidden="true"></span>
+    <div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,110px) clamp(16px,3vw,44px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px">
+      <span style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#9CC6E8">Próximo passo</span>
+      <h2 style="font-weight:600;font-size:clamp(30px,4.4vw,58px);font-weight:400;line-height:1.08;letter-spacing:-0.02em;color:#FFFFFF;margin:0;max-width:760px;text-wrap:pretty">Traga seu cenário. A recomendação vem depois.</h2>
+      <p style="font-size:16.5px;line-height:1.7;color:rgba(255,255,255,0.72);margin:0;max-width:500px">Uma conversa sem compromisso para entender o que você quer construir, proteger ou destravar.</p>
+      <a href="#" data-tpl-href="{{ waLink }}" target="_blank" rel="noopener" style="background:#FFFFFF;color:#0B2A45;font-size:15px;font-weight:600;padding:19px 38px;border-radius:2px;margin-top:8px" data-hv="0">Falar no WhatsApp →</a>
+    </div>
+  </section>
+
+  <footer style="background:#0B2A45;padding:clamp(36px,5vw,72px) 0 24px">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,3vw,44px)">
+      <div style="display:flex;flex-wrap:wrap;gap:32px 56px;justify-content:space-between;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.14)">
+        <div style="display:flex;flex-direction:column;gap:14px;max-width:320px">
+          <span style="display:flex;align-items:center;gap:12px">
+            <img src="/site/logo-monetizze.png" alt="Monetizze Investimentos" style="align-self:flex-start;height:46px;width:auto;display:block" />
+          </span>
+          <span style="font-size:14px;line-height:1.7;color:rgba(255,255,255,0.6)">Consórcio, home equity e planos de saúde. Crédito, patrimônio e proteção em um só atendimento.</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.66)">Soluções</span>
+          <a href="/site/consorcio/" style="font-size:14px;color:rgba(255,255,255,0.76)" data-hv="7">Consórcio</a>
+          <a href="/site/home-equity/" style="font-size:14px;color:rgba(255,255,255,0.76)" data-hv="7">Home Equity</a>
+          <a href="/site/home-equity/#auto-equity" style="font-size:14px;color:rgba(255,255,255,0.76)" data-hv="7">Auto Equity</a>
+          <a href="/site/planos-de-saude/" style="font-size:14px;color:rgba(255,255,255,0.76)" data-hv="7">Planos de Saúde</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.66)">Institucional</span>
+          <a href="#solucoes" style="font-size:14px;color:rgba(255,255,255,0.76)" data-hv="7">Como atendemos</a>
+          <a href="#simulador" style="font-size:14px;color:rgba(255,255,255,0.76)" data-hv="7">Simulador</a>
+          <a href="#sobre" style="font-size:14px;color:rgba(255,255,255,0.76)" data-hv="7">Sobre a Monetizze</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.66)">Contato</span>
+          <a href="#" data-tpl-href="{{ waLink }}" target="_blank" rel="noopener" style="font-size:14px;color:rgba(255,255,255,0.76)" data-hv="7">WhatsApp</a>
+          <a href="#" data-tpl-href="{{ instagramLink }}" target="_blank" rel="noopener" style="font-size:14px;color:rgba(255,255,255,0.76)" data-hv="7">@kawannmendess</a>
+          <a href="#" data-tpl-href="{{ emailLink }}" style="font-size:14px;color:rgba(255,255,255,0.76)" data-hv="7"><span data-v="emailText"></span></a>
+        </div>
+      </div>
+      <div style="padding-top:26px;display:flex;flex-wrap:wrap;gap:14px 40px;justify-content:space-between">
+        <p style="margin:0;font-size:11.5px;line-height:1.75;color:rgba(255,255,255,0.66);max-width:720px">Este site possui caráter informativo e não constitui oferta de crédito, consórcio, seguro ou plano de saúde. Condições, taxas, prazos e coberturas são definidos pelas administradoras e operadoras parceiras e apresentados em proposta formal. Consórcio não é investimento de renda fixa nem garante rentabilidade.</p>
+        <span style="font-size:11.5px;color:rgba(255,255,255,0.62)">© 2026 Monetizze Investimentos</span>
       </div>
     </div>
   </footer>
 
-  <!-- WhatsApp fixo: botão flutuante no computador, barra no celular -->
-  <a class="wa-float" data-wa="Olá! Vim pelo site e gostaria de um orçamento para criação de site." href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg><use href="#i-whats"/></svg>WhatsApp</a>
-  <div class="wa-bar">
-    <a class="btn btn--light btn--block" data-wa="Olá! Vim pelo site e gostaria de um orçamento para criação de site." href="#" target="_blank" rel="noopener">Pedir um orçamento</a>
+  <div class="only-narrow">
+    <div style="position:fixed;left:0;right:0;bottom:0;z-index:70;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(11,42,69,0.96);backdrop-filter:blur(14px);border-top:1px solid rgba(255,255,255,0.14)">
+      <a href="#" data-tpl-href="{{ waLink }}" target="_blank" rel="noopener" style="display:block;text-align:center;background:#FFFFFF;color:#0B2A45;font-size:14.5px;font-weight:600;padding:17px;border-radius:2px">Falar com um consultor</a>
+    </div>
+    <div style="height:80px"></div>
   </div>
 
+  <div class="only-wide">
+    <a href="#" data-tpl-href="{{ waLink }}" target="_blank" rel="noopener" aria-label="Falar no WhatsApp" style="position:fixed;right:24px;bottom:24px;z-index:70;display:flex;align-items:center;gap:10px;background:#0B2A45;color:#FFFFFF;padding:16px 26px;border-radius:2px;box-shadow:0 14px 36px rgba(7,29,48,0.4);font-size:13.5px;font-weight:600" data-hv="0">
+      <span style="width:7px;height:7px;background:#5B9BD5;display:block"></span>
+      WhatsApp
+    </a>
+  </div>
+
+</div>
+  </main>
+  <script src="/site/assets/efeitos.js"></script>
   <script>
-    /* ==========================================================
-       CONFIGURAÇÃO — edite aqui
-       ========================================================== */
-    const CONFIG = {
-      whatsapp: '5565996039092',
-      instagram: 'kawannmendess',
-      email: 'contato@monetizzeinvestimentos.com.br',
-      // Aviso do aulão no topo. Some sozinho depois de "fim".
-      aulao: {
-        url: '/',
-        inicio: '2026-10-20T20:30:00-03:00',
-        fim: '2026-10-20T22:00:00-03:00'
-      }
+class Component extends DCLogic {
+  state = { narrow: false, navOpen: false, credito: 300000, prazo: 180, objetivo: 'invest' };
+
+  componentDidMount() {
+    this.sync = () => {
+      const narrow = window.innerWidth < 1060;
+      if (narrow !== this.state.narrow) this.setState({ narrow, navOpen: false });
     };
+    this.sync();
+    window.addEventListener('resize', this.sync);
+    this.reveal();
+    this.zoomOnHover();
+  }
 
-    (() => {
-      const $ = (s, el = document) => el.querySelector(s);
-      const $$ = (s, el = document) => [...el.querySelectorAll(s)];
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.sync);
+    if (this.io) this.io.disconnect();
+  }
 
-      /* Links de contato */
-      const fone = CONFIG.whatsapp.replace(/\D/g, '');
-      $$('[data-wa]').forEach(a => { a.href = 'https://wa.me/' + fone + '?text=' + encodeURIComponent(a.dataset.wa); });
-      $$('[data-instagram]').forEach(a => { a.href = 'https://instagram.com/' + CONFIG.instagram; a.textContent = '@' + CONFIG.instagram; });
-      $$('[data-email]').forEach(a => { a.href = 'mailto:' + CONFIG.email; a.textContent = CONFIG.email; });
+  zoomOnHover() {
+    document.querySelectorAll('image-slot').forEach((slot) => {
+      if (slot.dataset.zoom) return;
+      slot.dataset.zoom = '1';
+      slot.style.transition = 'transform 480ms cubic-bezier(.22,.61,.36,1)';
+      slot.style.display = 'block';
+      slot.style.width = '100%';
+      slot.style.height = '100%';
+      slot.addEventListener('mouseenter', () => { slot.style.transform = 'scale(1.04)'; });
+      slot.addEventListener('mouseleave', () => { slot.style.transform = 'none'; });
+    });
+  }
 
-      /* Aviso do aulão (só até o fim do evento) */
-      const agora = Date.now();
-      const ini = new Date(CONFIG.aulao.inicio).getTime();
-      const fim = new Date(CONFIG.aulao.fim).getTime();
-      if (agora < fim) {
-        document.documentElement.classList.add('has-promo');
-        $('[data-promo]').href = CONFIG.aulao.url;
-        const hoje = new Date(ini).toDateString() === new Date(agora).toDateString();
-        const txt = $('[data-promo-text]');
-        if (agora >= ini) txt.innerHTML = '<b>Estamos ao vivo agora</b><span class="promo__long"> · Aulão Patrimônio Alavancado</span>';
-        else if (hoje) txt.innerHTML = '<b>É hoje, às 20h30</b> · Aulão<span class="promo__long"> Patrimônio Alavancado, ao vivo e</span> gratuito';
-      }
-
-      /* Título palavra a palavra */
-      $$('[data-split]').forEach(el => {
-        if (reduceMotion) return;
-        let i = 0;
-        const wrap = (text, cls = '') => text.split(/(\s+)/).map(part => part.trim() ? `<span class="w"><span class="w__i ${cls}" style="--i:${i++}">${part}</span></span>` : part).join('');
-        el.innerHTML = [...el.childNodes].map(n => n.nodeType === 3 ? wrap(n.textContent) : wrap(n.textContent, n.className)).join('');
-      });
-
-      /* Revelação no scroll */
-      const revealIO = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); revealIO.unobserve(e.target); } });
-      }, { threshold: .14, rootMargin: '0px 0px -6% 0px' });
-      $$('[data-reveal]').forEach(el => revealIO.observe(el));
-
-      /* Marquee contínuo */
-      $$('[data-marquee]').forEach(t => { t.innerHTML += t.innerHTML; });
-
-      /* Contadores */
-      const fmt = new Intl.NumberFormat('pt-BR');
-      const countIO = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (!e.isIntersecting) return;
-          countIO.unobserve(e.target);
-          const el = e.target, alvo = +el.dataset.count;
-          if (reduceMotion) return;
-          const t0 = performance.now(), dur = 1600;
-          const step = t => { const p = clamp((t - t0) / dur, 0, 1); el.textContent = fmt.format(Math.round(alvo * (1 - Math.pow(1 - p, 4)))); if (p < 1) requestAnimationFrame(step); };
-          requestAnimationFrame(step);
+  reveal() {
+    if (!('IntersectionObserver' in window)) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('section[data-reveal]').forEach((sec) => {
+      sec.removeAttribute('data-reveal');
+      Array.from(sec.children).forEach((wrap) => {
+        const kids = Array.from(wrap.children).filter((k) => k.tagName !== 'IFRAME');
+        const targets = kids.length > 1 ? kids : [wrap];
+        targets.forEach((t, i) => {
+          t.setAttribute('data-rv', '1');
+          t.style.transitionDelay = Math.min(i, 6) * 80 + 'ms';
         });
-      }, { threshold: .5 });
-      $$('[data-count]').forEach(el => countIO.observe(el));
-
-      /* Citação que acende com o scroll */
-      const quote = $('[data-words]');
-      let words = [];
-      if (quote) {
-        quote.innerHTML = [...quote.childNodes].map(n => n.textContent.split(/(\s+)/).map(p => p.trim() ? `<span class="qw${n.nodeType === 1 ? ' k' : ''}">${p}</span>` : p).join('')).join('');
-        words = $$('.qw', quote);
-      }
-
-      /* Linha do tempo */
-      const timeline = $('[data-timeline]');
-      const tlFill = timeline && $('.timeline__fill', timeline);
-      const tlItems = timeline ? $$('.tl-item', timeline) : [];
-
-      /* Scroll: header, progresso, citação, linha do tempo, WhatsApp flutuante */
-      const header = $('.header'), progress = $('.progress'), waFloat = $('.wa-float');
-      let ticking = false;
-      function onScroll() {
-        ticking = false;
-        const y = window.scrollY, vh = window.innerHeight;
-        header.classList.toggle('is-scrolled', y > 24);
-        const max = document.documentElement.scrollHeight - vh;
-        progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
-        waFloat.classList.toggle('is-visible', y > vh * .6);
-        if (words.length) {
-          const r = quote.getBoundingClientRect();
-          const p = reduceMotion ? 1 : clamp((vh * .82 - r.top) / (r.height + vh * .32), 0, 1);
-          const lit = Math.round(p * words.length);
-          words.forEach((w, i) => w.classList.toggle('on', i < lit));
-        }
-        if (timeline) {
-          const r = timeline.getBoundingClientRect(), line = vh * .6;
-          tlFill.style.transform = `scaleY(${clamp((line - r.top) / r.height, 0, 1)})`;
-          tlItems.forEach(it => it.classList.toggle('is-active', $('.tl-dot', it).getBoundingClientRect().top < line));
-        }
-      }
-      const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } };
-      window.addEventListener('scroll', req, { passive: true });
-      window.addEventListener('resize', req);
-      onScroll();
-
-      /* Luz que segue o cursor */
-      $$('.spot').forEach(el => el.addEventListener('pointermove', e => {
-        const r = el.getBoundingClientRect();
-        el.style.setProperty('--mx', `${e.clientX - r.left}px`);
-        el.style.setProperty('--my', `${e.clientY - r.top}px`);
-      }));
-
-      /* Menu do celular */
-      const menuBtn = $('[data-menu]');
-      menuBtn.addEventListener('click', () => {
-        const open = header.classList.toggle('is-open');
-        menuBtn.setAttribute('aria-expanded', String(open));
       });
-      $$('.mobile-nav a').forEach(a => a.addEventListener('click', () => { header.classList.remove('is-open'); menuBtn.setAttribute('aria-expanded', 'false'); }));
+    });
+    const els = Array.from(document.querySelectorAll('[data-rv]'));
+    const show = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; };
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { show(e.target); this.io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.02 });
+    els.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.9) return;
+      el.style.willChange = 'opacity, transform';
+      el.style.transition = 'opacity 820ms cubic-bezier(.16,1,.3,1), transform 820ms cubic-bezier(.16,1,.3,1)';
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(26px)';
+      this.io.observe(el);
+    });
+    setTimeout(() => els.forEach(show), 4000);
+  }
 
-      /* FAQ */
-      $$('[data-faq] .faq__q').forEach(btn => btn.addEventListener('click', () => {
-        const item = btn.closest('.faq__item');
-        const open = !item.classList.contains('is-open');
-        $$('[data-faq] .faq__item.is-open').forEach(o => { o.classList.remove('is-open'); $('.faq__q', o).setAttribute('aria-expanded', 'false'); });
-        item.classList.toggle('is-open', open);
-        btn.setAttribute('aria-expanded', String(open));
-      }));
+  brl(v) {
+    return 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+  }
 
-      $('[data-year]').textContent = new Date().getFullYear();
-    })();
+  renderVals() {
+    const phone = (this.props.whatsappNumber || '5565996039092').replace(/\D/g, '');
+    const handle = (this.props.instagramHandle || 'kawannmendess').replace(/^@/, '');
+    const email = this.props.email || 'contato@monetizzeinvestimentos.com.br';
+    const taxa = Number(this.props.taxaAdm ?? 18) / 100;
+    const link = (t) => 'https://wa.me/' + phone + '?text=' + encodeURIComponent(t);
+    const { credito, prazo, objetivo } = this.state;
+    const total = credito * (1 + taxa);
+    const isInvest = objetivo === 'invest';
+
+    return {
+      narrow: this.state.narrow,
+      wide: !this.state.narrow,
+      navOpen: this.state.navOpen && this.state.narrow,
+      toggleNav: () => this.setState((s) => ({ navOpen: !s.navOpen })),
+      closeNav: () => this.setState({ navOpen: false }),
+      credito,
+      prazo,
+      creditoFmt: this.brl(credito),
+      parcelaFmt: this.brl(total / prazo),
+      totalFmt: this.brl(total),
+      objetivoLabel: isInvest ? 'Patrimônio' : 'Aquisição',
+      setCredito: (e) => this.setState({ credito: Number(e.target.value) }),
+      setPrazo: (e) => this.setState({ prazo: Number(e.target.value) }),
+      setObjInvest: () => this.setState({ objetivo: 'invest' }),
+      setObjBem: () => this.setState({ objetivo: 'bem' }),
+      objInvestBg: isInvest ? '#0B2A45' : '#FFFFFF',
+      objInvestColor: isInvest ? '#FFFFFF' : '#4A5A6B',
+      objInvestBorder: isInvest ? '#0B2A45' : '#D6DFE7',
+      objBemBg: isInvest ? '#FFFFFF' : '#0B2A45',
+      objBemColor: isInvest ? '#4A5A6B' : '#FFFFFF',
+      objBemBorder: isInvest ? '#D6DFE7' : '#0B2A45',
+      waLink: link('Olá! Vim pelo site da Monetizze e gostaria de falar com um consultor.'),
+      waConsorcio: link('Olá! Gostaria de simular uma carta de crédito de consórcio.'),
+      waEquity: link('Olá! Gostaria de avaliar um crédito com garantia de imóvel (home equity).'),
+      waSaude: link('Olá! Gostaria de uma cotação de plano de saúde.'),
+      waSimulacao: link('Olá! Fiz uma simulação no site e gostaria de uma proposta detalhada.'),
+      instagramLink: 'https://instagram.com/' + handle,
+      emailText: email,
+      emailLink: 'mailto:' + email
+    };
+  }
+}
+MZ.mount(Component, {"whatsappNumber": "5565996039092", "instagramHandle": "kawannmendess", "email": "contato@monetizzeinvestimentos.com.br", "taxaAdm": 18});
   </script>
 </body>
 </html>
