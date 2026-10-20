@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Monetizze Investimentos | Consórcio, Home Equity e Planos de Saúde</title>
   <meta name="description" content="Crédito, patrimônio e proteção em um só atendimento. Consórcio como ferramenta de planejamento patrimonial, home equity com garantia de imóvel e planos de saúde.">
-  <meta name="keywords" content="consórcio investimento, carta de crédito imobiliário, home equity, auto equity, crédito com garantia de imóvel, planos de saúde, Monetizze Investimentos, Kawan Mendes">
+  <meta name="keywords" content="consórcio investimento, carta de crédito imobiliário, home equity, auto equity, crédito com garantia de imóvel, planos de saúde, Monetizze Investimentos">
   <meta name="theme-color" content="#071D30">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Monetizze Investimentos | Consórcio, Home Equity e Planos de Saúde">
@@ -400,13 +400,12 @@
         <span style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#124A7C">Sobre a Monetizze</span>
         <h2 style="font-weight:600;font-size:clamp(28px,3.8vw,48px);font-weight:400;line-height:1.1;letter-spacing:-0.02em;color:#0A1B2A;margin:0;max-width:560px;text-wrap:pretty">Uma consultoria nova, com um jeito antigo de trabalhar</h2>
         <p style="font-size:16.5px;line-height:1.72;color:#4A5A6B;margin:0;max-width:540px;text-wrap:pretty">A Monetizze Investimentos nasceu há menos de dois anos, com foco em cartas de crédito imobiliário via consórcio. De lá para cá, ampliamos a atuação para home equity e planos de saúde, sempre com a mesma premissa: entender o cenário do cliente antes de apresentar qualquer produto.</p>
-        <p style="font-size:16.5px;line-height:1.72;color:#4A5A6B;margin:0;max-width:540px;text-wrap:pretty">À frente do atendimento está Kawan Mendes, consultor responsável pelo conteúdo educativo da marca no Instagram e pela estratégia de cada operação estruturada aqui.</p>
+        <p style="font-size:16.5px;line-height:1.72;color:#4A5A6B;margin:0;max-width:540px;text-wrap:pretty">Cada cliente tem um consultor dedicado da nossa equipe, que acompanha a operação do primeiro contato até o fim, com a estratégia desenhada para o seu caso.</p>
         <div style="display:flex;flex-direction:column;margin-top:6px">
-          <span style="display:flex;justify-content:space-between;gap:16px;padding:15px 0;border-top:1px solid #E1E7ED;font-size:15px;color:#0A1B2A">Consultor responsável <strong style="font-weight:600;color:#124A7C;text-align:right">Kawan Mendes</strong></span>
-          <span style="display:flex;justify-content:space-between;gap:16px;padding:15px 0;border-top:1px solid #E1E7ED;font-size:15px;color:#0A1B2A">Conteúdo educativo <a href="#" data-tpl-href="{{ instagramLink }}" target="_blank" rel="noopener" style="font-weight:600;text-align:right">@kawannmendess</a></span>
-          <span style="display:flex;justify-content:space-between;gap:16px;padding:15px 0;border-top:1px solid #E1E7ED;border-bottom:1px solid #E1E7ED;font-size:15px;color:#0A1B2A">Atuação <strong style="font-weight:600;color:#124A7C;text-align:right">Consórcio · Equity · Saúde</strong></span>
+          <span style="display:flex;justify-content:space-between;gap:16px;padding:15px 0;border-top:1px solid #E1E7ED;font-size:15px;color:#0A1B2A">Atendimento <strong style="font-weight:600;color:#124A7C;text-align:right">Consultor dedicado</strong></span>
+          <span style="display:flex;justify-content:space-between;gap:16px;padding:15px 0;border-top:1px solid #E1E7ED;border-bottom:1px solid #E1E7ED;font-size:15px;color:#0A1B2A">Atuação <strong style="font-weight:600;color:#124A7C;text-align:right">Consórcio · Equity · Saúde · Tributário</strong></span>
         </div>
-        <a href="#" data-tpl-href="{{ waLink }}" target="_blank" rel="noopener" style="align-self:flex-start;background:#0B2A45;color:#FFFFFF;font-size:14px;font-weight:600;padding:17px 30px;border-radius:2px;margin-top:6px" data-hv="4">Conversar com o Kawan →</a>
+        <a href="#" data-tpl-href="{{ waLink }}" target="_blank" rel="noopener" style="align-self:flex-start;background:#0B2A45;color:#FFFFFF;font-size:14px;font-weight:600;padding:17px 30px;border-radius:2px;margin-top:6px" data-hv="4">Falar com a Monetizze →</a>
       </div>
     </div>
   </section>
@@ -447,7 +446,6 @@
         <div style="display:flex;flex-direction:column;gap:12px">
           <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.66)">Contato</span>
           <a href="#" data-tpl-href="{{ waLink }}" target="_blank" rel="noopener" style="font-size:14px;color:rgba(255,255,255,0.76)" data-hv="7">WhatsApp</a>
-          <a href="#" data-tpl-href="{{ instagramLink }}" target="_blank" rel="noopener" style="font-size:14px;color:rgba(255,255,255,0.76)" data-hv="7">@kawannmendess</a>
           <a href="#" data-tpl-href="{{ emailLink }}" style="font-size:14px;color:rgba(255,255,255,0.76)" data-hv="7"><span data-v="emailText"></span></a>
         </div>
       </div>
@@ -544,8 +542,8 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const phone = (this.props.whatsappNumber || '5565996039092').replace(/\D/g, '');
-    const handle = (this.props.instagramHandle || 'kawannmendess').replace(/^@/, '');
+    const phone = (this.props.whatsappNumber || '5565996745162').replace(/\D/g, '');
+    const handle = (this.props.instagramHandle || '').replace(/^@/, '');
     const email = this.props.email || 'contato@monetizzeinvestimentos.com.br';
     const taxa = Number(this.props.taxaAdm ?? 18) / 100;
     const link = (t) => 'https://wa.me/' + phone + '?text=' + encodeURIComponent(t);
@@ -586,7 +584,7 @@ class Component extends DCLogic {
     };
   }
 }
-MZ.mount(Component, {"whatsappNumber": "5565996039092", "instagramHandle": "kawannmendess", "email": "contato@monetizzeinvestimentos.com.br", "taxaAdm": 18});
+MZ.mount(Component, {"whatsappNumber": "5565996745162", "instagramHandle": "", "email": "contato@monetizzeinvestimentos.com.br", "taxaAdm": 18});
   </script>
 </body>
 </html>

@@ -285,9 +285,11 @@ def consultor(escuro=False):
     c = [fundo(w, h, escuro, 'e')]
     c.append(predio(70, 690, 130, 380, '#DCE8F3' if not escuro else '#123B60', WHITE if not escuro else '#1E5585', 3))
     c.append(predio(450, 690, 120, 300, '#DCE8F3' if not escuro else '#123B60', WHITE if not escuro else '#1E5585', 3))
-    c.append(pessoa(320, 700, 470, NAVY, '#1A2B3C', pele=1, cabelo=0, gravata=SKY))
-    c.append(documento(390, 470, 70, rot=8, grafico=True))
-    return svg(w, h, ''.join(c), 'Ilustração: consultor da Monetizze')
+    c.append(pessoa(185, 700, 380, SKY, '#24384D', pele=0, cabelo=1, longo=True))
+    c.append(pessoa(455, 700, 385, BLUE, NAVY, pele=2, cabelo=0))
+    c.append(pessoa(320, 712, 420, NAVY, '#1A2B3C', pele=1, cabelo=0, gravata=SKY))
+    c.append(documento(372, 500, 64, rot=8, grafico=True))
+    return svg(w, h, ''.join(c), 'Ilustração: equipe da Monetizze')
 
 
 def conquista():

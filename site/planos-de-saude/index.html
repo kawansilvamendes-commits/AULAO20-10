@@ -320,7 +320,6 @@
         <div style="display:flex;flex-direction:column;gap:12px">
           <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.66)">Contato</span>
           <a href="#" data-tpl-href="{{ waSaude }}" target="_blank" rel="noopener" style="font-size:14px;color:rgba(255,255,255,0.76)" data-hv="4">WhatsApp</a>
-          <a href="#" data-tpl-href="{{ instagramLink }}" target="_blank" rel="noopener" style="font-size:14px;color:rgba(255,255,255,0.76)" data-hv="4">@kawannmendess</a>
           <a href="#" data-tpl-href="{{ emailLink }}" style="font-size:14px;color:rgba(255,255,255,0.76)" data-hv="4"><span data-v="emailText"></span></a>
         </div>
       </div>
@@ -413,8 +412,8 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const phone = (this.props.whatsappNumber || '5565996039092').replace(/\D/g, '');
-    const handle = (this.props.instagramHandle || 'kawannmendess').replace(/^@/, '');
+    const phone = (this.props.whatsappNumber || '5565996745162').replace(/\D/g, '');
+    const handle = (this.props.instagramHandle || '').replace(/^@/, '');
     const email = this.props.email || 'contato@monetizzeinvestimentos.com.br';
     const link = (t) => 'https://wa.me/' + phone + '?text=' + encodeURIComponent(t);
     const faq = this.state.faq;
@@ -439,7 +438,7 @@ class Component extends DCLogic {
     return vals;
   }
 }
-MZ.mount(Component, {"whatsappNumber": "5565996039092", "instagramHandle": "kawannmendess", "email": "contato@monetizzeinvestimentos.com.br"});
+MZ.mount(Component, {"whatsappNumber": "5565996745162", "instagramHandle": "", "email": "contato@monetizzeinvestimentos.com.br"});
   </script>
 </body>
 </html>

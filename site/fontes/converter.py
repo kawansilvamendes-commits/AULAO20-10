@@ -269,6 +269,32 @@ def hero_tributario(src):
     return src
 
 
+FONE_ANTIGO, FONE = '5565996039092', '5565996745162'
+
+
+def site_da_empresa(page):
+    """O site fala pela Monetizze: número principal da empresa e nenhuma menção pessoal."""
+    page = page.replace(FONE_ANTIGO, FONE)
+    page = page.replace(', Kawan Mendes">', '">')
+    trocas = [
+        ('À frente do atendimento está Kawan Mendes, consultor responsável pelo conteúdo educativo da marca no Instagram e pela estratégia de cada operação estruturada aqui.',
+         'Cada cliente tem um consultor dedicado da nossa equipe, que acompanha a operação do primeiro contato até o fim, com a estratégia desenhada para o seu caso.'),
+        ('Consultor responsável <strong style="font-weight:600;color:#124A7C;text-align:right">Kawan Mendes</strong>',
+         'Atendimento <strong style="font-weight:600;color:#124A7C;text-align:right">Consultor dedicado</strong>'),
+        ('Atuação <strong style="font-weight:600;color:#124A7C;text-align:right">Consórcio · Equity · Saúde</strong>',
+         'Atuação <strong style="font-weight:600;color:#124A7C;text-align:right">Consórcio · Equity · Saúde · Tributário</strong>'),
+        ('Conversar com o Kawan →', 'Falar com a Monetizze →'),
+    ]
+    for a, b in trocas:
+        page = page.replace(a, b)
+    # linha "Conteúdo educativo @…" do Sobre e o Instagram pessoal do rodapé
+    page = re.sub(r'\s*<span [^>]*>Conteúdo educativo <a [^>]*instagramLink[^>]*>[^<]*</a></span>', '', page)
+    page = re.sub(r'\s*<a href="#" data-tpl-href="\{\{ instagramLink \}\}"[^>]*>[^<]*</a>', '', page)
+    page = page.replace('kawannmendess', '')
+    assert 'Kawan' not in page and 'kawann' not in page
+    return page
+
+
 TRIB = ('tributario', 'tributario/index.html',
         ['Reforma Tributária', 'CBS e IBS', 'Recuperação de créditos', 'Incentivos fiscais', 'Governança'],
         ['Planejamento tributário', 'Compliance', 'Split payment', 'Monetizze + Valorya', 'Diagnóstico gratuito'])
@@ -284,7 +310,7 @@ def main():
     jobs[0] = (hero_tributario(jobs[0][0]),) + jobs[0][1:]
     jobs.append((trib_src, TRIB[0], TRIB[1], TRIB[2], TRIB[3]))
     for src, key, path, ta, tb in jobs:
-        page = add_footer_link(convert(src, key, ta, tb))
+        page = site_da_empresa(add_footer_link(convert(src, key, ta, tb)))
         dest = os.path.join(OUT, path)
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         open(dest, 'w', encoding='utf-8').write(page)

@@ -3,7 +3,7 @@
    renderVals); este arquivo a executa sem React e aplica os efeitos. */
 (() => {
   const CONFIG = {
-    whatsapp: '5565996039092',
+    whatsapp: '5565996745162',
     // Aviso do aulão no topo. Some sozinho depois de "fim".
     aulao: { url: '/', inicio: '2026-10-20T20:30:00-03:00', fim: '2026-10-20T22:00:00-03:00' }
   };
