@@ -147,6 +147,8 @@ a:hover { color: #0A3459; }
 /* Espaços de foto: painel da marca até entrarem as fotos reais */
 .ph { position: relative; display: block; width: 100%; height: 100%; min-height: inherit; overflow: hidden; background: radial-gradient(120% 90% at 20% 0%, #124A7C 0%, #0B2A45 55%, #071D30 100%); transition: transform 480ms cubic-bezier(.22, .61, .36, 1); }
 .ph:hover { transform: scale(1.04); }
+.ph-img { display: block; width: 100%; height: 100%; min-height: inherit; object-fit: cover; transition: transform 480ms cubic-bezier(.22, .61, .36, 1); }
+.ph-img:hover { transform: scale(1.04); }
 .ph::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(156, 198, 232, .08) 1px, transparent 1px), linear-gradient(90deg, rgba(156, 198, 232, .08) 1px, transparent 1px); background-size: 40px 40px; }
 .ph svg { position: absolute; right: -8%; bottom: -6%; width: 78%; fill: none; stroke: rgba(156, 198, 232, .28); stroke-width: .45; }
 
