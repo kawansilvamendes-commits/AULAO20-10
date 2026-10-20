@@ -398,7 +398,7 @@ def tributario():
 
 
 CENAS = {
-    'mz-ed-1': reuniao, 'mz-ed-2': fachada, 'mz-ed-3': familia, 'mz-equity': equity, 'mz-kawan': consultor,
+    'mz-ed-1': reuniao, 'mz-ed-2': fachada, 'mz-ed-3': familia, 'mz-equity': equity, 'mz-sobre': consultor,
     'cs-hero': conquista, 'cs-imovel': imoveis, 'cs-veiculo': veiculo,
     'he-hero': he_hero, 'he-criterios': criterios,
     'ps-hero': saude_hero, 'ps-cobertura': hospital, 'ps-migracao': migracao,

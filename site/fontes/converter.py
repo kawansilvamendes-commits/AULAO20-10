@@ -142,6 +142,7 @@ def convert(src, key, tapes_a, tapes_b):
     # ilustrações geradas por fontes/ilustracoes.py (img/<id>.svg)
     def slot(m):
         uid = re.search(r'id="([^"]+)"', m.group(0)).group(1)
+        uid = {'mz-kawan': 'mz-sobre'}.get(uid, uid)
         # foto real (jpg/webp/png) tem prioridade sobre a ilustração
         for ext in ('jpg', 'webp', 'png', 'svg'):
             if os.path.exists(os.path.join(OUT, 'img', f'{uid}.{ext}')):
