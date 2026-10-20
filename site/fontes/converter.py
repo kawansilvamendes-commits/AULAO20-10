@@ -252,6 +252,19 @@ def add_footer_link(page):
     return page[:i] + ft + page[j:]
 
 
+def hero_tributario(src):
+    """Home: Tributário como 4ª opção no herói, ao lado das outras três frentes."""
+    m = re.search(r'<a href="\./Monetizze Planos de Saude\.dc\.html" style="background:rgba\(255,255,255,0\.06\).*?</a>', src, re.S)
+    card = m.group(0)
+    novo = card.replace('./Monetizze Planos de Saude.dc.html', '/site/tributario/', 1)
+    novo = novo.replace('>Planos de Saúde<', '>Tributário<', 1).replace('>Proteção do que você construiu<', '>Planejamento fiscal para sua empresa<', 1)
+    src = src.replace(card, card + '\n' + novo, 1)
+    src = src.replace('Consórcio, home equity e planos de saúde em um só atendimento. Reunimos as três frentes',
+                      'Consórcio, home equity, planos de saúde e planejamento tributário em um só atendimento. Reunimos as quatro frentes', 1)
+    src = re.sub(r'>3(</span>\s*<span[^>]*>Frentes de negócio)', r'>4\1', src, 1)
+    return src
+
+
 TRIB = ('tributario', 'tributario/index.html',
         ['Reforma Tributária', 'CBS e IBS', 'Recuperação de créditos', 'Incentivos fiscais', 'Governança'],
         ['Planejamento tributário', 'Compliance', 'Split payment', 'Monetizze + Valorya', 'Diagnóstico gratuito'])
@@ -264,6 +277,7 @@ def main():
     footer = re.sub(r'href="#(solucoes|simulador|sobre)"', r'href="./Monetizze Investimentos v2.dc.html#\1"', footer)
     trib_src = open(os.path.join(OUT, 'fontes/tributario.dc.html'), encoding='utf-8').read().replace('%%FOOTER%%', footer)
     jobs = [(files[uid].decode('utf-8'), key, path, ta, tb) for uid, (key, path, ta, tb) in PAGES.items()]
+    jobs[0] = (hero_tributario(jobs[0][0]),) + jobs[0][1:]
     jobs.append((trib_src, TRIB[0], TRIB[1], TRIB[2], TRIB[3]))
     for src, key, path, ta, tb in jobs:
         page = add_footer_link(convert(src, key, ta, tb))
