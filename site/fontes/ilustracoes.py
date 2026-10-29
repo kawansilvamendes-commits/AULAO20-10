@@ -397,12 +397,47 @@ def tributario():
     return svg(w, h, ''.join(c), 'Ilustração: planejamento tributário para empresas')
 
 
+def seguro_hero():
+    w, h = 800, 600
+    c = [fundo(w, h, True, 's')]
+    c.append(casa(110, 500, 300, '#E9F1F8', MID, LIGHT, BLUE))
+    c.append(carro(330, 512, 300, SKY, PALE))
+    c.append(escudo(600, 220, 120, BLUE, 'check', WHITE))
+    c.append(selo(170, 120, 30, '24h', '#F2C14E', NAVY))
+    return svg(w, h, ''.join(c), 'Ilustração: casa, carro e família protegidos pelo seguro')
+
+
+def seguro_coberturas():
+    w, h = 800, 600
+    c = [fundo(w, h, False, 't')]
+    c.append(casa_moderna(90, 460, 280))
+    c.append(predio(410, 460, 140, 250, MID, LIGHT, 3))
+    c.append(f'<rect x="0" y="460" width="{w}" height="140" fill="#DCE8F3"/>')
+    c.append(escudo(655, 330, 80, BLUE, 'check'))
+    c.append(selo(600, 200, 24, '+', SKY, WHITE))
+    return svg(w, h, ''.join(c), 'Ilustração: imóveis e empresa cobertos pelo seguro')
+
+
+def seguro_sinistro():
+    w, h = 800, 600
+    c = [fundo(w, h, False, 'u')]
+    c.append(busto(400, 380, 210, NAVY, pele=1, cabelo=0, gravata=BLUE))
+    c.append(f'<rect x="170" y="378" width="460" height="18" fill="{MID}"/><rect x="210" y="396" width="14" height="130" fill="{MID}"/><rect x="576" y="396" width="14" height="130" fill="{MID}"/>')
+    c.append(notebook(345, 378, 110))
+    c.append(documento(120, 100, 120, rot=-6, check=True))
+    c.append(f'<rect x="590" y="110" width="90" height="160" rx="12" fill="{NAVY}"/><rect x="598" y="126" width="74" height="122" rx="4" fill="{LIGHT}"/>'
+             f'<rect x="608" y="142" width="54" height="10" fill="{WHITE}"/><rect x="608" y="160" width="40" height="10" fill="{WHITE}"/><rect x="618" y="190" width="44" height="22" rx="4" fill="{BLUE}"/>')
+    c.append(selo(660, 104, 22, '!', '#F2C14E', NAVY))
+    return svg(w, h, ''.join(c), 'Ilustração: consultor acompanhando o sinistro')
+
+
 CENAS = {
     'mz-ed-1': reuniao, 'mz-ed-2': fachada, 'mz-ed-3': familia, 'mz-equity': equity, 'mz-sobre': consultor,
     'cs-hero': conquista, 'cs-imovel': imoveis, 'cs-veiculo': veiculo,
     'he-hero': he_hero, 'he-criterios': criterios,
     'ps-hero': saude_hero, 'ps-cobertura': hospital, 'ps-migracao': migracao,
     'tb-parceria': tributario,
+    'sg-hero': seguro_hero, 'sg-coberturas': seguro_coberturas, 'sg-sinistro': seguro_sinistro,
 }
 
 if __name__ == '__main__':
