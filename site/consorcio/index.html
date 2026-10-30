@@ -34,7 +34,7 @@
 
   <header class="mz-header">
     <div class="mz-header__inner">
-      <a class="mz-brand" href="/site/" aria-label="Monetizze Investimentos — início"><img src="/site/logo-monetizze.png" alt="Monetizze Investimentos" width="923" height="215"></a>
+      <a class="mz-brand" href="/site/" aria-label="Monetizze Investimentos, início"><img src="/site/logo-monetizze.png" alt="Monetizze Investimentos" width="923" height="215"></a>
       <nav class="mz-nav" aria-label="Páginas">
         <a href="/site/" data-nav="home">Início</a>
         <a href="/site/consorcio/" data-nav="consorcio">Consórcio</a>
@@ -283,31 +283,24 @@
       <div style="max-width:660px;margin-bottom:clamp(26px,3.4vw,42px);display:flex;flex-direction:column;gap:16px">
         <span style="font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#124A7C">Simulador</span>
         <h2 style="font-size:clamp(28px,3.6vw,44px);font-weight:600;line-height:1.12;letter-spacing:-0.028em;color:#0A1B2A;margin:0;text-wrap:pretty">Uma estimativa para começar a conversa</h2>
-        <p style="font-size:16.5px;line-height:1.7;color:#4A5A6B;margin:0;text-wrap:pretty">Ajuste o crédito e o prazo para ver a ordem de grandeza da parcela. O número exato depende da administradora e do grupo, e vem na proposta formal.</p>
+        <p style="font-size:16.5px;line-height:1.7;color:#4A5A6B;margin:0;text-wrap:pretty">Escolha o valor da carta para ver a parcela do plano de 240 meses com 50% da parcela. O número exato depende da administradora e do grupo, e vem na proposta formal.</p>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:1px;background:#E1E7ED;border:1px solid #E1E7ED">
         <div style="flex:1.1 1 380px;min-width:0;background:#FFFFFF;padding:clamp(26px,3.4vw,44px);display:flex;flex-direction:column;gap:30px">
-          <div style="display:flex;flex-direction:column;gap:12px">
-            <span style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#566878">Tipo de carta</span>
-            <div style="display:flex;flex-wrap:wrap;gap:10px">
-              <button data-on-click="setTipoImovel" data-tpl-style="cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:500;padding:12px 20px;border-radius:2px;border:1px solid {{ tImovelBorder }};background:{{ tImovelBg }};color:{{ tImovelColor }}">Imóvel</button>
-              <button data-on-click="setTipoVeiculo" data-tpl-style="cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:500;padding:12px 20px;border-radius:2px;border:1px solid {{ tVeiculoBorder }};background:{{ tVeiculoBg }};color:{{ tVeiculoColor }}">Veículo</button>
-            </div>
-          </div>
           <label style="display:flex;flex-direction:column;gap:14px">
             <span style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px">
               <span style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#566878">Valor da carta de crédito</span>
               <span style="font-size:clamp(23px,2.6vw,30px);font-weight:600;letter-spacing:-0.03em;line-height:1;color:#0A1B2A"><span data-v="creditoFmt"></span></span>
             </span>
-            <input type="range" data-tpl-min="{{ min }}" data-tpl-max="{{ max }}" data-tpl-step="{{ step }}" data-tpl-value="{{ credito }}" data-on-input="setCredito" style="width:100%;accent-color:#124A7C;height:28px;cursor:pointer" />
+            <input type="range" min="0" max="9" step="1" data-tpl-value="{{ idx }}" data-on-input="setCredito" style="width:100%;accent-color:#124A7C;height:28px;cursor:pointer" />
           </label>
-          <label style="display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;flex-direction:column;gap:14px">
             <span style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px">
               <span style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#566878">Prazo do plano</span>
-              <span style="font-size:clamp(23px,2.6vw,30px);font-weight:600;letter-spacing:-0.03em;line-height:1;color:#0A1B2A"><span data-v="prazo"></span> meses</span>
+              <span style="font-size:clamp(23px,2.6vw,30px);font-weight:600;letter-spacing:-0.03em;line-height:1;color:#0A1B2A">240 meses</span>
             </span>
-            <input type="range" data-tpl-min="{{ minPrazo }}" data-tpl-max="{{ maxPrazo }}" step="12" data-tpl-value="{{ prazo }}" data-on-input="setPrazo" style="width:100%;accent-color:#124A7C;height:28px;cursor:pointer" />
-          </label>
+            <span style="font-size:13px;line-height:1.6;color:#566878">Prazo máximo do plano, que traz a menor parcela.</span>
+          </div>
           <div style="display:flex;flex-direction:column;gap:12px">
             <span style="font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#566878">Objetivo</span>
             <div style="display:flex;flex-wrap:wrap;gap:10px">
@@ -320,15 +313,14 @@
           <div style="display:flex;flex-direction:column;gap:10px">
             <span style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#9CC6E8">Parcela estimada</span>
             <span style="font-size:clamp(32px,4.2vw,50px);font-weight:600;letter-spacing:-0.035em;line-height:1;color:#FFFFFF"><span data-v="parcelaFmt"></span></span>
-            <span style="font-size:13.5px;line-height:1.6;color:rgba(255,255,255,0.66)">por mês, ao longo de <span data-v="prazo"></span> meses</span>
+            <span style="font-size:13.5px;line-height:1.6;color:rgba(255,255,255,0.66)">por mês, em um plano de 240 meses</span>
           </div>
           <div style="display:flex;flex-direction:column;padding-top:20px;border-top:1px solid rgba(255,255,255,0.16)">
-            <span style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;font-size:14px;color:rgba(255,255,255,0.76)">Tipo de carta <strong style="font-weight:600;color:#FFFFFF"><span data-v="tipoLabel"></span></strong></span>
-            <span style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;font-size:14px;color:rgba(255,255,255,0.76)">Total de aportes <strong style="font-weight:600;color:#FFFFFF"><span data-v="totalFmt"></span></strong></span>
+            <span style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;font-size:14px;color:rgba(255,255,255,0.76)">Taxa + fundo de reserva <strong style="font-weight:600;color:#FFFFFF">25,50%</strong></span>
             <span style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;font-size:14px;color:rgba(255,255,255,0.76)">Objetivo <strong style="font-weight:600;color:#FFFFFF"><span data-v="objetivoLabel"></span></strong></span>
           </div>
           <a href="#" data-tpl-href="{{ waSimulacao }}" target="_blank" rel="noopener" style="background:#FFFFFF;color:#0B2A45;font-size:14px;font-weight:600;padding:17px 28px;border-radius:2px;text-align:center" data-hv="3">Receber proposta detalhada →</a>
-          <p style="margin:0;font-size:12px;line-height:1.66;color:rgba(255,255,255,0.62)">Estimativa educativa, calculada sobre o crédito e a taxa de administração de referência. Não constitui oferta, proposta de crédito ou promessa de rentabilidade.</p>
+          <p style="margin:0;font-size:12px;line-height:1.66;color:rgba(255,255,255,0.62)">Valores de referência do plano de 240 meses com 50% da parcela, com taxa e fundo de reserva de 25,50%. Estimativa educativa, que não constitui oferta, proposta de crédito ou promessa de rentabilidade.</p>
         </div>
       </div>
     </div>
@@ -429,7 +421,7 @@
   <script src="/site/assets/efeitos.js"></script>
   <script>
 class Component extends DCLogic {
-  state = { narrow: false, navOpen: false, tipo: 'imovel', credito: 300000, prazo: 180, objetivo: 'invest', faq: 0 };
+  state = { narrow: false, navOpen: false, idx: 5, objetivo: 'invest', faq: 0 };
 
   componentDidMount() {
     this.sync = () => {
@@ -493,24 +485,18 @@ class Component extends DCLogic {
 
   brl(v) { return 'R$ ' + Math.round(v).toLocaleString('pt-BR'); }
 
-  setTipo(tipo) {
-    const isCar = tipo === 'veiculo';
-    this.setState({
-      tipo,
-      credito: isCar ? 90000 : 300000,
-      prazo: isCar ? 72 : 180
-    });
-  }
+  brl2(v) { return 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+
+  static CARTAS = [80000, 100000, 150000, 200000, 250000, 300000, 400000, 500000, 800000, 1000000];
+  static PARCELAS = [209.17, 261.46, 392.19, 522.92, 653.65, 784.38, 1045.83, 1307.29, 2091.67, 2614.58];
 
   renderVals() {
     const phone = (this.props.whatsappNumber || '5565996745162').replace(/\D/g, '');
     const handle = (this.props.instagramHandle || '').replace(/^@/, '');
     const email = this.props.email || 'contato@monetizzeinvestimentos.com.br';
     const link = (t) => 'https://wa.me/' + phone + '?text=' + encodeURIComponent(t);
-    const { tipo, credito, prazo, objetivo, faq } = this.state;
-    const isCar = tipo === 'veiculo';
-    const taxa = Number(isCar ? (this.props.taxaVeiculo ?? 16) : (this.props.taxaImovel ?? 18)) / 100;
-    const total = credito * (1 + taxa);
+    const { idx, objetivo, faq } = this.state;
+    const credito = Component.CARTAS[idx];
     const isInvest = objetivo === 'invest';
 
     const vals = {
@@ -519,29 +505,13 @@ class Component extends DCLogic {
       navOpen: this.state.navOpen && this.state.narrow,
       toggleNav: () => this.setState((s) => ({ navOpen: !s.navOpen })),
       closeNav: () => this.setState({ navOpen: false }),
-      credito, prazo,
-      min: isCar ? 30000 : 80000,
-      max: isCar ? 400000 : 2000000,
-      step: isCar ? 5000 : 10000,
-      minPrazo: isCar ? 36 : 60,
-      maxPrazo: isCar ? 120 : 240,
+      idx,
       creditoFmt: this.brl(credito),
-      parcelaFmt: this.brl(total / prazo),
-      totalFmt: this.brl(total),
-      tipoLabel: isCar ? 'Veículo' : 'Imóvel',
+      parcelaFmt: this.brl2(Component.PARCELAS[idx]),
       objetivoLabel: isInvest ? 'Patrimônio' : 'Aquisição',
-      setCredito: (e) => this.setState({ credito: Number(e.target.value) }),
-      setPrazo: (e) => this.setState({ prazo: Number(e.target.value) }),
-      setTipoImovel: () => this.setTipo('imovel'),
-      setTipoVeiculo: () => this.setTipo('veiculo'),
+      setCredito: (e) => this.setState({ idx: Number(e.target.value) }),
       setObjInvest: () => this.setState({ objetivo: 'invest' }),
       setObjBem: () => this.setState({ objetivo: 'bem' }),
-      tImovelBg: isCar ? '#FFFFFF' : '#0B2A45',
-      tImovelColor: isCar ? '#4A5A6B' : '#FFFFFF',
-      tImovelBorder: isCar ? '#D6DFE7' : '#0B2A45',
-      tVeiculoBg: isCar ? '#0B2A45' : '#FFFFFF',
-      tVeiculoColor: isCar ? '#FFFFFF' : '#4A5A6B',
-      tVeiculoBorder: isCar ? '#0B2A45' : '#D6DFE7',
       objInvestBg: isInvest ? '#0B2A45' : '#FFFFFF',
       objInvestColor: isInvest ? '#FFFFFF' : '#4A5A6B',
       objInvestBorder: isInvest ? '#0B2A45' : '#D6DFE7',
@@ -559,12 +529,12 @@ class Component extends DCLogic {
     for (let i = 0; i < 5; i++) {
       vals['faq' + i] = () => this.setState((s) => ({ faq: s.faq === i ? -1 : i }));
       vals['faqOpen' + i] = faq === i;
-      vals['faqIcon' + i] = faq === i ? '–' : '+';
+      vals['faqIcon' + i] = faq === i ? '×' : '+';
     }
     return vals;
   }
 }
-MZ.mount(Component, {"whatsappNumber": "5565996745162", "instagramHandle": "", "email": "contato@monetizzeinvestimentos.com.br", "taxaImovel": 18, "taxaVeiculo": 16});
+MZ.mount(Component, {"whatsappNumber": "5565996745162", "instagramHandle": "", "email": "contato@monetizzeinvestimentos.com.br"});
   </script>
 </body>
 </html>

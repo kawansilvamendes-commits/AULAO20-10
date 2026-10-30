@@ -34,7 +34,7 @@
 
   <header class="mz-header">
     <div class="mz-header__inner">
-      <a class="mz-brand" href="/site/" aria-label="Monetizze Investimentos — início"><img src="/site/logo-monetizze.png" alt="Monetizze Investimentos" width="923" height="215"></a>
+      <a class="mz-brand" href="/site/" aria-label="Monetizze Investimentos, início"><img src="/site/logo-monetizze.png" alt="Monetizze Investimentos" width="923" height="215"></a>
       <nav class="mz-nav" aria-label="Páginas">
         <a href="/site/" data-nav="home">Início</a>
         <a href="/site/consorcio/" data-nav="consorcio">Consórcio</a>
@@ -499,7 +499,7 @@ class Component extends DCLogic {
     for (let k = 0; k < 5; k++) {
       vals['faq' + k] = () => this.setState((s) => ({ faq: s.faq === k ? -1 : k }));
       vals['faqOpen' + k] = faq === k;
-      vals['faqIcon' + k] = faq === k ? '–' : '+';
+      vals['faqIcon' + k] = faq === k ? '×' : '+';
     }
     return vals;
   }

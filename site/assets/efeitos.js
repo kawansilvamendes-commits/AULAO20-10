@@ -1,4 +1,4 @@
-/* Monetizze Investimentos — runtime das páginas + efeitos do site do aulão.
+/* Monetizze Investimentos: runtime das páginas + efeitos do site do aulão.
    Cada página traz a lógica original do Claude Design (classe Component com
    renderVals); este arquivo a executa sem React e aplica os efeitos. */
 (() => {

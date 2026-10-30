@@ -55,7 +55,7 @@ def header_html():
     mob = '\n'.join(f'        <a href="{u}" data-nav="{k}">{t}</a>' for k, u, t in nav)
     return f'''<header class="mz-header">
     <div class="mz-header__inner">
-      <a class="mz-brand" href="/site/" aria-label="Monetizze Investimentos — início"><img src="/site/logo-monetizze.png" alt="Monetizze Investimentos" width="923" height="215"></a>
+      <a class="mz-brand" href="/site/" aria-label="Monetizze Investimentos, início"><img src="/site/logo-monetizze.png" alt="Monetizze Investimentos" width="923" height="215"></a>
       <nav class="mz-nav" aria-label="Páginas">
 {desk}
         <a class="mz-cta" data-wa="{MSG_CONSULTOR}" href="#" target="_blank" rel="noopener">Falar com um consultor</a>
