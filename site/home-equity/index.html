@@ -473,7 +473,7 @@ class Component extends DCLogic {
   renderVals() {
     const phone = (this.props.whatsappNumber || '5565996745162').replace(/\D/g, '');
     const handle = (this.props.instagramHandle || '').replace(/^@/, '');
-    const email = this.props.email || 'contato@monetizzeinvestimentos.com.br';
+    const email = this.props.email || 'adm.monetizzeinvestimentos@gmail.com';
     const link = (t) => 'https://wa.me/' + phone + '?text=' + encodeURIComponent(t);
 
     const ltvPct = Number(this.props.ltvPct ?? 60);
@@ -515,7 +515,7 @@ class Component extends DCLogic {
     return vals;
   }
 }
-MZ.mount(Component, {"whatsappNumber": "5565996745162", "instagramHandle": "", "email": "contato@monetizzeinvestimentos.com.br", "taxaMensal": 1.29, "ltvPct": 60});
+MZ.mount(Component, {"whatsappNumber": "5565996745162", "instagramHandle": "", "email": "adm.monetizzeinvestimentos@gmail.com", "taxaMensal": 1.29, "ltvPct": 60});
   </script>
 </body>
 </html>

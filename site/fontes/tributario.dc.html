@@ -267,7 +267,7 @@
 <script type="text/x-dc" data-dc-script data-props="{
   &quot;whatsappNumber&quot;: { &quot;default&quot;: &quot;5565996745162&quot; },
   &quot;instagramHandle&quot;: { &quot;default&quot;: &quot;kawannmendess&quot; },
-  &quot;email&quot;: { &quot;default&quot;: &quot;contato@monetizzeinvestimentos.com.br&quot; }
+  &quot;email&quot;: { &quot;default&quot;: &quot;adm.monetizzeinvestimentos@gmail.com&quot; }
 }">
 class Component extends DCLogic {
   state = { narrow: false, faq: 0 };
@@ -275,7 +275,7 @@ class Component extends DCLogic {
   renderVals() {
     const phone = (this.props.whatsappNumber || '5565996745162').replace(/\D/g, '');
     const handle = (this.props.instagramHandle || 'kawannmendess').replace(/^@/, '');
-    const email = this.props.email || 'contato@monetizzeinvestimentos.com.br';
+    const email = this.props.email || 'adm.monetizzeinvestimentos@gmail.com';
     const link = (t) => 'https://wa.me/' + phone + '?text=' + encodeURIComponent(t);
     const faq = this.state.faq;
     const vals = {

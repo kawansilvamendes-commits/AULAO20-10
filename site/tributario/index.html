@@ -360,7 +360,7 @@ class Component extends DCLogic {
   renderVals() {
     const phone = (this.props.whatsappNumber || '5565996745162').replace(/\D/g, '');
     const handle = (this.props.instagramHandle || '').replace(/^@/, '');
-    const email = this.props.email || 'contato@monetizzeinvestimentos.com.br';
+    const email = this.props.email || 'adm.monetizzeinvestimentos@gmail.com';
     const link = (t) => 'https://wa.me/' + phone + '?text=' + encodeURIComponent(t);
     const faq = this.state.faq;
     const vals = {
@@ -380,7 +380,7 @@ class Component extends DCLogic {
     return vals;
   }
 }
-MZ.mount(Component, {"whatsappNumber": "5565996745162", "instagramHandle": "", "email": "contato@monetizzeinvestimentos.com.br"});
+MZ.mount(Component, {"whatsappNumber": "5565996745162", "instagramHandle": "", "email": "adm.monetizzeinvestimentos@gmail.com"});
   </script>
 </body>
 </html>
