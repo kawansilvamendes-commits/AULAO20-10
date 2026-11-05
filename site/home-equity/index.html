@@ -269,7 +269,7 @@
           <span style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;font-size:14px;color:rgba(255,255,255,0.76)">Comprometimento do imóvel <strong style="font-weight:600;color:#FFFFFF"><span data-v="ltvAtual"></span>%</strong></span>
         </div>
         <a href="#" data-tpl-href="{{ waSimulacao }}" target="_blank" rel="noopener" style="background:#FFFFFF;color:#0B2A45;font-size:14px;font-weight:600;padding:17px 28px;border-radius:2px;text-align:center" data-hv="3">Receber proposta detalhada →</a>
-        <p style="margin:0;font-size:12px;line-height:1.66;color:rgba(255,255,255,0.62)">Estimativa educativa em tabela Price, sobre uma taxa de referência e sem considerar IOF, custas cartorárias e tarifas. Não constitui oferta nem proposta de crédito.</p>
+        <p style="margin:0;font-size:12px;line-height:1.66;color:rgba(255,255,255,0.62)">Estimativa educativa em tabela Price, sobre uma taxa de referência de mercado (out/2026) e sem considerar IOF, custas cartorárias e tarifas. Não constitui oferta nem proposta de crédito.</p>
       </div>
     </div>
   </section>
@@ -472,7 +472,7 @@ class Component extends DCLogic {
     const link = (t) => 'https://wa.me/' + phone + '?text=' + encodeURIComponent(t);
 
     const ltvPct = Number(this.props.ltvPct ?? 60);
-    const taxa = Number(this.props.taxaMensal ?? 1.29) / 100;
+    const taxa = Number(this.props.taxaMensal ?? 1.44) / 100;
     const { imovel, prazo, faq } = this.state;
     const creditoMax = Math.max(50000, Math.round(imovel * ltvPct / 100 / 5000) * 5000);
     const credito = Math.min(this.state.credito, creditoMax);
@@ -510,7 +510,7 @@ class Component extends DCLogic {
     return vals;
   }
 }
-MZ.mount(Component, {"whatsappNumber": "5565996745162", "instagramHandle": "", "email": "adm.monetizzeinvestimentos@gmail.com", "taxaMensal": 1.29, "ltvPct": 60});
+MZ.mount(Component, {"whatsappNumber": "5565996745162", "instagramHandle": "", "email": "adm.monetizzeinvestimentos@gmail.com", "taxaMensal": 1.44, "ltvPct": 60});
   </script>
 </body>
 </html>
